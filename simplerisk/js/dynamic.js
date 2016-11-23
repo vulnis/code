@@ -528,6 +528,106 @@ function check_affected_assets()
   }
 }
 
+function check_risk_assessment(){
+  elements = document.getElementsByClassName("risk_assessment");
+  checkbox = document.getElementById("RiskAssessment");
+
+  if(checkbox.checked)
+  {
+    for(i=0; i<elements.length; i++)
+    {
+      elements[i].style.display = "";
+    }
+  }
+  else
+  {
+    for(i=0; i<elements.length; i++)
+    {
+      elements[i].style.display = "none";
+    }
+  }
+}
+
+function check_additional_notes(){
+  elements = document.getElementsByClassName("additional_notes");
+  checkbox = document.getElementById("AdditionalNotes");
+
+  if(checkbox.checked)
+  {
+    for(i=0; i<elements.length; i++)
+    {
+      elements[i].style.display = "";
+    }
+  }
+  else
+  {
+    for(i=0; i<elements.length; i++)
+    {
+      elements[i].style.display = "none";
+    }
+  }
+}
+
+function check_current_solution(){
+  elements = document.getElementsByClassName("current_solution");
+  checkbox = document.getElementById("CurrentSolution");
+
+  if(checkbox.checked)
+  {
+    for(i=0; i<elements.length; i++)
+    {
+      elements[i].style.display = "";
+    }
+  }
+  else
+  {
+    for(i=0; i<elements.length; i++)
+    {
+      elements[i].style.display = "none";
+    }
+  }
+}
+
+function check_security_recommendations(){
+  elements = document.getElementsByClassName("security_recommendations");
+  checkbox = document.getElementById("SecurityRecommendations");
+
+  if(checkbox.checked)
+  {
+    for(i=0; i<elements.length; i++)
+    {
+      elements[i].style.display = "";
+    }
+  }
+  else
+  {
+    for(i=0; i<elements.length; i++)
+    {
+      elements[i].style.display = "none";
+    }
+  }
+}
+
+function check_security_requirements(){
+  elements = document.getElementsByClassName("security_requirements");
+  checkbox = document.getElementById("SecurityRequirements");
+
+  if(checkbox.checked)
+  {
+    for(i=0; i<elements.length; i++)
+    {
+      elements[i].style.display = "";
+    }
+  }
+  else
+  {
+    for(i=0; i<elements.length; i++)
+    {
+      elements[i].style.display = "none";
+    }
+  }
+}
+
 function check_planning_strategy()
 {
   elements = document.getElementsByClassName("planning_strategy");
