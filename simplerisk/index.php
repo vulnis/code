@@ -145,24 +145,9 @@ if (isset($_SESSION["access"]) && ($_SESSION["access"] == "duo"))
   	}
 }
 ?>
+<!DOCTYPE html>
 <html ng-app="SimpleRisk">
-<head>
-  <title>SimpleRisk: Enterprise Risk Management Simplified</title>
-  <!-- build:css vendor/vendor.min.css -->
-  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" media="screen" />
-  <!-- endbuild -->
-  <!-- build:css style.min.css -->
-  <link rel="stylesheet" type="text/css" href="css/style.css" media="screen" />
-  <!-- endbuild -->
-
-  <link rel="stylesheet" href="css/bootstrap.css">
-  <link rel="stylesheet" href="css/bootstrap-responsive.css">
-
-  <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
-  <link rel="stylesheet" href="css/theme.css">
-
-  <script src="js/jquery.min.js"></script>
-</head>
+<?php include_once($_SERVER['DOCUMENT_ROOT'].'/templates/head.php'); ?>
 <body ng-controller="MainCtrl" class="login--page">
   <?php view_top_menu("Home"); ?>
 
@@ -170,8 +155,8 @@ if (isset($_SESSION["access"]) && ($_SESSION["access"] == "duo"))
   // If the user has authenticated and now we need to authenticate with duo
   if (isset($_SESSION["access"]) && $_SESSION["access"] == "duo")
   {
-    echo "<div class=\"row-fluid\">\n";
-    echo "<div class=\"span9\">\n";
+    echo "<div class=\"row\">\n";
+    echo "<div class=\"col-9\">\n";
     // echo "<div class=\"well\">\n";
 
     // Include the custom authentication extra
@@ -187,48 +172,10 @@ if (isset($_SESSION["access"]) && ($_SESSION["access"] == "duo"))
   // If the user has not authenticated
   else if (!isset($_SESSION["access"]) || $_SESSION["access"] != "granted")
   {
-    echo "<div class=\"row-fluid\">\n";
-    echo "<div class=\"span12\">\n";
-    // echo "<div class=\"well\">\n";
-
-    // Get any alert messages
-    get_alert();
-
-    echo "<div class=\"login-wrapper clearfix\">";
-    echo "<h1 class=\"text-center welcome--msg\"> Enterprise Risk Management Simplified... </h1>";
-
-    echo "<form name=\"authenticate\" method=\"post\" action=\"\" class=\"loginForm\">\n";
-    echo "<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\n";
-    echo "<tr><td colspan=\"2\"><label class=\"login--label\">" . $escaper->escapeHtml($lang['LogInHere']) . "</label></td></tr>\n";
-    echo "<tr><td width=\"20%\"><label for=\"\">" . $escaper->escapeHtml($lang['Username']) . ":&nbsp;</label></td><td class=\"80%\"><input class=\"form-control input-medium\" name=\"user\" id=\"user\" type=\"text\" /></td></tr>\n";
-    echo "<tr><td width=\"20%\"><label for=\"\">" . $escaper->escapeHtml($lang['Password']) . ":&nbsp;</label></td><td class=\"80%\"><input class=\"form-control input-medium\" name=\"pass\" id=\"pass\" type=\"password\" autocomplete=\"off\" /></td></tr>\n";
-    echo "</table>\n";
-    echo "<div class=\"form-actions\">\n";
-
-    // If the custom authentication extra is enabled
-    if (custom_authentication_extra())
-    {
-        // If SSO Login is enabled or not set yet
-	if(get_settting_by_name("GO_TO_SSO_LOGIN") === false || get_settting_by_name("GO_TO_SSO_LOGIN") === '1')
-        {
-            // Display the SSO login link
-            echo "<tr><td colspan=\"2\"><label><a href=\"extras/authentication/login.php\">" . $escaper->escapeHtml($lang['GoToSSOLoginPage']) . "</a></label></td></tr>\n";
-        }
-    }
-
-    echo "<a href=\"reset.php\">" . $escaper->escapeHtml($lang['ForgotYourPassword']) . "</a>";
-    echo "<button type=\"submit\" name=\"submit\" class=\"btn btn-primary pull-right\">" . $escaper->escapeHtml($lang['Login']) . "</button>\n";
-    echo "<input class=\"btn btn-default pull-right\" value=\"" . $escaper->escapeHtml($lang['Reset']) . "\" type=\"reset\">\n";
-    echo "</div>\n";
-    echo "</form>\n";
-    echo "</div>";
-
-
-    // echo "</div>\n";
-    echo "</div>\n";
-    echo "</div>\n";
+	get_alert();
+	include_once($_SERVER['DOCUMENT_ROOT'].'/templates/login.php');
   }
   ?>
-  <script src="js/bootstrap.min.js"></script>
+<?php include_once($_SERVER['DOCUMENT_ROOT'].'/templates/footer.php'); ?>
 </body>
 </html>

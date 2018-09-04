@@ -146,41 +146,9 @@ if (isset($_POST['delete_document']))
 
 ?>
 
-<!doctype html>
-<html>
-
-<head>
-  <script src="../js/jquery.min.js"></script>
-  <script src="../js/jquery.easyui.min.js"></script>
-  <script src="../js/jquery-ui.min.js"></script>
-  <script src="../js/jquery.draggable.js"></script>
-  <script src="../js/jquery.droppable.js"></script>
-  <script src="../js/treegrid-dnd.js"></script>
-  <script src="../js/bootstrap.min.js"></script>
-  <script src="../js/bootstrap-multiselect.js"></script>
-  <script src="../js/jquery.dataTables.js"></script>
-  <script src="../js/pages/governance.js"></script>
-
-  <title>SimpleRisk: Enterprise Risk Management Simplified</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
-  <link rel="stylesheet" href="../css/easyui.css">
-  <link rel="stylesheet" href="../css/bootstrap.css">
-  <link rel="stylesheet" href="../css/bootstrap-responsive.css">
-  <link rel="stylesheet" href="../css/jquery.dataTables.css">
-  <link rel="stylesheet" href="../css/bootstrap-multiselect.css">
-  <link rel="stylesheet" href="../css/prioritize.css">
-  <link rel="stylesheet" href="../css/divshot-util.css">
-  <link rel="stylesheet" href="../css/divshot-canvas.css">
-  <link rel="stylesheet" href="../css/display.css">
-  <link rel="stylesheet" href="../css/style.css">
-
-  <link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.min.css">
-  <link rel="stylesheet" href="../css/theme.css">
-
-
-</head>
-
+<!DOCTYPE html>
+<html ng-app="SimpleRisk">
+<?php include_once($_SERVER['DOCUMENT_ROOT'].'/templates/head.php'); ?>
 <body>
 
        
@@ -191,15 +159,15 @@ if (isset($_POST['delete_document']))
       get_alert();
   ?>
 
-  <div class="container-fluid">
-    <div class="row-fluid">
-      <div class="span3">
+  <div class="container">
+    <div class="row">
+      <div class="col-3">
         <?php view_governance_menu("DocumentProgram"); ?>
       </div>
-      <div class="span9">
+      <div class="col-9">
         <div id="show-alert"></div>
-        <div class="row-fluid">
-          <div class="span12">
+        <div class="row">
+          <div class="col-12">
             <!--  Documents container Begin -->
             <div id="documents-tab-content" class="plan-projects tab-data hide">
 
@@ -248,7 +216,7 @@ if (isset($_POST['delete_document']))
     </div>
   </div>
           
-    <!-- MODEL WINDOW FOR ADDING DOCUMENT -->
+    <!-- MODAL WINDOW FOR ADDING DOCUMENT -->
     <div id="document-program--add" class="modal hide fade" tabindex="-1" role="dialog">
       <div class="modal-body">
         <form class="" action="#" method="post" autocomplete="off" enctype=multipart/form-data>
@@ -360,82 +328,7 @@ if (isset($_POST['delete_document']))
     </div>
     
     <?php display_set_default_date_format_script(); ?>
-    
-    <script>
-        $(document).ready(function(){
-            var $tabs = $( "#documents-tab-content" ).tabs({
-                activate: function(event, ui){
-                    $(".document-table").treegrid('resize');
-                }
-            })
-            
-            var tabContentId = document.location.hash ? document.location.hash : "#documents-tab";
-            tabContentId += "-content";
-            $(".tab-show").removeClass("selected");
-            
-            $(".tab-show[data-content='"+ tabContentId +"']").addClass("selected");
-            $(".tab-data").addClass("hide");
-            $(tabContentId).removeClass("hide");
-            
-            $(".datepicker").datepicker();
-            
-            $("#document-program--add .document_type").change(function(){
-                $parent = $(this).parents(".modal");
-                $.ajax({
-                    url: BASE_URL + '/api/governance/parent_documents_dropdown?type=' + encodeURI($(this).val()),
-                    type: 'GET',
-                    success : function (res){
-                        $(".parent_documents_container", $parent).html(res.data.html)
-                    }
-                });
-            })
-            $(".document-table").treegrid('resize');
 
-            $("#document-update-modal .document_type").change(function(){
-                $parent = $(this).parents(".modal");
-                var document_id = $("[name=document_id]", $parent).val();
-                $.ajax({
-                    url: BASE_URL + '/api/governance/selected_parent_documents_dropdown?type=' + encodeURI($(this).val()) + "&child_id=" + document_id,
-                    type: 'GET',
-                    success : function (res){
-                        $(".parent_documents_container", $parent).html(res.data.html)
-                    }
-                });
-            })
-
-            $("body").on("click", ".document--edit", function(){
-                var document_id = $(this).data("id");
-                $.ajax({
-                    url: BASE_URL + '/api/governance/document?id=' + document_id,
-                    type: 'GET',
-                    success : function (res){
-                        var data = res.data;
-                        $.ajax({
-                            url: BASE_URL + '/api/governance/selected_parent_documents_dropdown?type=' + encodeURI(data.document_type) + '&child_id=' + document_id,
-                            type: 'GET',
-                            success : function (res){
-                                $("#document-update-modal .parent_documents_container").html(res.data.html)
-                            }
-                        });
-                        $("#document-update-modal [name=document_id]").val(data.id);
-                        $("#document-update-modal [name=document_type]").val(data.document_type);
-                        $("#document-update-modal [name=document_name]").val(data.document_name);
-                        $("#document-update-modal [name=creation_date]").val(data.creation_date);
-                        $("#document-update-modal [name=status]").val(data.status);
-                        $("#document-update-modal").modal();
-                    }
-                });
-                        
-            })
-
-        });
-    </script>
-    
-    <style type="">
-        .document--edit, .document--delete{
-            cursor: pointer;
-        }
-    </style>
+<?php include_once($_SERVER['DOCUMENT_ROOT'].'/templates/footer.php'); ?>
 </body>
-
 </html>

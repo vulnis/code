@@ -56,46 +56,25 @@ if (!isset($_SESSION["access"]) || $_SESSION["access"] != "granted")
 enforce_permission_compliance();
 
 ?>
-<!doctype html>
-<html>
-
-<head>
-    <script src="../js/jquery.min.js"></script>
-    <script src="../js/jquery-ui.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
-    <script src="../js/jquery.dataTables.js"></script>
-    <script src="../js/bootstrap-multiselect.js"></script>
-
-    <title>SimpleRisk: Enterprise Risk Management Simplified</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
-
-    <link rel="stylesheet" href="../css/bootstrap.css">
-    <link rel="stylesheet" href="../css/bootstrap-responsive.css">
-    <link rel="stylesheet" href="../css/jquery.dataTables.css">
-    <link rel="stylesheet" href="../css/bootstrap-multiselect.css">
-    
-    <link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../css/theme.css">
-</head>
-
+<!DOCTYPE html>
+<html ng-app="SimpleRisk">
+<?php include_once($_SERVER['DOCUMENT_ROOT'].'/templates/head.php'); ?>
 <body>
-
     <?php
         view_top_menu("Compliance");
 
         // Get any alert messages
         get_alert();
     ?>
-    <div class="container-fluid">
-        <div class="row-fluid">
-            <div class="span3">
+    <div class="container">
+        <div class="row">
+            <div class="col-3">
                 <?php view_compliance_menu("PastAudits"); ?>
             </div>
-            <div class="span9 compliance-content-container content-margin-height">
+            <div class="col-9 compliance-content-container content-margin-height">
                 <div id="show-alert"></div>
-                <div class="row-fluid">
-                    <div class="span12">
+                <div class="row">
+                    <div class="col-12">
                         <?php display_past_audits(); ?>
                     </div>
                 </div>
@@ -105,5 +84,6 @@ enforce_permission_compliance();
     </div>
     <?php display_set_default_date_format_script(); ?>
 
+<?php include_once($_SERVER['DOCUMENT_ROOT'].'/templates/footer.php'); ?>
 </body>
 </html>

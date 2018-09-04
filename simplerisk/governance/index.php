@@ -290,38 +290,10 @@ if (isset($_POST['update_control']))
 
 ?>
 
-<!doctype html>
-<html>
-
-<head>
-  <script src="../js/jquery.min.js"></script>
-  <script src="../js/jquery.easyui.min.js"></script>
-  <script src="../js/jquery-ui.min.js"></script>
-  <script src="../js/jquery.draggable.js"></script>
-  <script src="../js/jquery.droppable.js"></script>
-  <script src="../js/treegrid-dnd.js"></script>
-  <script src="../js/bootstrap.min.js"></script>
-  <script src="../js/bootstrap-multiselect.js"></script>
-  <script src="../js/jquery.dataTables.js"></script>
-  <script src="../js/pages/governance.js"></script>
-
-  <title>SimpleRisk: Enterprise Risk Management Simplified</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
-  <link rel="stylesheet" href="../css/easyui.css">
-  <link rel="stylesheet" href="../css/bootstrap.css">
-  <link rel="stylesheet" href="../css/bootstrap-responsive.css">
-  <link rel="stylesheet" href="../css/jquery.dataTables.css">
-  <link rel="stylesheet" href="../css/bootstrap-multiselect.css">
-  <link rel="stylesheet" href="../css/prioritize.css">
-  <link rel="stylesheet" href="../css/divshot-util.css">
-  <link rel="stylesheet" href="../css/divshot-canvas.css">
-  <link rel="stylesheet" href="../css/display.css">
-  <link rel="stylesheet" href="../css/style.css">
-
-  <link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.min.css">
-  <link rel="stylesheet" href="../css/theme.css">
-
+<!DOCTYPE html>
+<html ng-app="SimpleRisk">
+<?php include_once($_SERVER['DOCUMENT_ROOT'].'/templates/head.php'); ?>
+<body>
 
   <?php
     // Get the frameworks
@@ -334,114 +306,6 @@ if (isset($_POST['update_control']))
     $counter = 1;
 
   ?>
-    <script>
-        // Set current mouse position
-        var mouseX, mouseY;
-        $(document).mousemove(function(e) {
-            mouseX = e.pageX;
-            mouseY = e.pageY;
-        }).mouseover(); 
-
-        $(document).ready(function(){
-            var $tabs = $( "#frameworks-tab-content, #controls-tab-content" ).tabs({
-                activate: function(event, ui){
-                    $(".framework-table").treegrid('resize');
-                }
-            })
-            
-            $("#framework-add-btn").click(function(){
-                $.ajax({
-                    url: BASE_URL + '/api/governance/parent_frameworks_dropdown?status=1',
-                    type: 'GET',
-                    success : function (res){
-                        $("#framework--add .parent_frameworks_container").html(res.data.html)
-                    }
-                });
-            })
-            
-            $("body").on("click", ".framework-block--edit", function(){
-                var framework_id = $(this).data("id");
-                $.ajax({
-                    url: BASE_URL + '/api/governance/framework?framework_id=' + framework_id,
-                    type: 'GET',
-                    success : function (res){
-                        var data = res.data;
-                        $.ajax({
-                            url: BASE_URL + '/api/governance/selected_parent_frameworks_dropdown?child_id=' + framework_id,
-                            type: 'GET',
-                            success : function (res){
-                                $("#framework--update .parent_frameworks_container").html(res.data.html)
-                            }
-                        });
-                        $("#framework--update [name=framework_id]").val(framework_id);
-                        $("#framework--update [name=framework_name]").val(data.framework.name);
-                        $("#framework--update [name=framework_description]").val(data.framework.description);
-                        $("#framework--update").modal();
-                    }
-                });
-                        
-            })
-            
-            var tabContentId = document.location.hash ? document.location.hash : "#frameworks-tab";
-            tabContentId += "-content";
-            $(".tab-show").removeClass("selected");
-            
-            $(".tab-show[data-content='"+ tabContentId +"']").addClass("selected");
-            $(".tab-data").addClass("hide");
-            $(tabContentId).removeClass("hide");
-            $(".framework-table").treegrid('resize');
-
-            $(function(){
-                // Create multiselect instance in Updating modal of framework control 
-                $("#frameworks").multiselect({
-                    allSelectedText: '<?php echo $escaper->escapeHtml($lang['AllFrameworks']); ?>',
-                    includeSelectAllOption: true
-                });
-
-                // Create multiselect instance in Adding modal of framework control 
-                $("#add_framework_ids").multiselect({
-                    allSelectedText: '<?php echo $escaper->escapeHtml($lang['AllFrameworks']); ?>',
-                    includeSelectAllOption: true
-                });
-
-                $("#filter_by_control_owner").multiselect({
-                    allSelectedText: '<?php echo $escaper->escapeHtml($lang['ALL']); ?>',
-                    includeSelectAllOption: true
-                });
-
-                $("#filter_by_control_class").multiselect({
-                    allSelectedText: '<?php echo $escaper->escapeHtml($lang['ALL']); ?>',
-                    includeSelectAllOption: true
-                });
-
-                $("#filter_by_control_phase").multiselect({
-                    allSelectedText: '<?php echo $escaper->escapeHtml($lang['ALL']); ?>',
-                    includeSelectAllOption: true
-                });
-
-                $("#filter_by_control_family").multiselect({
-                    allSelectedText: '<?php echo $escaper->escapeHtml($lang['ALL']); ?>',
-                    includeSelectAllOption: true
-                });
-
-                $("#filter_by_control_framework").multiselect({
-                    allSelectedText: '<?php echo $escaper->escapeHtml($lang['ALL']); ?>',
-                    includeSelectAllOption: true
-                });
-
-                $("#filter_by_control_priority").multiselect({
-                    allSelectedText: '<?php echo $escaper->escapeHtml($lang['ALL']); ?>',
-                    includeSelectAllOption: true
-                });
-            });
-        
-        });
-    </script>
-</head>
-
-<body>
-
-       
   <?php
       view_top_menu("Governance");
 
@@ -450,34 +314,30 @@ if (isset($_POST['update_control']))
   ?>
 
   <div class="tabs new-tabs planning-tabs">
-    <div class="container-fluid">
+    <div class="container">
 
-      <div class="row-fluid">
+      <div class="row">
 
-        <div class="span3"> </div>
-        <div class="span9">
-
+        <div class="col-3"> </div>
+        <div class="col-9">
           <div class="tab-append">
             <div class="tab selected form-tab tab-show" data-content="#frameworks-tab-content"><div><span><?php echo $escaper->escapeHtml($lang['Frameworks']); ?></span></div></div>
             <div class="tab form-tab tab-show controls-tab" data-content="#controls-tab-content"><div><span><?php echo $escaper->escapehtml($lang['Controls']); ?></span></div></div>
           </div>
-
         </div>
-
       </div>
-
     </div>
   </div>
 
-  <div class="container-fluid">
-    <div class="row-fluid">
-      <div class="span3">
+  <div class="container">
+    <div class="row">
+      <div class="col-3">
         <?php view_governance_menu("DefineControlFrameworks"); ?>
       </div>
-      <div class="span9">
+      <div class="col-9">
         <div id="show-alert"></div>
-        <div class="row-fluid">
-          <div class="span12">
+        <div class="row">
+          <div class="col-12">
             <!--  Frameworks container Begin -->
             <div id="frameworks-tab-content" class="plan-projects tab-data hide">
 
@@ -503,8 +363,8 @@ if (isset($_POST['update_control']))
 
             <!--  Controls container Begin -->
             <div id="controls-tab-content" class="tab-data hide">
-                <div class="row-fluid">
-                    <div class="span4">
+                <div class="row">
+                    <div class="col-4">
                         <div class="well">
                             <h4><?php echo $escaper->escapeHtml($lang['ControlClass']); ?>:</h4>
                             <select id="filter_by_control_class" class="" multiple="multiple">
@@ -519,7 +379,7 @@ if (isset($_POST['update_control']))
                             </select>
                         </div>
                     </div>
-                    <div class="span4">
+                    <div class="col-4">
                         <div class="well">
                             <h4><?php echo $escaper->escapeHtml($lang['ControlPhase']); ?>:</h4>
                             <select id="filter_by_control_phase" class="" multiple="multiple">
@@ -534,7 +394,7 @@ if (isset($_POST['update_control']))
                             </select>
                         </div>
                     </div>
-                    <div class="span4">
+                    <div class="col-4">
                         <div class="well">
                             <h4><?php echo $escaper->escapeHtml($lang['ControlFamily']); ?>:</h4>
                             <select id="filter_by_control_family" class="" multiple="multiple">
@@ -550,8 +410,8 @@ if (isset($_POST['update_control']))
                         </div>
                     </div>
                 </div>
-                <div class="row-fluid">
-                    <div class="span4">
+                <div class="row">
+                    <div class="col-4">
                         <div class="well">
                             <h4><?php echo $escaper->escapeHtml($lang['ControlOwner']); ?>:</h4>
                             <select id="filter_by_control_owner" class="form-field form-control" multiple="multiple">
@@ -566,7 +426,7 @@ if (isset($_POST['update_control']))
                             </select>
                         </div>
                     </div>
-                    <div class="span4">
+                    <div class="col-4">
                         <div class="well">
                             <h4><?php echo $escaper->escapeHtml($lang['ControlFramework']); ?>:</h4>
                             <select id="filter_by_control_framework" class="form-field form-control" multiple="multiple">
@@ -581,7 +441,7 @@ if (isset($_POST['update_control']))
                             </select>
                         </div>
                     </div>
-                    <div class="span4">
+                    <div class="col-4">
                         <div class="well">
                             <h4><?php echo $escaper->escapeHtml($lang['ControlPriority']); ?>:</h4>
                             <select id="filter_by_control_priority" class="form-field form-control" multiple="multiple">
@@ -597,8 +457,8 @@ if (isset($_POST['update_control']))
                         </div>
                     </div>
                 </div>
-                <div class="row-fluid">
-                    <div class="span4">
+                <div class="row">
+                    <div class="col-4">
                         <div class="well">
                             <h4><?php echo $escaper->escapeHtml($lang['FilterByText']); ?>:</h4>
                             <input type="text" class="form-control" id="filter_by_control_text">
@@ -632,7 +492,7 @@ if (isset($_POST['update_control']))
     </div>
   </div>
           
-<!-- MODEL WINDOW FOR ADDING FRAMEWORK -->
+<!-- MODAL WINDOW FOR ADDING FRAMEWORK -->
 <div id="framework--add" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="framework--add" aria-hidden="true">
   <div class="modal-body">
 
@@ -657,7 +517,7 @@ if (isset($_POST['update_control']))
   </div>
 </div>
 
-<!-- MODEL WINDOW FOR EDITING FRAMEWORK -->
+<!-- MODAL WINDOW FOR EDITING FRAMEWORK -->
 <div id="framework--update" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-body">
 
@@ -826,6 +686,7 @@ if (isset($_POST['update_control']))
 </div>
 
     <?php display_set_default_date_format_script(); ?>
-</body>
 
+<?php include_once($_SERVER['DOCUMENT_ROOT'].'/templates/footer.php'); ?>
+</body>
 </html>

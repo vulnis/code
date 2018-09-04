@@ -36,22 +36,16 @@ function get_alert($returnHtml = false)
         if ($_SESSION['alert_type'] == "good")
         {
             $html .= "
-                <div id=\"alert\" class=\"container-fluid\">
-                    <div class=\"row-fluid\">
-                        <div class=\"span10 greenalert\"><span><i class=\"fa fa-check\"></i>" . $escaper->escapeHtml($_SESSION['alert_message']) . "</span></div>
-                    </div>
-                </div>
-            ";
+                <div id=\"alert\" class=\"text-center alert alert-success\" role=\"alert\">
+                    <i class=\"fa fa-check\"></i>" . $escaper->escapeHtml($_SESSION['alert_message']) .
+                "</div>";
         }
         else if ($_SESSION['alert_type'] == "bad")
         {
             $html .= "
-                <div id=\"alert\" class=\"container-fluid\">
-                    <div class=\"row-fluid\">
-                        <div class=\"span10 redalert\"><span><i class=\"fa fa-check\"></i>" . $escaper->escapeHtml($_SESSION['alert_message']) . "</span></div>
-                    </div>
-                </div>
-            ";
+                <div id=\"alert\" class=\"text-center alert alert-warning\" role=\"alert\">
+                    <i class=\"fa fa-check\"></i>" . $escaper->escapeHtml($_SESSION['alert_message']) . 
+                    "</div>";
         }
     }
 

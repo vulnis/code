@@ -76,49 +76,27 @@ if (isset($_POST['delete']))
 }
 ?>
 
-<!doctype html>
-<html>
-
-<head>
-  <script src="../js/jquery.min.js"></script>
-  <script src="../js/jquery-ui.min.js"></script>
-  <script src="../js/bootstrap.min.js"></script>
-  <script src="../js/pages/assessment.js"></script>
-  <script src="../js/common.js"></script>
-  <script src="../js/cve_lookup.js"></script>
-  <title>SimpleRisk: Enterprise Risk Management Simplified</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
-  <link rel="stylesheet" href="../css/bootstrap.css">
-  <link rel="stylesheet" href="../css/bootstrap-responsive.css">
-
-  <link rel="stylesheet" href="../css/divshot-util.css">
-  <link rel="stylesheet" href="../css/divshot-canvas.css">
-  <link rel="stylesheet" href="../css/display.css">
-  <link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.min.css">
-  <link rel="stylesheet" href="../css/theme.css">
-
-</head>
-
-<body>
-
-  <?php
-  view_top_menu("Assessments");
-
-  // Get any alerts
-  get_alert();
-  ?>
-  <div class="container-fluid">
-    <div class="row-fluid">
-      <div class="span3">
-        <?php view_assessments_menu("PendingRisks"); ?>
-      </div>
-      <div class="span9">
-        <?php display_pending_risks(); ?>
+<!DOCTYPE html>
+<html ng-app="SimpleRisk">
+<?php include_once($_SERVER['DOCUMENT_ROOT'].'/templates/head.php'); ?>
+  <body>
+    <?php
+    view_top_menu("Assessments");
+    // Get any alerts
+    get_alert();
+    ?>
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span3">
+          <?php view_assessments_menu("PendingRisks"); ?>
+        </div>
+        <div class="span9">
+          <?php display_pending_risks(); ?>
+        </div>
       </div>
     </div>
-  </div>
-    <?php display_set_default_date_format_script(); ?>
-</body>
+      <?php display_set_default_date_format_script(); ?>
 
+<?php include_once($_SERVER['DOCUMENT_ROOT'].'/templates/footer.php'); ?>
+</body>
 </html>

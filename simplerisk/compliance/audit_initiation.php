@@ -180,46 +180,25 @@ if(isset($_GET['initiate']) ){
 
 
 ?>
-<!doctype html>
-<html>
-
-<head>
-    <script src="../js/jquery.min.js"></script>
-    <script src="../js/jquery.easyui.min.js"></script>
-    <script src="../js/jquery-ui.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
-    <script src="../js/bootstrap-multiselect.js"></script>
-
-    <title>SimpleRisk: Enterprise Risk Management Simplified</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
-
-    <link rel="stylesheet" href="../css/easyui.css">
-    <link rel="stylesheet" href="../css/bootstrap.css">
-    <link rel="stylesheet" href="../css/bootstrap-responsive.css">
-    <link rel="stylesheet" href="../css/bootstrap-multiselect.css">
-    
-    <link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../css/theme.css">
-</head>
-
+<!DOCTYPE html>
+<html ng-app="SimpleRisk">
+<?php include_once($_SERVER['DOCUMENT_ROOT'].'/templates/head.php'); ?>
 <body>
-
     <?php
         view_top_menu("Compliance");
 
         // Get any alert messages
         get_alert();
     ?>
-    <div class="container-fluid">
-        <div class="row-fluid">
-            <div class="span3">
+    <div class="container">
+        <div class="row">
+            <div class="col-3">
                 <?php view_compliance_menu("InitialAudits"); ?>
             </div>
-            <div class="span9 compliance-content-container content-margin-height">
+            <div class="col-9 compliance-content-container content-margin-height">
                 <div id="show-alert"></div>
-                <div class="row-fluid">
-                    <div class="span12">
+                <div class="row">
+                    <div class="col-12">
                         <div class="custom-treegrid-container" id="initiate-audits">
                             <?php display_initiate_audits(); ?>
                         </div>
@@ -231,119 +210,7 @@ if(isset($_GET['initiate']) ){
     </div>
     
     <script type="">
-        $(document).ready(function(){
-            $( window ).resize(function() {
-                $('#initiate_audit_treegrid').datagrid('resize',{
-                  width: $("#initiate-audits").width()
-                });
-            });
-            $("body").on("click", ".framework-name", function(e){
-                e.preventDefault();
-                var framework_id = $(this).data("id")
-                $.ajax({
-                    url: BASE_URL + '/api/governance/framework?framework_id=' + framework_id,
-                    type: 'GET',
-                    dataType: 'json',
-                    success : function (res){
-                        var data = res.data;
-                        
-                        // Add parent framework dropdown
-                        $.ajax({
-                            url: BASE_URL + '/api/governance/selected_parent_frameworks_dropdown?child_id=' + framework_id,
-                            type: 'GET',
-                            success : function (res){
-                                $("#framework--update .parent_frameworks_container").html(res.data.html)
-                            }
-                        });
-
-                        $("#framework--update [name=framework_id]").val(framework_id);
-                        $("#framework--update [name=framework_name]").val(data.framework.name);
-                        $("#framework--update [name=framework_description]").val(data.framework.description);
-                        $("#framework--update").modal();
-                    }
-                });
-            })
-
-            $("body").on("click", ".control-name", function(e){
-                e.preventDefault();
-                var control_id = $(this).data("id")
-                $.ajax({
-                    url: BASE_URL + '/api/governance/control?control_id=' + control_id,
-                    type: 'GET',
-                    dataType: 'json',
-                    success : function (res){
-                        var data = res.data;
-                        var control = data.control;
-                        
-                        var modal = $('#control--update');
-                        $('.control_id', modal).val(control_id);
-                        $('[name=short_name]', modal).val(control.short_name);
-                        $('[name=long_name]', modal).val(control.long_name);
-                        $('[name=description]', modal).val(control.description);
-                        $('[name=supplemental_guidance]', modal).val(control.supplemental_guidance);
-                        
-                        $("#frameworks").multiselect('deselectAll', false);
-                        $.each(control.framework_ids.split(","), function(i,e){
-                            $("#frameworks option[value='" + e + "']").prop("selected", true);
-                        });
-                        $("#frameworks").multiselect('refresh');
-                        
-                        $('[name=control_class]', modal).val(Number(control.control_class) ? control.control_class : "");
-                        $('[name=control_phase]', modal).val(Number(control.control_phase) ? control.control_phase : "");
-                        $('[name=control_owner]', modal).val(Number(control.control_owner) ? control.control_owner : "");
-                        $('[name=control_number]', modal).val(control.control_number);
-                        $('[name=control_priority]', modal).val(Number(control.control_priority) ? control.control_priority : "");
-                        $('[name=family]', modal).val(Number(control.family) ? control.family : "");
-                        
-                        modal.modal();
-                    }
-                });
-            })
-            
-            $("body").on("click", ".test-name", function(e){
-                e.preventDefault();
-                
-                var test_id = $(this).data('id');
-                $.ajax({
-                    type: "GET",
-                    url: BASE_URL + "/api/compliance/test?id=" + test_id,
-                    success: function(result){
-                        var data = result['data'];
-                        var modal = $('#test--edit');
-                        
-                        $('[name=test_id]', modal).val(data['id']);
-                        $('[name=tester]', modal).val(data['tester']);
-                        $('[name=test_frequency]', modal).val(data['test_frequency']);
-                        $('[name=last_date]', modal).val(data['last_date']);
-                        $('[name=next_date]', modal).val(data['next_date']);
-                        $('[name=name]', modal).val(data['name']);
-                        $('[name=objective]', modal).val(data['objective']);
-                        $('[name=test_steps]', modal).val(data['test_steps']);
-                        $('[name=approximate_time]', modal).val(data['approximate_time']);
-                        $('[name=expected_results]', modal).val(data['expected_results']);
-                        $(".datepicker" , modal).datepicker();
-                        
-                        modal.modal();
-                    }
-                })
-            })
-            
-            // Event when clicks Initiate Framework Audit button
-            $('body').on("click", ".initiate-framework-audit-btn", function(){
-                document.location.href = BASE_URL + "/compliance/audit_initiation.php?initiate&type=framework&id=" + $(this).data('id');
-            })
-            
-            // Event when clicks Initiate Control Audit button
-            $('body').on("click", ".initiate-control-audit-btn", function(){
-                document.location.href = BASE_URL + "/compliance/audit_initiation.php?initiate&type=control&id=" + $(this).data('id');
-            })
-            
-            // Event when clicks Initiate Test button
-            $('body').on("click", ".initiate-test-btn", function(){
-                document.location.href = BASE_URL + "/compliance/audit_initiation.php?initiate&type=test&id=" + $(this).data('id');
-            })
-
-        })
+        
     </script>
 
     <!-- MODEL WINDOW FOR EDITING FRAMEWORK -->
@@ -465,5 +332,7 @@ if(isset($_GET['initiate']) ){
       </div>
     </div>
     <?php display_set_default_date_format_script(); ?>
+
+<?php include_once($_SERVER['DOCUMENT_ROOT'].'/templates/footer.php'); ?>
 </body>
 </html>

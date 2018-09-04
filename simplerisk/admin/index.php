@@ -376,26 +376,11 @@
 	$simplerisk_max_upload_size = get_setting('max_upload_size');
 ?>
 
-<!doctype html>
-<html>
-
-  <head>
-    <script src="../js/jquery.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
-    <title>SimpleRisk: Enterprise Risk Management Simplified</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
-    <link rel="stylesheet" href="../css/bootstrap.css">
-    <link rel="stylesheet" href="../css/bootstrap-responsive.css">
-
-    <link rel="stylesheet" href="../css/divshot-util.css">
-    <link rel="stylesheet" href="../css/divshot-canvas.css">
-    <link rel="stylesheet" href="../css/display.css">
-
-    <link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../css/theme.css">
-    <link rel="stylesheet" href="../css/settings_tabs.css">
-    <script>
+<!DOCTYPE html>
+<html ng-app="SimpleRisk">
+<?php include_once($_SERVER['DOCUMENT_ROOT'].'/templates/head.php'); ?>
+<body>
+  <script>
       function dropdown_transport()
       {
         smtp = document.getElementsByClassName("smtp");
@@ -451,10 +436,6 @@
         }
       }
     </script>
-  </head>
-
-  <body>
-
 <?php
     view_top_menu("Configure");
 
@@ -879,20 +860,6 @@
         </div>
       </div>
     </div>
-    <script>
-        (function($) {
-
-        var tabs =  $(".tabs li a");
-  
-        tabs.click(function() {
-                var content = this.hash.replace('/','');
-                tabs.removeClass("active");
-                $(this).addClass("active");
-                $("#content").find('div').hide();
-                $(content).fadeIn(200);
-        });
-
-        })(jQuery);
-    </script>
-  </body>
+<?php include_once($_SERVER['DOCUMENT_ROOT'].'/templates/footer.php'); ?>
+</body>
 </html>

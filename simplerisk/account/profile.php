@@ -60,12 +60,12 @@
             require_once(language_file());
 
             // Display an alert
-            set_alert(true, "good", "Your language was updated successfully.");
+            set_alert(true, "good", $lang['LanguageUpdated']);
         }
         else
         {
             // Display an alert
-            set_alert(true, "bad", "You need to select a valid language");
+            set_alert(true, "bad", $lang['SelectValidLanguage']);
         }
     }
 
@@ -157,7 +157,7 @@
                     }
 
                     // Display an alert
-                    set_alert(true, "good", "Your password has been updated successfully!");
+                    set_alert(true, "good", $lang['PasswordUpdated']);
                 }else{
                     set_alert(true, "bad", $lang['PasswordNoLongerUse']);
                 }
@@ -171,7 +171,7 @@
         else
         {
             // Display an alert
-            set_alert(true, "bad", "You have entered your current password incorrectly.  Please try again.");
+            set_alert(true, "bad", $lang['PasswordIncorrect']);
         }
     }
     
@@ -184,30 +184,12 @@
     }
 ?>
 
-<!doctype html>
-<html>
-
-  <head>
-    <script src="../js/jquery.min.js"></script>
-    <script src="../js/jquery-ui.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
-    <script src="../js/bootstrap-multiselect.js"></script>
-    <title>SimpleRisk: Enterprise Risk Management Simplified</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
-    <link rel="stylesheet" href="../css/bootstrap.css">
-    <link rel="stylesheet" href="../css/bootstrap-responsive.css">
-    <link rel="stylesheet" href="../css/bootstrap-multiselect.css">
-
-
-    <link rel="stylesheet" href="../css/divshot-util.css">
-    <link rel="stylesheet" href="../css/divshot-canvas.css">
-    <link rel="stylesheet" href="../css/display.css">
-
-    <link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../css/theme.css">
-    <script type="text/javascript">
-        $(function(){
+<!DOCTYPE html>
+<html ng-app="SimpleRisk">
+<?php include_once($_SERVER['DOCUMENT_ROOT'].'/templates/head.php'); ?>
+<body>
+<script type="text/javascript">
+    $(function(){
             $(document).ready(function(){
                 $("#team").multiselect({
                     allSelectedText: '<?php echo $escaper->escapeHtml($lang['AllTeams']); ?>',
@@ -263,30 +245,50 @@
             }
         });
     </script>
-  </head>
-
-  <body>
 <?php
     view_top_menu("Configure");
 
     // Get any alert messages
     get_alert();
 ?>
-    <div class="container-fluid">
-      <div class="row-fluid">
-        <div class="span12">
-          <div class="row-fluid">
-            <div class="span12">
-              <div class="hero-unit">
+    <div class="container p-5">
+      <div class="row">
+        <div class="col-12">
+          <div class="row">
+            <div class="col-12">
                 <form name="change_language" method="post" action="">
-                <table border="0" cellspacing="0" cellpadding="0">
-                  <tr><td colspan="2"><h4><?php echo $escaper->escapeHtml($lang['ProfileDetails']); ?></h4></td></tr>
-                  <tr><td><?php echo $escaper->escapeHtml($lang['FullName']); ?>:&nbsp;</td><td><input style="cursor: default;" name="name" type="text" maxlength="50" size="20" title="<?php echo $escaper->escapeHtml($name); ?>" disabled="disabled" value="<?php echo $escaper->escapeHtml($name); ?>" /></td></tr>
-                  <tr><td><?php echo $escaper->escapeHtml($lang['EmailAddress']); ?>:&nbsp;</td><td><input style="cursor: default;" name="email" type="text" maxlength="200" size="20" title="<?php echo $escaper->escapeHtml($email); ?>"disabled="disabled" value="<?php echo $escaper->escapeHtml($email); ?>" /></td></tr>
-                  <tr><td><?php echo $escaper->escapeHtml($lang['Username']); ?>:&nbsp;</td><td><input style="cursor: default;" name="username" type="text" maxlength="20" size="20" title="<?php echo $escaper->escapeHtml($username); ?>" disabled="disabled" value="<?php echo $escaper->escapeHtml($username); ?>" /></td></tr>
-                  <tr><td><?php echo $escaper->escapeHtml($lang['LastLogin']); ?>:&nbsp;</td><td><input style="cursor: default;" name="last_login" type="text" maxlength="20" size="20" title="<?php echo $escaper->escapeHtml($last_login); ?>" disabled="disabled" value="<?php echo $escaper->escapeHtml($last_login); ?>" /></td></tr>
-                  <tr><td><?php echo $escaper->escapeHtml($lang['Language']); ?>:&nbsp;</td><td><?php create_dropdown("languages", get_value_by_name("languages", $language)); ?><input type="submit" name="change_language" value="<?php echo $escaper->escapeHtml($lang['Update']); ?>" /></td></tr>
-
+                    <h3><?php echo $escaper->escapeHtml($lang['ProfileDetails']); ?></h3>
+                    <div class="form-group">
+                        <label for="name">
+                            <?php echo $escaper->escapeHtml($lang['FullName']); ?>
+                        </label>
+                        <input style="cursor: default;" name="name" type="text" maxlength="50" size="20" title="<?php echo $escaper->escapeHtml($name); ?>" disabled="disabled" value="<?php echo $escaper->escapeHtml($name); ?>" />
+                    </div>
+                    <div class="form-group">
+                        <label for="email">
+                            <?php echo $escaper->escapeHtml($lang['EmailAddress']); ?>
+                        </label>
+                        <input style="cursor: default;" name="email" type="text" maxlength="200" size="20" title="<?php echo $escaper->escapeHtml($email); ?>"disabled="disabled" value="<?php echo $escaper->escapeHtml($email); ?>" />
+                    </div>
+                    <div class="form-group">
+                        <label for="username">
+                            <?php echo $escaper->escapeHtml($lang['Username']); ?>
+                        </label>
+                        <input style="cursor: default;" name="username" type="text" maxlength="20" size="20" title="<?php echo $escaper->escapeHtml($username); ?>" disabled="disabled" value="<?php echo $escaper->escapeHtml($username); ?>" />
+                    </div>
+                    <div class="form-group">
+                        <label for="last_login">
+                            <?php echo $escaper->escapeHtml($lang['LastLogin']); ?>
+                        </label>
+                        <input style="cursor: default;" name="last_login" type="text" maxlength="20" size="20" title="<?php echo $escaper->escapeHtml($last_login); ?>" disabled="disabled" value="<?php echo $escaper->escapeHtml($last_login); ?>" />
+                    </div>
+                    <div class="form-group">
+                        <label for="language">
+                            <?php echo $escaper->escapeHtml($lang['Language']); ?>
+                        </label>
+                        <?php create_dropdown("languages", get_value_by_name("languages", $language)); ?>
+                    </div>
+                    
                     <?php
                         // If the API Extra is enabled
                         if (api_extra())
@@ -298,21 +300,28 @@
                             display_api_profile();
                         }
                     ?>
-
-                </table>
+                    <div class="form-group">
+                    <label for="teams">
+                        <?php echo $escaper->escapeHtml($lang['Teams']); ?>
+                    </label>
+                    <?php create_multiple_dropdown("team", $teams); ?>
+                </div>
+                <div class="form-group">
+                    <label for="rol">
+                        <?php echo $escaper->escapeHtml($lang['Role']); ?>
+                    </label>
+                    <?php create_dropdown("role", $role_id); ?>
+                </div>
+                <input class="btn btn-lg btn-block btn-danger" type="submit" name="change_language" value="<?php echo $escaper->escapeHtml($lang['Update']); ?>" />
                 </form>
                 <br>
                 <form action="" method="POST">
                     <input name="reset_custom_display_settings" value="<?php echo $lang['ResetCustomDisplaySettings']; ?>" type="submit">
                 </form>
                 
-                <h6><u><?php echo $escaper->escapeHtml($lang['Teams']); ?></u></h6>
-                <?php create_multiple_dropdown("team", $teams); ?>
                 
-                <h6><u><?php echo $escaper->escapeHtml($lang['Role']); ?></u></h6>
-                <?php create_dropdown("role", $role_id); ?>
                 
-                <h6><u><?php echo $escaper->escapeHtml($lang['UserResponsibilities']); ?></u></h6>
+                <h3><?php echo $escaper->escapeHtml($lang['UserResponsibilities']); ?></h3>
                 <table class="checklist" border="0" cellspacing="0" cellpadding="0">
                           <tr><td colspan="2"><?php echo $escaper->escapeHtml($lang['Governance']); ?></td></tr>
                           <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td><input name="governance" type="checkbox"<?php if ($governance) echo " checked" ?> />&nbsp;<?php echo $escaper->escapeHtml($lang['AllowAccessToGovernanceMenu']); ?></td></tr>
@@ -351,7 +360,7 @@
                           <tr><td colspan="2"><?php echo $escaper->escapeHtml($lang['Configure']); ?></td></tr>
                           <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td><input name="admin" type="checkbox"<?php if ($admin) echo " checked" ?> />&nbsp;<?php echo $escaper->escapeHtml($lang['AllowAccessToConfigureMenu']); ?></td></tr>
                 </table>
-              </div>
+
 <?php
     if (isset($_SESSION['user_type']) && $_SESSION['user_type'] != "ldap")
     {
@@ -392,6 +401,6 @@
     </div>
     <?php display_set_default_date_format_script(); ?>
 
-  </body>
-
+<?php include_once($_SERVER['DOCUMENT_ROOT'].'/templates/footer.php'); ?>
+</body>
 </html>

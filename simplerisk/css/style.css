@@ -14,68 +14,7 @@ input, select {
   margin-bottom: 10px;
 }
 
-.navbar {
-  font-size: 16px;
-  padding-top: 25px;
-  background: #3A3A3A;
-  border-radius: 0px;
-  margin: 0;
-  border: 0;
-}
 
-.navbar .menu li>a {
-  padding-bottom: 10px;
-  color: #F3EDED;
-}
-
-.navbar .menu li>a.selected {
-  font-weight: bolder;
-}
-
-.navbar .menu li>a:hover:after,
-.navbar .menu li>a.selected:after {
-  content:'';
-  display:block;
-  width:0;
-  height:0;
-  position:absolute;
-
-  border-left:  6px solid transparent;
-  border-right: 6px solid transparent;
-  border-bottom:10px solid #A9ABAD;
-  left: 45%;
-  bottom: -5px;
-}
-
-.btn {
-  border-radius: 0;
-}
-
-.btn.btn-primary {
-  background: #ed3139;
-  border-color: #D40000;
-}
-
-.btn.btn-primary:focus,
-.btn.btn-primary:hover,
-.btn.btn-primary:active,
-.btn.btn-primary:visited {
-  background: #D20000;
-  border-color: #D00000;
-}
-
-.btn.btn-default {
-  background: #B6B9BB;
-  border-color: #A4A7A9;
-}
-
-.btn.btn-default:focus,
-.btn.btn-default:hover,
-.btn.btn-default:active,
-.btn.btn-default:visited {
-  background: #A9ABAD;
-  border-color: #77797B;
-}
 
 label, .title {
   color: #808080;
@@ -385,3 +324,6 @@ p.comment-block{
     user-select: text;
 }
 
+.document--edit, .document--delete{
+  cursor: pointer;
+}

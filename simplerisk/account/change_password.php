@@ -150,60 +150,38 @@ if (isset($_POST['change_password']))
 
 ?>
 
-<!doctype html>
-<html>
-
-<head>
-    <script src="../js/jquery.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
-    <title>SimpleRisk: Enterprise Risk Management Simplified</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
-    <link rel="stylesheet" href="../css/bootstrap.css">
-    <link rel="stylesheet" href="../css/bootstrap-responsive.css">
-    <link rel="stylesheet" href="../css/divshot-util.css">
-    <link rel="stylesheet" href="../css/divshot-canvas.css">
-    <link rel="stylesheet" href="../css/display.css">
-    <link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../css/theme.css">
-</head>
-
+<!DOCTYPE html>
+<html ng-app="SimpleRisk">
+<?php include_once($_SERVER['DOCUMENT_ROOT'].'/templates/head.php'); ?>
 <body>
-
-
     <?php
         view_top_menu("Configure");
 
         // Get any alert messages
         get_alert();
     ?>
-    <div class="container-fluid">
-        <div class="row-fluid">
-            <div class="span4 offset4">
-                <div class="well">
-                    <?php
-                        //if (isset($_SESSION['user_type']) && $_SESSION['user_type'] != "ldap")
-                        //{
-                            echo "<div class=\"hero-unit\">\n";
-                            echo "<form name=\"change_password\" method=\"post\" action=\"\">\n";
-                            echo "<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\n";
-                            echo "<tr><td colspan=\"2\"><h4>" . $escaper->escapeHtml($lang['ChangePassword']) . "</h4></td><tr>\n";
-                            echo "<tr><td>" . $escaper->escapeHtml($lang['CurrentPassword']) . ":&nbsp</td><td><input maxlength=\"100\" name=\"current_pass\" id=\"current_pass\" class=\"input-medium\" type=\"password\" autocomplete=\"off\" /></td></tr>\n";
-                            echo "<tr><td>" . $escaper->escapeHtml($lang['NewPassword']) . ":&nbsp</td><td><input maxlength=\"100\" name=\"new_pass\" id=\"new_pass\" class=\"input-medium\" type=\"password\" autocomplete=\"off\" /></td></tr>\n";
-                            echo "<tr><td>" . $escaper->escapeHtml($lang['ConfirmPassword']) . ":&nbsp;</td><td><input maxlength=\"100\" name=\"confirm_pass\" id=\"confirm_pass\" class=\"input-medium\" type=\"password\" autocomplete=\"off\" /></td></tr>\n";
-                            echo "</table>\n";
-                                echo "<div class=\"form-actions\">\n";
-                                    echo "<button type=\"submit\" name=\"change_password\" class=\"btn btn-primary\">" . $escaper->escapeHtml($lang['Submit']) . "</button>\n";
-                                    echo "<input class=\"btn\" value=\"" . $escaper->escapeHtml($lang['Reset']) . "\" type=\"reset\">\n";
-                                    echo "</div>\n";
-                                echo "</form>\n";
-                            echo "</div>\n";
-                    //    }
-                    ?>
-                </div>
+    <div class="container p-5">
+        <div class="row">
+            <div class="col-lg-4 col-8 mx-auto rounded bg-light shadow">
+                <form name="change_password" method="post" action="" class="p-5">
+                    <h3><?php echo $escaper->escapeHtml($lang['ChangePassword']) ?></h3>
+                    <div class="form-group">
+                        <label for="current_pass"><?php echo $escaper->escapeHtml($lang['CurrentPassword']) ?></label>
+                        <input class="form-control input-medium" name="current_pass" id="current_pass" type="password" autocomplete="off" />
+                    </div>
+                    <div class="form-group">
+                        <label for="new_pass"><?php echo $escaper->escapeHtml($lang['NewPassword']) ?></label>
+                        <input class="form-control input-medium" name="new_pass" id="new_pass" type="password" autocomplete="off" />
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm_pass"><?php echo $escaper->escapeHtml($lang['ConfirmPassword']) ?></label>
+                        <input class="form-control input-medium" name="confirm_pass" id="confirm_pass" type="password" autocomplete="off" />
+                    </div>
+                    <button type="submit" name="change_password" class="btn btn-danger btn-lg btn-block"><?php echo $escaper->escapeHtml($lang['Submit']) ?></button>
+                </form>
             </div>
         </div>
     </div>
+<?php include_once($_SERVER['DOCUMENT_ROOT'].'/templates/footer.php'); ?>
 </body>
-
 </html>

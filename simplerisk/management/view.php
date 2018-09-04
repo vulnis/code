@@ -654,70 +654,22 @@ else if (isset($_POST['update_subject']) && (!isset($_SESSION["modify_risks"]) |
 	$_SESSION["workflow_start"] = $_SERVER['SCRIPT_NAME'];
 ?>
 
-<!doctype html>
-<html>
-
-<head>
-    <title>SimpleRisk: Enterprise Risk Management Simplified</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
-
-    <script src="../js/jquery.min.js"></script>
-    <script src="../js/jquery-ui.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
-    <script src="../js/jquery.dataTables.js"></script>
-    <script src="../js/cve_lookup.js"></script>
-    <script src="../js/basescript.js"></script>
-    <script src="../js/highcharts/code/highcharts.js"></script>
-    <script src="../js/common.js"></script>
-    <script src="../js/bootstrap-multiselect.js"></script>
-
-    <link rel="stylesheet" href="../css/bootstrap.css">
-    <link rel="stylesheet" href="../css/bootstrap-responsive.css">
-    <link rel="stylesheet" href="../css/jquery.dataTables.css">
-    <link rel="stylesheet" href="../css/divshot-util.css">
-    <link rel="stylesheet" href="../css/divshot-canvas.css">
-    <link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/theme.css">
-    <link rel="stylesheet" href="../css/bootstrap-multiselect.css">
-
-    <script type="text/javascript">
-        function showScoreDetails() {
-            document.getElementById("scoredetails").style.display = "";
-            document.getElementById("hide").style.display = "block";
-            document.getElementById("show").style.display = "none";
-        }
-
-        function hideScoreDetails() {
-            document.getElementById("scoredetails").style.display = "none";
-            document.getElementById("updatescore").style.display = "none";
-            document.getElementById("hide").style.display = "none";
-            document.getElementById("show").style.display = "";
-        }
-
-        function updateScore() {
-            document.getElementById("scoredetails").style.display = "none";
-            document.getElementById("updatescore").style.display = "";
-            document.getElementById("show").style.display = "none";
-        }
-      
-    </script>
-  <?php display_asset_autocomplete_script(get_entered_assets()); ?>
-</head>
-
+<!DOCTYPE html>
+<html ng-app="SimpleRisk">
+<?php include_once($_SERVER['DOCUMENT_ROOT'].'/templates/head.php'); ?>
 <body>
 
+  <?php display_asset_autocomplete_script(get_entered_assets()); ?>
   <?php
     view_top_menu("RiskManagement");
     // Get any alert messages
     get_alert();
   ?>
   <div class="tabs new-tabs">
-    <div class="container-fluid">
-      <div class="row-fluid">
-        <div class="span3"> </div>
-        <div class="span9">
+    <div class="container">
+      <div class="row">
+        <div class="col-3"> </div>
+        <div class="col-9">
           <div class="tab-append">
             <div class="tab selected form-tab tab-show" id="tab"><div><span><a href="plan_mitigations.php">Risk list</a></span></div>
             </div>
@@ -729,15 +681,15 @@ else if (isset($_POST['update_subject']) && (!isset($_SESSION["modify_risks"]) |
 
     </div>
   </div>
-  <div class="container-fluid">
-    <div class="row-fluid">
-      <div class="span3">
+  <div class="container">
+    <div class="row">
+      <div class="col-">
         <?php view_risk_management_menu("ReviewRisksRegularly"); ?>
       </div>
-      <div class="span9">
+      <div class="col-9">
 
 <!--        <div id="show-alert"></div>-->
-        <div class="row-fluid" id="tab-content-container">
+        <div class="row" id="tab-content-container">
             <div class='tab-data' id="tab-container">
                 <?php
                     
@@ -751,184 +703,8 @@ else if (isset($_POST['update_subject']) && (!isset($_SESSION["modify_risks"]) |
     </div>
   </div>
     <input type="hidden" id="enable_popup" value="<?php echo get_setting('enable_popup'); ?>">
-      <script>
-        /*
-        * Function to add the css class for textarea title and make it popup.
-        * Example usage:
-        * focus_add_css_class("#foo", "#bar");
-        */
-        function focus_add_css_class(id_of_text_head, text_area_id){
-            // If enable_popup setting is false, disable popup
-            if($("#enable_popup").val() != 1){
-                $("textarea").removeClass("enable-popup");
-                return;
-            }else{
-                $("textarea").addClass("enable-popup");
-            }
-            
-            look_for = "textarea" + text_area_id;
-            if( !$(look_for).length ){
-                text_area_id = text_area_id.replace('#','');
-                look_for = "textarea[name=" + text_area_id;
-            }
-            $(look_for).focusin(function() {
-                $(id_of_text_head).addClass("affected-assets-title");
-                $('.ui-autocomplete').addClass("popup-ui-complete")
-            });
-            $(look_for).focusout(function() {
-                $(id_of_text_head).removeClass("affected-assets-title");
-                $('.ui-autocomplete').removeClass("popup-ui-complete")
-            });
-        }
-        $(document).ready(function() {
-            focus_add_css_class("#AffectedAssetsTitle", "#assets");
-            focus_add_css_class("#RiskAssessmentTitle", "#assessment");
-            focus_add_css_class("#NotesTitle", "#notes");
-            focus_add_css_class("#SecurityRequirementsTitle", "#security_requirements");
-            focus_add_css_class("#CurrentSolutionTitle", "#current_solution");
-            focus_add_css_class("#SecurityRecommendationsTitle", "#security_recommendations");
-            
-            
-            /**
-            * Change Event of Risk Scoring Method
-            * 
-            */
-            $('body').on('change', '[name=scoring_method]', function(e){
-                e.preventDefault();
-                var formContainer = $(this).parents('form');
-                handleSelection($(this).val(), formContainer);
-            })
-            
-            /**
-            * events in clicking soring button of edit details page, muti tabs case
-            */
-            $('body').on('click', '[name=cvssSubmit]', function(e){
-                e.preventDefault();
-                var form = $(this).parents('form');
-                popupcvss(form);
-            })
-            
-        });
-    </script>
-</body>
-
-    <script type="text/javascript">
-
-        $( function() {
-           
-            $("#comment-submit").attr('disabled','disabled');
-            $("#cancel_disable").attr('disabled','disabled');
-            $("#rest-btn").attr('disabled','disabled');
-            $("#comment-text").click(function(){
-                $("#comment-submit").removeAttr('disabled');
-                $("#rest-btn").removeAttr('disabled');
-            });
-
-            $("#comment-submit").click(function(){
-                var submitbutton = document.getElementById("comment-text").value;
-                 if(submitbutton == ''){
-               $("#comment-submit").attr('disabled','disabled');
-               $("#rest-btn").attr('disabled','disabled');
-           }
-           });
-            $("#rest-btn").click(function(){
-               $("#comment-submit").attr('disabled','disabled');
-            });
-           
-           $(".active-textfield").click(function(){
-                $("#cancel_disable").removeAttr('disabled');
-            });
-                
-           $("select").change(function changeOption(){
-                $("#cancel_disable").removeAttr('disabled');
-           });
-                 
-
-          $("#tabs").tabs({ active: 0});
-          <?php if (isset($_POST['edit_mitigation'])): ?>
-          $("#tabs").tabs({ active: 1});
-
-          <?php elseif (!isset($_POST['tab_type']) && (isset($_POST['edit_details']) ||(isset($_GET['type']) && $_GET['type']) =='0')): ?>
-         // $("#tabs").tabs({ active: 0});
-
-          <?php elseif ((isset($_POST['tab_type']) || isset($_GET['tab_type'])) || isset($_GET['type']) && $_GET['type']=='1'): ?>
-          $("#tabs").tabs({ active: 1});
-
-          <?php else: ?>
-          $("#tabs").tabs({ active: 2});
-          <?php endif; ?>
-
-          $('.collapsible').hide();
-
-          $('.collapsible--toggle span').click(function(event) {
-            event.preventDefault();
-            $(this).parents('.collapsible--toggle').next('.collapsible').slideToggle('400');
-            $(this).find('i').toggleClass('fa-caret-right fa-caret-down');
-          });
-
-          $('.add-comments').click(function(event) {
-            event.preventDefault();
-            $(this).parents('.collapsible--toggle').next('.collapsible').slideDown('400');
-            $(this).toggleClass('rotate');
-            $('#comment').fadeToggle('100');
-            $(this).parent().find('span i').removeClass('fa-caret-right');
-            $(this).parent().find('span i').addClass('fa-caret-down');
-          });
-
-
-          $("#tabs" ).tabs({
-            activate:function(event,ui){
-              if(ui.newPanel.selector== "#tabs1"){
-                $("#tab_details").addClass("tabList");
-                $("#tab_mitigation").removeClass("tabList");
-                $("#tab_review").removeClass("tabList");
-              } else if(ui.newPanel.selector== "#tabs2"){
-                $("#tab_mitigation").addClass("tabList");
-                $("#tab_review").removeClass("tabList");
-                $("#tab_details").removeClass("tabList");
-              }else{
-                $("#tab_review").addClass("tabList");
-                $("#tab_mitigation").removeClass("tabList");
-                $("#tab_details").removeClass("tabList");
-
-              }
-
-            }
-          });
-    //      $("#tabs" ).removeClass('ui-tabs')
-
-          $('#edit-subject').click(function (){
-            $('.edit-subject').show();
-            $('#static-subject').hide();
-          });
-          
-          $(".add-comment-menu").click(function(event){
-            event.preventDefault();
-            $commentsContainer = $("#comment").parents('.well');
-            $commentsContainer.find(".collapsible--toggle").next('.collapsible').slideDown('400');
-            $commentsContainer.find(".add-comments").addClass('rotate');
-            $('#comment').show();
-            $commentsContainer.find(".add-comments").parent().find('span i').removeClass('fa-caret-right');
-            $commentsContainer.find(".add-comments").parent().find('span i').addClass('fa-caret-down');
-            $("#comment-text").focus();
-          })
-          $( ".datepicker" ).datepicker();
-        });
-
-        $('body').on('click', '[name=view_all_reviews], .view-all-reviews', function(e){
-            e.preventDefault();
-            var tabContainer = $(this).parents('.tab-data');
-            if($('.current_review', tabContainer).is(":visible")){
-                $('.all_reviews', tabContainer).show();
-                $('.current_review', tabContainer).hide();
-	        $('.all_reviews_btn', tabContainer).html("<?php echo $escaper->escapeHtml($lang['LastReview']); ?>");
-            }else{
-                $('.all_reviews', tabContainer).hide();
-                $('.current_review', tabContainer).show();
-	        $('.all_reviews_btn', tabContainer).html("<?php echo $escaper->escapeHtml($lang['ViewAllReviews']); ?>");
-            }
-        });
-
-    </script>
     <?php display_set_default_date_format_script(); ?>
+
+<?php include_once($_SERVER['DOCUMENT_ROOT'].'/templates/footer.php'); ?>
+</body>
 </html>

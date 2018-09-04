@@ -802,25 +802,9 @@
     }
 ?>
 
-<!doctype html>
-<html>
-
-    <head>
-        <script src="../js/jquery.min.js"></script>
-        <script src="../js/bootstrap.min.js"></script>
-        <title>SimpleRisk: Enterprise Risk Management Simplified</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
-        <link rel="stylesheet" href="../css/bootstrap.css">
-        <link rel="stylesheet" href="../css/bootstrap-responsive.css">
-
-        <link rel="stylesheet" href="../css/divshot-util.css">
-        <link rel="stylesheet" href="../css/divshot-canvas.css">
-        <link rel="stylesheet" href="../css/display.css">
-
-        <link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.min.css">
-        <link rel="stylesheet" href="../css/theme.css">
-    </head>
+<!DOCTYPE html>
+<html ng-app="SimpleRisk">
+<?php include_once($_SERVER['DOCUMENT_ROOT'].'/templates/head.php'); ?>
 
     <body>
 
@@ -830,14 +814,14 @@
             // Get any alert messages
             get_alert();
         ?>
-        <div class="container-fluid">
-            <div class="row-fluid">
-                <div class="span3">
+        <div class="container">
+            <div class="row">
+                <div class="col-3">
                   <?php view_configure_menu("AddAndRemoveValues"); ?>
                 </div>
-                <div class="span9">
-                    <div class="row-fluid">
-                        <div class="span12">
+                <div class="col-9">
+                    <div class="row">
+                        <div class="col-12">
                             <div class="hero-unit">
                                 <form name="review_form" method="post" action="">
                                     <p>
@@ -1004,6 +988,6 @@
                 </div>
             </div>
         </div>
-    </body>
-
+<?php include_once($_SERVER['DOCUMENT_ROOT'].'/templates/footer.php'); ?>
+</body>
 </html>

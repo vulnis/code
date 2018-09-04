@@ -274,7 +274,7 @@ function display_asset_table()
     // Display the table header
     echo "<thead>\n";
     echo "<tr>\n";
-    echo "<th align=\"left\" width=\"75\"><input class=\"hidden-checkbox\" id=\"delete-all\" type=\"checkbox\" onclick=\"checkAll(this)\" /><label for=\"delete-all\" >" . $escaper->escapeHtml($lang['Delete']) . "</label></th>\n";
+    echo "<th align=\"left\" width=\"75\"><input class=\"hidden-checkbox\" id=\"delete-all\" type=\"checkbox\" onclick=\"checkAll(this)\" /><label for=\"delete-all\" >" . $escaper->escapeHtml($lang['SelectAll']) . "</label></th>\n";
     echo "<th align=\"left\">" . $escaper->escapeHtml($lang['AssetName']) . "</th>\n";
     echo "<th align=\"left\">" . $escaper->escapeHtml($lang['IPAddress']) . "</th>\n";
     echo "<th align=\"left\">" . $escaper->escapeHtml($lang['AssetValuation']) . "</th>\n";

@@ -2703,8 +2703,9 @@ function risk_table_open_by_team($teamOptions, $ownerOptions, $managerOptions, $
 /**********************************
  * FUNCTION: RISKS BY MONTH TABLE *
  **********************************/
-function risks_by_month_table()
+function risks_by_month_table($months)
 {
+    $months = $months -1;
     global $escaper;
     global $lang;
 
@@ -2718,28 +2719,28 @@ function risks_by_month_table()
     $close_date = $closed_risks[0];
     $close_count = $closed_risks[1];
 
-    echo "<table name=\"risks_by_month\" width=\"100%\" height=\"100%\" border=\"1\">\n";
+    echo "<table name=\"risks_by_month\" class=\"table table-hover table-sm table-responsive\">\n";
     echo "<thead>\n";
-    echo "<tr bgcolor=\"white\">\n";
-    echo "<th>&nbsp;</th>\n";
+    echo "<tr>\n";
+    echo "<th scope=\"col\"></th>\n";
 
     // For each of the past 12 months
-    for ($i=12; $i>=0; $i--)
+    for ($i=$months; $i>=0; $i--)
     {
         // Get the month
         $month = date('Y M', strtotime("first day of -$i month"));
 
-        echo "<th align=\"center\" width=\"50px\">" . $escaper->escapeHtml($month) . "</th>\n";
+        echo "<th scope=\"col\">" . $escaper->escapeHtml($month) . "</th>\n";
     }
 
     echo "</tr>\n";
     echo "</thead>\n";
     echo "<tbody>\n";
-    echo "<tr bgcolor=\"white\">\n";
-    echo "<td align=\"center\">" . $escaper->escapeHtml($lang['OpenedRisks']) . "</td>\n";
+    echo "<tr>\n";
+    echo "<th scope=\"row\">" . $escaper->escapeHtml($lang['OpenedRisks']) . "</th>\n";
 
     // For each of the past 12 months
-    for ($i=12; $i>=0; $i--)
+    for ($i=$months; $i>=0; $i--)
     {
         // Get the month
         $month = date('Y-m', strtotime("first day of -$i month"));
@@ -2756,15 +2757,15 @@ function risks_by_month_table()
         // Otherwise, use the value found
         else $open[$i] = $open_count[$key];
 
-        echo "<td align=\"center\" width=\"50px\">" . $escaper->escapeHtml($open[$i]) . "</td>\n";
+        echo "<td>" . $escaper->escapeHtml($open[$i]) . "</td>\n";
     }
 
     echo "</tr>\n";
-    echo "<tr bgcolor=\"white\">\n";
-    echo "<td align=\"center\">" . $escaper->escapeHtml($lang['ClosedRisks']) . "</td>\n";
+    echo "<tr>\n";
+    echo "<th scope=\"row\">" . $escaper->escapeHtml($lang['ClosedRisks']) . "</th>\n";
 
     // For each of the past 12 months
-    for ($i=12; $i>=0; $i--)
+    for ($i=$months; $i>=0; $i--)
     {
         // Get the month
         $month = date('Y-m', strtotime("first day of -$i month"));
@@ -2781,15 +2782,15 @@ function risks_by_month_table()
         // Otherwise, use the value found
         else $close[$i] = $close_count[$key];
 
-        echo "<td align=\"center\" width=\"50px\">" . $escaper->escapeHtml($close[$i]) . "</td>\n";
+        echo "<td>" . $escaper->escapeHtml($close[$i]) . "</td>\n";
     }
 
     echo "</tr>\n";
-    echo "<tr bgcolor=\"white\">\n";
-    echo "<td align=\"center\">" . $escaper->escapeHtml($lang['RiskTrend']) . "</td>\n";
+    echo "<tr>\n";
+    echo "<th scope=\"row\">" . $escaper->escapeHtml($lang['RiskTrend']) . "</th>\n";
 
     // For each of the past 12 months
-    for ($i=12; $i>=0; $i--)
+    for ($i=$months; $i>=0; $i--)
     {
         // Subtract the open number from the closed number
         $total[$i] = $open[$i] - $close[$i];
@@ -2804,13 +2805,12 @@ function risks_by_month_table()
         else if ($total[$i] < 0)
         {
             // Display it in green
-            $total_string = "<font color=\"green\">" . $total[$i] . "</font>
-";
+            $total_string = "<font color=\"green\">" . $total[$i] . "</font>";
         }
         // Otherwise the total is 0
         else $total_string = $total[$i];
 
-        echo "<td align=\"center\" width=\"50px\">" . $total_string . "</td>\n";
+        echo "<td>" . $total_string . "</td>\n";
     }
 
     // Reverse the total array
@@ -2823,7 +2823,7 @@ function risks_by_month_table()
     $total_open_risks[] = $open_risks_today;
 
     // For each of the past 12 months
-    for ($i=1; $i<=12; $i++)
+    for ($i=1; $i<=$months; $i++)
     {
         $total_open_risks[$i] = $total_open_risks[$i-1] - $total[$i-1];
     }
@@ -2832,16 +2832,16 @@ function risks_by_month_table()
     $total_open_risks = array_reverse($total_open_risks);
     
     echo "</tr>\n";
-    echo "<tr bgcolor=\"white\">\n";
-    echo "<td align=\"center\">" . $escaper->escapeHtml($lang['TotalOpenRisks']) . "</td>\n";
+    echo "<tr class=\"text-light bg-dark\">\n";
+    echo "<th scope=\"row\">" . $escaper->escapeHtml($lang['TotalOpenRisks']) . "</th>\n";
 
     // For each of the past 12 months
-    for ($i=0; $i<=12; $i++)
+    for ($i=0; $i<=$months; $i++)
     {
         // Get the total number of risks
         $total = $total_open_risks[$i];
 
-        echo "<td align=\"center\" width=\"50px\">" . $escaper->escapeHtml($total) . "</td>\n";
+        echo "<td>" . $escaper->escapeHtml($total) . "</td>\n";
     }
 
     echo "</tr>\n";

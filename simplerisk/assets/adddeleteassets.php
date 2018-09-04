@@ -209,7 +209,6 @@ if ((isset($_POST['delete_assets'])) && $manage_assets)
 
                 <h4><?php echo $escaper->escapeHTML($lang['DeleteAnExistingAsset']); ?></h4>
                 <form name="delete" method="post" action="">
-                  <button type="submit" name="delete_assets" class="btn btn-primary"><?php echo $escaper->escapeHtml($lang['Delete']); ?></button>
                   <?php display_asset_table(); ?>
                   <button type="submit" name="delete_assets" class="btn btn-primary"><?php echo $escaper->escapeHtml($lang['Delete']); ?></button>
                 </form>

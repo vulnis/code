@@ -87,15 +87,15 @@ enforce_permission_compliance();
         // Get any alert messages
         get_alert();
     ?>
-    <div class="container-fluid">
-        <div class="row-fluid">
-            <div class="span3">
+    <div class="container">
+        <div class="row">
+            <div class="col-3">
                 <?php view_compliance_menu("ActiveAudits"); ?>
             </div>
-            <div class="span9 compliance-content-container content-margin-height">
+            <div class="col-9 compliance-content-container content-margin-height">
                 <div id="show-alert"></div>
-                <div class="row-fluid">
-                    <div class="span12">
+                <div class="row">
+                    <div class="col-12">
                         <?php display_active_audits(); ?>
                     </div>
                 </div>
