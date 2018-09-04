@@ -149,7 +149,6 @@ if (isset($_SESSION["access"]) && ($_SESSION["access"] == "duo"))
 <html ng-app="SimpleRisk">
 <?php 
     include_once($_SERVER['DOCUMENT_ROOT'].'/templates/head.php');
-    display_asset_autocomplete_script(get_entered_assets()); 
     view_top_menu("Home");
 
   // If the user has authenticated and now we need to authenticate with duo

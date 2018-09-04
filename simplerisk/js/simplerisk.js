@@ -1,18 +1,6 @@
 var loading;
 
 $(document).ready(function () {
-    /* Custom functions */
-    (function ($) {
-        var tabs = $(".tabs li a");
-        tabs.click(function () {
-            var content = this.hash.replace('/', '');
-            tabs.removeClass("active");
-            $(this).addClass("active");
-            $("#content").find('div').hide();
-            $(content).fadeIn(200);
-        });
-    })(jQuery);
-
     function dropdown_transport()
       {
         smtp = document.getElementsByClassName("smtp");
@@ -99,11 +87,6 @@ $(document).ready(function () {
             return document.getElementById(el);
         }
     };
-    var $tabs = $("#documents-tab-content").tabs({
-        activate: function (event, ui) {
-            $(".document-table").treegrid('resize');
-        }
-    })
 
     var tabContentId = document.location.hash ? document.location.hash : "#documents-tab";
     tabContentId += "-content";
@@ -125,7 +108,6 @@ $(document).ready(function () {
             }
         });
     })
-    $(".document-table").treegrid('resize');
 
     $("#document-update-modal .document_type").change(function () {
         $parent = $(this).parents(".modal");
@@ -163,11 +145,6 @@ $(document).ready(function () {
         });
 
     })
-    $(window).resize(function () {
-        $('#initiate_audit_treegrid').datagrid('resize', {
-            width: $("#initiate-audits").width()
-        });
-    });
     $("body").on("click", ".framework-name", function (e) {
         e.preventDefault();
         var framework_id = $(this).data("id")
@@ -213,11 +190,9 @@ $(document).ready(function () {
                 $('[name=description]', modal).val(control.description);
                 $('[name=supplemental_guidance]', modal).val(control.supplemental_guidance);
 
-                $("#frameworks").multiselect('deselectAll', false);
                 $.each(control.framework_ids.split(","), function (i, e) {
                     $("#frameworks option[value='" + e + "']").prop("selected", true);
                 });
-                $("#frameworks").multiselect('refresh');
 
                 $('[name=control_class]', modal).val(Number(control.control_class) ? control.control_class : "");
                 $('[name=control_phase]', modal).val(Number(control.control_phase) ? control.control_phase : "");
@@ -274,12 +249,6 @@ $(document).ready(function () {
         document.location.href = BASE_URL + "/compliance/audit_initiation.php?initiate&type=test&id=" + $(this).data('id');
     });
 
-    var $tabs = $("#frameworks-tab-content, #controls-tab-content").tabs({
-        activate: function (event, ui) {
-            $(".framework-table").treegrid('resize');
-        }
-    })
-
     $("#framework-add-btn").click(function () {
         $.ajax({
             url: BASE_URL + '/api/governance/parent_frameworks_dropdown?status=1',
@@ -320,64 +289,12 @@ $(document).ready(function () {
     $(".tab-show[data-content='" + tabContentId + "']").addClass("selected");
     $(".tab-data").addClass("hide");
     $(tabContentId).removeClass("hide");
-    $(".framework-table").treegrid('resize');
-
-    $(function () {
-        // Create multiselect instance in Updating modal of framework control 
-        $("#frameworks").multiselect({
-            allSelectedText: simplerisk.allSelectedText,
-            includeSelectAllOption: true
-        });
-
-        // Create multiselect instance in Adding modal of framework control 
-        $("#add_framework_ids").multiselect({
-            allSelectedText: simplerisk.allFrameworks,
-            includeSelectAllOption: true
-        });
-
-        $("#filter_by_control_owner").multiselect({
-            allSelectedText: simplerisk.all,
-            includeSelectAllOption: true
-        });
-
-        $("#filter_by_control_class").multiselect({
-            allSelectedText: simplerisk.all,
-            includeSelectAllOption: true
-        });
-
-        $("#filter_by_control_phase").multiselect({
-            allSelectedText: simplerisk.all,
-            includeSelectAllOption: true
-        });
-
-        $("#filter_by_control_family").multiselect({
-            allSelectedText: simplerisk.all,
-            includeSelectAllOption: true
-        });
-
-        $("#filter_by_control_framework").multiselect({
-            allSelectedText: simplerisk.all,
-            includeSelectAllOption: true
-        });
-
-        $("#filter_by_control_priority").multiselect({
-            allSelectedText: simplerisk.all,
-            includeSelectAllOption: true
-        });
-    });
-
-    window.onbeforeunload = function () {
-        if ($('#subject:enabled').val() != '') {
-            return "Are you sure you want to procced without saving the risk?";
-        }
-    }
 
     var length = $('.tab-close').length;
     if (length == 1) {
         $('.tab-show button').hide();
     }
 
-    $("div#tabs").tabs();
 
     $("div#add-tab").click(function () {
 
@@ -453,18 +370,6 @@ $(document).ready(function () {
                     self.autocomplete("search", "");
                 }, 1000)
             });
-
-        // Add multiple selctets
-        $('.multiselect', "#tab-container" + num_tabs).multiselect();
-        function checkAll(bx) {
-            var cbs = document.getElementsByTagName('input');
-            for(var i=0; i < cbs.length; i++) {
-              if (cbs[i].type == 'checkbox') {
-                cbs[i].checked = bx.checked;
-              }
-            }
-          }
-
 
     });
 
@@ -592,9 +497,7 @@ $(document).ready(function () {
     $("select").change(function changeOption() {
         $("#cancel_disable").removeAttr('disabled');
     });
-    $("#tabs").tabs({
-        active: simplerisk.editmitigation
-    });
+
     $('.collapsible').hide();
 
     $('.collapsible--toggle span').click(function (event) {
@@ -612,27 +515,6 @@ $(document).ready(function () {
         $(this).parent().find('span i').addClass('fa-caret-down');
     });
 
-
-    $("#tabs").tabs({
-        activate: function (event, ui) {
-            if (ui.newPanel.selector == "#tabs1") {
-                $("#tab_details").addClass("tabList");
-                $("#tab_mitigation").removeClass("tabList");
-                $("#tab_review").removeClass("tabList");
-            } else if (ui.newPanel.selector == "#tabs2") {
-                $("#tab_mitigation").addClass("tabList");
-                $("#tab_review").removeClass("tabList");
-                $("#tab_details").removeClass("tabList");
-            } else {
-                $("#tab_review").addClass("tabList");
-                $("#tab_mitigation").removeClass("tabList");
-                $("#tab_details").removeClass("tabList");
-
-            }
-
-        }
-    });
-    //      $("#tabs" ).removeClass('ui-tabs')
 
     $('#edit-subject').click(function () {
         $('.edit-subject').show();
@@ -658,12 +540,6 @@ $(document).ready(function () {
           }
         }
     }
-    $(function(){
-        $("#complianceforge_frameworks").multiselect({
-            allSelectedText: simplerisk.allFrameworks,
-            includeSelectAllOption: true
-        });
-    });
 
     function colourNameToHex(colour)
         {

@@ -256,7 +256,7 @@ function add_risk_details(){
                     display_supporting_documentation_add();
 
                 echo "</div>\n";
-                echo "<!-- second coulmn end -->\n";
+                echo "<!-- second column end -->\n";
             echo "</div>\n";
         }
 
@@ -264,8 +264,9 @@ function add_risk_details(){
             echo "<div class=\"span10\">\n";
                 echo "<div class=\"actions risk-form-actions\">\n";
                     echo "<span>".$escaper->escapeHtml($lang['RiskFormRemark'])."</span>\n";
-                    echo "<button type=\"button\" name=\"submit\" class=\"btn btn-primary pull-right save-risk-form\">".$escaper->escapeHtml($lang['SubmitRisk'])."</button>\n";
-                    echo "<input class=\"btn pull-right\" value=\"".$escaper->escapeHtml($lang['ClearForm'])."\" type=\"reset\">\n";
+                    echo "<input class=\"btn btn-secondary\" value=\"".$escaper->escapeHtml($lang['Reset'])."\" type=\"reset\">\n";
+                    echo "<button type=\"button\" name=\"submit\" class=\"btn btn-primary\">".$escaper->escapeHtml($lang['Submit'])."</button>\n";
+                    
                 echo "</div>\n";
             echo "</div>\n";
         echo "</div>\n";
@@ -3283,7 +3284,7 @@ function view_top_menu($active)
     echo "<span class=\"navbar-toggler-icon\"></span>\n";
     echo "</button>\n";
     echo "<div class=\"navbar-collapse collapse\" id=\"navbarNav\">\n";
-    echo "<ul class=\"navbar-nav\" style=\"padding-top:15px\">\n";
+    echo "<ul class=\"navbar-nav mr-auto\">\n";
     // If the page is in the root directory
     if ($active == "Home")
     {
@@ -3359,25 +3360,35 @@ function view_top_menu($active)
             echo "<a class=\"nav-link\" href=\"../admin/index.php\">". $escaper->escapeHtml($lang['Configure']) ."</a>\n";
             echo "</li>\n";
         }
-
+        echo "</ul>"; // Finish left section
+        
+        echo "<form class=\"navbar-form\" role=\"search\" action=\"../management/view.php\" method=\"get\">";
+        echo "<div class=\"input-group\">";
+        echo "<input name=\"search\" type=\"text\" class=\"form-control\" placeholder=\"" . $escaper->escapeHtml($lang['Search']) . "\">";
+        echo "<div class=\"input-group-append\">";
+        echo "<button type=\"submit\" class=\"btn  btn-outline-secondary\">";
+        echo "<span class=\"fa fa-search\"></span></button></span></div></div></form>";
+        
         // If the user is logged in
+        echo "<ul class=\"navbar-nav\">";
         if (isset($_SESSION["access"]) && $_SESSION["access"] == "granted")
         {
             // Show the user profile menu
             echo "<li class=\"nav-item dropdown\">\n";
             echo "<a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"navbarUserMenu\" role=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">" . 
+                "<i class=\"fa fa-user\" aria-hidden=\"true\"></i>&nbsp;" .
                 $escaper->escapeHtml($_SESSION['name']) .
                 "</a>\n";
-            echo "<div class=\"dropdown-menu\" aria-labelledby=\"navbarUserMenu\">\n";
-            echo "<a class=\"dropdown-item\" href=\"../account/profile.php\">". $escaper->escapeHtml($lang['MyProfile']) ."</a>\n";
-            echo "<a class=\"dropdown-item\" href=\"../logout.php\">". $escaper->escapeHtml($lang['Logout']) ."</a>\n";
+            echo "<div class=\"dropdown-menu  dropdown-menu-right\" aria-labelledby=\"navbarUserMenu\">\n";
+            echo "<a class=\"dropdown-item\" href=\"../account/profile.php\">". 
+                "<i class=\"fa fa-cog\" aria-hidden=\"true\"></i>&nbsp;" .
+                $escaper->escapeHtml($lang['Settings']) ."</a>\n";
+            echo "<a class=\"dropdown-item\" href=\"../logout.php\">" .
+                "<i class=\"fa fa-sign-out\" aria-hidden=\"true\"></i>&nbsp;" . 
+                $escaper->escapeHtml($lang['Logout']) ."</a>\n";
             echo "</div>\n";
             echo "</li>\n";
         }
-
-        echo "<form class=\"form-inline\" name=\"search\" action=\"../management/view.php\" method=\"get\">\n";
-        echo "<input class=\"form-control mr-sm-2\" type=\"search\" name=\"id\" placeholder=\"" . $escaper->escapeHtml($lang['Search']). "\" onClick=\"this.setSelectionRange(0, this.value.length)\" />\n";
-        echo "</form>\n";
     }
     echo "</ul>\n";
     echo "</div>\n";

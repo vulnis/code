@@ -54,33 +54,23 @@
                 exit(0);
         }
 ?>
-
-<!DOCTYPE html>
-<html ng-app="SimpleRisk">
 <?php 
   include_once($_SERVER['DOCUMENT_ROOT'].'/templates/head.php');
 	view_top_menu("Configure");
 	get_alert();
 ?>
-
-    <div class="container">
-      <div class="row">
+<div class="container-fluid">
+    <div class="row p-5">
         <div class="col-3">
-          <?php view_configure_menu("Announcements"); ?>
+            <?php view_configure_menu("Announcements"); ?>
         </div>
         <div class="col-9">
-          <div class="row">
-            <div class="col-12">
-              <div class="hero-unit">
-                <h4>SimpleRisk Announcements</h4>
-                <p>
-                  <?php echo get_announcements(); ?>
-                </p>
-              </div>
-            </div>
-          </div>
+            <h4>SimpleRisk Announcements</h4>
+            <p>
+                <?php echo get_announcements(); ?>
+            </p>
         </div>
-      </div>
     </div>
+</div>
 
 <?php include_once($_SERVER['DOCUMENT_ROOT'].'/templates/footer.php'); ?>

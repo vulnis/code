@@ -80,35 +80,10 @@
         
         refresh();
     }
-?>
-
-<!DOCTYPE html>
-<html ng-app="SimpleRisk">
-<?php include_once($_SERVER['DOCUMENT_ROOT'].'/templates/head.php'); ?>
-    <script type="text/javascript">
-      
-    </script>
-
-<?php
+    // render
+    include_once($_SERVER['DOCUMENT_ROOT'].'/templates/head.php'); 
     view_top_menu("Configure");
-
-        // Get any alert messages
-        get_alert();
+    get_alert();
+    include_once('./active_assessments.html');
+    include_once($_SERVER['DOCUMENT_ROOT'].'/templates/footer.php'); 
 ?>
-    <div class="container">
-      <div class="row">
-        <div class="col-3">
-          <?php view_configure_menu("ActiveAssessments"); ?>
-        </div>
-        <div class="col-9">
-          <div class="row">
-            <div class="col-12">
-              <div class="hero-unit">
-                <?php display_active_assessments(); ?>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-<?php include_once($_SERVER['DOCUMENT_ROOT'].'/templates/footer.php'); ?>

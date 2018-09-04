@@ -317,7 +317,7 @@
                             </label>
                             <?php create_dropdown("role", $role_id); ?>
                         </div>
-                        <input class="btn btn-secondary" name="reset_custom_display_settings" value="<?php echo $lang['ResetCustomDisplaySettings']; ?>" type="submit">
+                        <input class="btn btn-secondary" name="reset_custom_display_settings" value="<?php echo $lang['Reset']; ?>" type="submit">
                         <input class="btn btn-primary" type="submit" name="change_language" value="<?php echo $escaper->escapeHtml($lang['Submit']); ?>" />
                     </form>
                 </div>
