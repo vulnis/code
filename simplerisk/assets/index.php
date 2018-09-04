@@ -70,7 +70,6 @@ if ((isset($_POST['search'])) && $manage_assets)
 }
 
 ?>
-
 <!DOCTYPE html>
 <html ng-app="SimpleRisk">
 <?php include_once($_SERVER['DOCUMENT_ROOT'].'/templates/head.php'); ?>

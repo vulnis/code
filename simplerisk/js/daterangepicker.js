@@ -60,8 +60,8 @@
             this.drops = 'up';
 
         this.buttonClasses = 'btn btn-sm';
-        this.applyClass = 'btn-success';
-        this.cancelClass = 'btn-default';
+        this.applyClass = 'btn-primary';
+        this.cancelClass = 'btn-secondary';
 
         this.locale = {
             direction: 'ltr',

@@ -288,7 +288,7 @@
                 
             },
             enableHTML: false,
-            buttonClass: 'btn btn-default',
+            buttonClass: 'btn btn-primary',
             inheritClass: false,
             buttonWidth: 'auto',
             buttonContainer: '<div class="btn-group" />',

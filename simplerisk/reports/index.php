@@ -48,13 +48,13 @@ if (!isset($_SESSION["access"]) || $_SESSION["access"] != "granted")
 }
 
 ?>
-<!DOCTYPE html>
-<html ng-app="SimpleRisk">
-<?php include_once($_SERVER['DOCUMENT_ROOT'].'/templates/head.php'); ?>
-<body>
-  <?php view_top_menu("Reporting"); ?>
-  <div class="container">
-    <div class="row">
+<?php 
+    include_once($_SERVER['DOCUMENT_ROOT'].'/templates/head.php'); 
+    view_top_menu("Reporting");
+    get_alert();
+?>
+  <div class="container-fluid">
+    <div class="row p-5">
       <div class="col-3">
         <?php view_reporting_menu("Overview"); ?>
       </div>
@@ -80,5 +80,3 @@ if (!isset($_SESSION["access"]) || $_SESSION["access"] != "granted")
   </div>
 
 <?php include_once($_SERVER['DOCUMENT_ROOT'].'/templates/footer.php'); ?>
-</body>
-</html>

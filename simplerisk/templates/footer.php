@@ -30,3 +30,5 @@
 </script>
 <script src="/js/simplerisk.js"></script>
 <!-- end ./templates/footer.php -->
+</body>
+</html>

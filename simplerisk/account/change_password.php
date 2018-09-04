@@ -153,7 +153,6 @@ if (isset($_POST['change_password']))
 <!DOCTYPE html>
 <html ng-app="SimpleRisk">
 <?php include_once($_SERVER['DOCUMENT_ROOT'].'/templates/head.php'); ?>
-<body>
     <?php
         view_top_menu("Configure");
 
@@ -177,11 +176,9 @@ if (isset($_POST['change_password']))
                         <label for="confirm_pass"><?php echo $escaper->escapeHtml($lang['ConfirmPassword']) ?></label>
                         <input class="form-control input-medium" name="confirm_pass" id="confirm_pass" type="password" autocomplete="off" />
                     </div>
-                    <button type="submit" name="change_password" class="btn btn-danger btn-lg btn-block"><?php echo $escaper->escapeHtml($lang['Submit']) ?></button>
+                    <button type="submit" name="change_password" class="btn btn-primary btn-lg btn-block"><?php echo $escaper->escapeHtml($lang['Submit']) ?></button>
                 </form>
             </div>
         </div>
     </div>
 <?php include_once($_SERVER['DOCUMENT_ROOT'].'/templates/footer.php'); ?>
-</body>
-</html>

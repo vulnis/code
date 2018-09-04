@@ -1,7 +1,7 @@
 
 <!-- start ./templates/login.php -->
-<div class="container p-5">
-    <div class="row">
+<div class="container-fluid">
+    <div class="row p-5">
         <div class="col-lg-4 col-8 mx-auto rounded bg-light shadow">
                 <form name="authenticate" method="post" action="" class="p-5">
                     <h3><?php echo $escaper->escapeHtml($lang['LogInHere']) ?></h3>
@@ -25,7 +25,7 @@
                         }
                     }
                     ?>
-                    <button type="submit" name="submit" class="btn btn-danger btn-block"><?php echo $escaper->escapeHtml($lang['Login']) ?></button>
+                    <button type="submit" name="submit" class="btn btn-primary btn-block"><?php echo $escaper->escapeHtml($lang['Login']) ?></button>
                     <a class="btn btn-link btn-block" href="reset.php"><?php echo $escaper->escapeHtml($lang['ForgotYourPassword']) ?></a>
                     
                 </form>

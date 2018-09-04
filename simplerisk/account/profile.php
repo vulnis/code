@@ -187,7 +187,6 @@
 <!DOCTYPE html>
 <html ng-app="SimpleRisk">
 <?php include_once($_SERVER['DOCUMENT_ROOT'].'/templates/head.php'); ?>
-<body>
 <script type="text/javascript">
     $(function(){
             $(document).ready(function(){
@@ -251,156 +250,150 @@
     // Get any alert messages
     get_alert();
 ?>
-    <div class="container p-5">
-      <div class="row">
-        <div class="col-12">
-          <div class="row">
-            <div class="col-12">
-                <form name="change_language" method="post" action="">
-                    <h3><?php echo $escaper->escapeHtml($lang['ProfileDetails']); ?></h3>
-                    <div class="form-group">
-                        <label for="name">
-                            <?php echo $escaper->escapeHtml($lang['FullName']); ?>
-                        </label>
-                        <input style="cursor: default;" name="name" type="text" maxlength="50" size="20" title="<?php echo $escaper->escapeHtml($name); ?>" disabled="disabled" value="<?php echo $escaper->escapeHtml($name); ?>" />
-                    </div>
-                    <div class="form-group">
-                        <label for="email">
-                            <?php echo $escaper->escapeHtml($lang['EmailAddress']); ?>
-                        </label>
-                        <input style="cursor: default;" name="email" type="text" maxlength="200" size="20" title="<?php echo $escaper->escapeHtml($email); ?>"disabled="disabled" value="<?php echo $escaper->escapeHtml($email); ?>" />
-                    </div>
-                    <div class="form-group">
-                        <label for="username">
-                            <?php echo $escaper->escapeHtml($lang['Username']); ?>
-                        </label>
-                        <input style="cursor: default;" name="username" type="text" maxlength="20" size="20" title="<?php echo $escaper->escapeHtml($username); ?>" disabled="disabled" value="<?php echo $escaper->escapeHtml($username); ?>" />
-                    </div>
-                    <div class="form-group">
-                        <label for="last_login">
-                            <?php echo $escaper->escapeHtml($lang['LastLogin']); ?>
-                        </label>
-                        <input style="cursor: default;" name="last_login" type="text" maxlength="20" size="20" title="<?php echo $escaper->escapeHtml($last_login); ?>" disabled="disabled" value="<?php echo $escaper->escapeHtml($last_login); ?>" />
-                    </div>
-                    <div class="form-group">
-                        <label for="language">
-                            <?php echo $escaper->escapeHtml($lang['Language']); ?>
-                        </label>
-                        <?php create_dropdown("languages", get_value_by_name("languages", $language)); ?>
-                    </div>
-                    
+<div class="container-fluid">
+    <div class="row p-5">
+        <div class="col-lg-6 col-12 mx-auto">
+            <nav>
+                <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                    <a class="nav-item nav-link active" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="true"><?php echo $escaper->escapeHtml($lang['ProfileDetails']); ?></a>
+                    <a class="nav-item nav-link" id="nav-rights-tab" data-toggle="tab" href="#nav-rights" role="tab" aria-controls="nav-rights" aria-selected="false"><?php echo $escaper->escapeHtml($lang['UserResponsibilities']); ?></a>
+                    <a class="nav-item nav-link" id="nav-password-tab" data-toggle="tab" href="#nav-password" role="tab" aria-controls="nav-password" aria-selected="false"><?php echo $escaper->escapeHtml($lang['ChangePassword']); ?></a>
+                </div>
+            </nav>
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                    <form name="change_language" method="post" action="">
+                        <div class="form-group">
+                            <label for="name">
+                                <?php echo $escaper->escapeHtml($lang['FullName']); ?>
+                            </label>
+                            <input class="form-control" name="name" type="text" value="<?php echo $escaper->escapeHtml($name); ?>" readonly />
+                        </div>
+                        <div class="form-group">
+                            <label for="email">
+                                <?php echo $escaper->escapeHtml($lang['EmailAddress']); ?>
+                            </label>
+                            <input class="form-control" name="email" type="text" value="<?php echo $escaper->escapeHtml($email); ?>" readonly />
+                        </div>
+                        <div class="form-group">
+                            <label for="username">
+                                <?php echo $escaper->escapeHtml($lang['Username']); ?>
+                            </label>
+                            <input class="form-control" name="username" type="text" value="<?php echo $escaper->escapeHtml($username); ?>" readonly />
+                        </div>
+                        <div class="form-group">
+                            <label for="last_login">
+                                <?php echo $escaper->escapeHtml($lang['LastLogin']); ?>
+                            </label>
+                            <input class="form-control" name="last_login" type="text" value="<?php echo $escaper->escapeHtml($last_login); ?>"  readonly />
+                        </div>
+                        <div class="form-group">
+                            <label for="language">
+                                <?php echo $escaper->escapeHtml($lang['Language']); ?>
+                            </label>
+                            <?php create_dropdown("languages", get_value_by_name("languages", $language)); ?>
+                        </div>
+                        
+                        <?php
+                            // If the API Extra is enabled
+                            if (api_extra())
+                            {
+                                // Require the API Extra
+                                require_once(realpath(__DIR__ . '/../extras/api/index.php'));
+
+                                // Display the API Profile
+                                display_api_profile();
+                            }
+                        ?>
+                        <div class="form-group">
+                            <label for="teams">
+                                <?php echo $escaper->escapeHtml($lang['Teams']); ?>
+                            </label>
+                            <?php create_multiple_dropdown("team", $teams); ?>
+                        </div>
+                        <div class="form-group">
+                            <label for="rol">
+                                <?php echo $escaper->escapeHtml($lang['Role']); ?>
+                            </label>
+                            <?php create_dropdown("role", $role_id); ?>
+                        </div>
+                        <input class="btn btn-secondary" name="reset_custom_display_settings" value="<?php echo $lang['ResetCustomDisplaySettings']; ?>" type="submit">
+                        <input class="btn btn-primary" type="submit" name="change_language" value="<?php echo $escaper->escapeHtml($lang['Submit']); ?>" />
+                    </form>
+                </div>
+                <div class="tab-pane fade" id="nav-rights" role="tabpanel" aria-labelledby="nav-rights-tab">
+                    <table class="table checklist">
+                        <tr><td colspan="2"><?php echo $escaper->escapeHtml($lang['Governance']); ?></td></tr>
+                        <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td><input name="governance" type="checkbox"<?php if ($governance) echo " checked" ?> />&nbsp;<?php echo $escaper->escapeHtml($lang['AllowAccessToGovernanceMenu']); ?></td></tr>
+                        <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td><input name="add_new_frameworks" type="checkbox"<?php if ($add_new_frameworks) echo " checked" ?> />&nbsp;<?php echo $escaper->escapeHtml($lang['AbleToAddNewFrameworks']); ?></td></tr>
+                        <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td><input name="modify_frameworks" type="checkbox"<?php if ($modify_frameworks) echo " checked" ?> />&nbsp;<?php echo $escaper->escapeHtml($lang['AbleToModifyExistingFrameworks']); ?></td></tr>
+                        <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td><input name="delete_frameworks" type="checkbox"<?php if ($delete_frameworks) echo " checked" ?> />&nbsp;<?php echo $escaper->escapeHtml($lang['AbleToDeleteExistingFrameworks']); ?></td></tr>
+                        <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td><input name="add_new_controls" type="checkbox"<?php if ($add_new_controls) echo " checked" ?> />&nbsp;<?php echo $escaper->escapeHtml($lang['AbleToAddNewControls']); ?></td></tr>
+                        <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td><input name="modify_controls" type="checkbox"<?php if ($modify_controls) echo " checked" ?> />&nbsp;<?php echo $escaper->escapeHtml($lang['AbleToModifyExistingControls']); ?></td></tr>
+                        <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td><input name="delete_controls" type="checkbox"<?php if ($delete_controls) echo " checked" ?> />&nbsp;<?php echo $escaper->escapeHtml($lang['AbleToDeleteExistingControls']); ?></td></tr>
+                        <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td><input name="add_documentation" type="checkbox"<?php if ($add_documentation) echo " checked" ?> />&nbsp;<?php echo $escaper->escapeHtml($lang['AbleToAddDocumentation']); ?></td></tr>
+                        <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td><input name="modify_documentation" type="checkbox"<?php if ($modify_documentation) echo " checked" ?> />&nbsp;<?php echo $escaper->escapeHtml($lang['AbleToModifyDocumentation']); ?></td></tr>
+                        <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td><input name="delete_documentation" type="checkbox"<?php if ($delete_documentation) echo " checked" ?> />&nbsp;<?php echo $escaper->escapeHtml($lang['AbleToDeleteDocumentation']); ?></td></tr>
+                        <tr><td colspan="2"><?php echo $escaper->escapeHtml($lang['RiskManagement']); ?></td></tr>
+                        <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td><input name="riskmanagement" type="checkbox"<?php if ($riskmanagement) echo " checked" ?> />&nbsp;<?php echo $escaper->escapeHtml($lang['AllowAccessToRiskManagementMenu']); ?></td></tr>
+                        <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td><input name="submit_risks" type="checkbox"<?php if ($submit_risks) echo " checked" ?> />&nbsp;<?php echo $escaper->escapeHtml($lang['AbleToSubmitNewRisks']); ?></td></tr>
+                        <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td><input name="modify_risks" type="checkbox"<?php if ($modify_risks) echo " checked" ?> />&nbsp;<?php echo $escaper->escapeHtml($lang['AbleToModifyExistingRisks']); ?></td></tr>
+                        <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td><input name="close_risks" type="checkbox"<?php if ($close_risks) echo " checked" ?> />&nbsp;<?php echo $escaper->escapeHtml($lang['AbleToCloseRisks']); ?></td></tr>
+                        <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td><input name="plan_mitigations" type="checkbox"<?php if ($plan_mitigations) echo " checked" ?> />&nbsp;<?php echo $escaper->escapeHtml($lang['AbleToPlanMitigations']); ?></td></tr>
+                        <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td><input name="accept_mitigation" type="checkbox"<?php if ($accept_mitigation) echo " checked" ?> />&nbsp;<?php echo $escaper->escapeHtml($lang['AbleToAcceptMitigations']); ?></td></tr>
+                        <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td><input name="review_insignificant" type="checkbox"<?php if ($review_insignificant) echo " checked" ?> />&nbsp;<?php echo $escaper->escapeHtml($lang['AbleToReviewInsignificantRisks']); ?></td></tr>
+                        <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td><input name="review_low" type="checkbox"<?php if ($review_low) echo " checked" ?> />&nbsp;<?php echo $escaper->escapeHtml($lang['AbleToReviewLowRisks']); ?></td></tr>
+                        <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td><input name="review_medium" type="checkbox"<?php if ($review_medium) echo " checked" ?> />&nbsp;<?php echo $escaper->escapeHtml($lang['AbleToReviewMediumRisks']); ?></td></tr>
+                        <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td><input name="review_high" type="checkbox"<?php if ($review_high) echo " checked" ?> />&nbsp;<?php echo $escaper->escapeHtml($lang['AbleToReviewHighRisks']); ?></td></tr>
+                        <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td><input name="review_veryhigh" type="checkbox"<?php if ($review_veryhigh) echo " checked" ?> />&nbsp;<?php echo $escaper->escapeHtml($lang['AbleToReviewVeryHighRisks']); ?></td></tr>
+                        <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td><input name="comment_risk_management" type="checkbox"<?php if ($comment_risk_management) echo " checked" ?> />&nbsp;<?php echo $escaper->escapeHtml($lang['AbleToCommentRiskManagement']); ?></td></tr>
+                        <tr><td colspan="2"><?php echo $escaper->escapeHtml($lang['Compliance']); ?></td></tr>
+                        <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td><input name="compliance" type="checkbox"<?php if ($compliance) echo " checked" ?> />&nbsp;<?php echo $escaper->escapeHtml($lang['AllowAccessToComplianceMenu']); ?></td></tr>
+                        <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td><input name="comment_compliance" type="checkbox"<?php if ($comment_compliance) echo " checked" ?> />&nbsp;<?php echo $escaper->escapeHtml($lang['AbleToCommentCompliance']); ?></td></tr>
+                        <tr><td colspan="2"><?php echo $escaper->escapeHtml($lang['AssetManagement']); ?></td></tr>
+                        <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td><input name="asset" type="checkbox"<?php if ($asset) echo " checked" ?> />&nbsp;<?php echo $escaper->escapeHtml($lang['AllowAccessToAssetManagementMenu']); ?></td></tr>
+                        <tr><td colspan="2"><?php echo $escaper->escapeHtml($lang['Assessments']); ?></td></tr>
+                        <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td><input name="assessments" type="checkbox"<?php if ($assessments) echo " checked" ?> />&nbsp;<?php echo $escaper->escapeHtml($lang['AllowAccessToAssessmentsMenu']); ?></td></tr>
+                        <tr><td colspan="2"><?php echo $escaper->escapeHtml($lang['Configure']); ?></td></tr>
+                        <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td><input name="admin" type="checkbox"<?php if ($admin) echo " checked" ?> />&nbsp;<?php echo $escaper->escapeHtml($lang['AllowAccessToConfigureMenu']); ?></td></tr>
+                    </table>
+                </div>
+                <div class="tab-pane fade" id="nav-password" role="tabpanel" aria-labelledby="nav-password-tab">
                     <?php
-                        // If the API Extra is enabled
-                        if (api_extra())
-                        {
-                            // Require the API Extra
-                            require_once(realpath(__DIR__ . '/../extras/api/index.php'));
-
-                            // Display the API Profile
-                            display_api_profile();
-                        }
-                    ?>
-                    <div class="form-group">
-                    <label for="teams">
-                        <?php echo $escaper->escapeHtml($lang['Teams']); ?>
-                    </label>
-                    <?php create_multiple_dropdown("team", $teams); ?>
+                        if (isset($_SESSION['user_type']) && $_SESSION['user_type'] != "ldap")
+                        { ?>
+                    <form name="change_password" method="post" action="">
+                        <?php $resetRequestMessages = getPasswordReqeustMessages(); ?>
+                        <div class="form-group">
+                            <label for="current_pass"><?php echo $escaper->escapeHtml($lang['CurrentPassword']) ?></label>
+                            <input name="current_pass" id="current_pass" class="form-control" type="password" autocomplete="off" />
+                        </div>
+                        <div class="form-group">
+                            <label for="new_pass"><?php echo $escaper->escapeHtml($lang['NewPassword']) ?></label>
+                            <input name="new_pass" id="new_pass" class="form-control" type="password" autocomplete="off" />
+                        </div>
+                        <div class="form-group">
+                            <label for="confirm_pass"><?php echo $escaper->escapeHtml($lang['ConfirmPassword']) ?></label>
+                            <input name="confirm_pass" id="confirm_pass" class="form-control" type="password" autocomplete="off" />
+                            <?php 
+                            if(count($resetRequestMessages))
+                            {
+                                foreach($resetRequestMessages as $resetRequestMessage)
+                                { 
+                                    echo "<small class=\"form-text text-muted\">{$resetRequestMessage}</small>\n";
+                                } 
+                            } ?>
+                        </div>
+                        <button class="btn btn-secondary" type="reset"><?php echo $escaper->escapeHtml($lang['Reset']) ?></button>
+                        <button type="submit" name="change_password" class="btn btn-primary"><?php echo $escaper->escapeHtml($lang['Submit']) ?></button>
+                    </form>
+                    <?php } ?>
                 </div>
-                <div class="form-group">
-                    <label for="rol">
-                        <?php echo $escaper->escapeHtml($lang['Role']); ?>
-                    </label>
-                    <?php create_dropdown("role", $role_id); ?>
-                </div>
-                <input class="btn btn-lg btn-block btn-danger" type="submit" name="change_language" value="<?php echo $escaper->escapeHtml($lang['Update']); ?>" />
-                </form>
-                <br>
-                <form action="" method="POST">
-                    <input name="reset_custom_display_settings" value="<?php echo $lang['ResetCustomDisplaySettings']; ?>" type="submit">
-                </form>
-                
-                
-                
-                <h3><?php echo $escaper->escapeHtml($lang['UserResponsibilities']); ?></h3>
-                <table class="checklist" border="0" cellspacing="0" cellpadding="0">
-                          <tr><td colspan="2"><?php echo $escaper->escapeHtml($lang['Governance']); ?></td></tr>
-                          <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td><input name="governance" type="checkbox"<?php if ($governance) echo " checked" ?> />&nbsp;<?php echo $escaper->escapeHtml($lang['AllowAccessToGovernanceMenu']); ?></td></tr>
-                          <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td><input name="add_new_frameworks" type="checkbox"<?php if ($add_new_frameworks) echo " checked" ?> />&nbsp;<?php echo $escaper->escapeHtml($lang['AbleToAddNewFrameworks']); ?></td></tr>
-                          <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td><input name="modify_frameworks" type="checkbox"<?php if ($modify_frameworks) echo " checked" ?> />&nbsp;<?php echo $escaper->escapeHtml($lang['AbleToModifyExistingFrameworks']); ?></td></tr>
-                          <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td><input name="delete_frameworks" type="checkbox"<?php if ($delete_frameworks) echo " checked" ?> />&nbsp;<?php echo $escaper->escapeHtml($lang['AbleToDeleteExistingFrameworks']); ?></td></tr>
-                          <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td><input name="add_new_controls" type="checkbox"<?php if ($add_new_controls) echo " checked" ?> />&nbsp;<?php echo $escaper->escapeHtml($lang['AbleToAddNewControls']); ?></td></tr>
-                          <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td><input name="modify_controls" type="checkbox"<?php if ($modify_controls) echo " checked" ?> />&nbsp;<?php echo $escaper->escapeHtml($lang['AbleToModifyExistingControls']); ?></td></tr>
-                          <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td><input name="delete_controls" type="checkbox"<?php if ($delete_controls) echo " checked" ?> />&nbsp;<?php echo $escaper->escapeHtml($lang['AbleToDeleteExistingControls']); ?></td></tr>
-                          <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td><input name="add_documentation" type="checkbox"<?php if ($add_documentation) echo " checked" ?> />&nbsp;<?php echo $escaper->escapeHtml($lang['AbleToAddDocumentation']); ?></td></tr>
-                          <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td><input name="modify_documentation" type="checkbox"<?php if ($modify_documentation) echo " checked" ?> />&nbsp;<?php echo $escaper->escapeHtml($lang['AbleToModifyDocumentation']); ?></td></tr>
-                          <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td><input name="delete_documentation" type="checkbox"<?php if ($delete_documentation) echo " checked" ?> />&nbsp;<?php echo $escaper->escapeHtml($lang['AbleToDeleteDocumentation']); ?></td></tr>
-                          
-                          <tr><td colspan="2"><?php echo $escaper->escapeHtml($lang['RiskManagement']); ?></td></tr>
-                          <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td><input name="riskmanagement" type="checkbox"<?php if ($riskmanagement) echo " checked" ?> />&nbsp;<?php echo $escaper->escapeHtml($lang['AllowAccessToRiskManagementMenu']); ?></td></tr>
-                          <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td><input name="submit_risks" type="checkbox"<?php if ($submit_risks) echo " checked" ?> />&nbsp;<?php echo $escaper->escapeHtml($lang['AbleToSubmitNewRisks']); ?></td></tr>
-                          <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td><input name="modify_risks" type="checkbox"<?php if ($modify_risks) echo " checked" ?> />&nbsp;<?php echo $escaper->escapeHtml($lang['AbleToModifyExistingRisks']); ?></td></tr>
-                          <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td><input name="close_risks" type="checkbox"<?php if ($close_risks) echo " checked" ?> />&nbsp;<?php echo $escaper->escapeHtml($lang['AbleToCloseRisks']); ?></td></tr>
-                          <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td><input name="plan_mitigations" type="checkbox"<?php if ($plan_mitigations) echo " checked" ?> />&nbsp;<?php echo $escaper->escapeHtml($lang['AbleToPlanMitigations']); ?></td></tr>
-                          <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td><input name="accept_mitigation" type="checkbox"<?php if ($accept_mitigation) echo " checked" ?> />&nbsp;<?php echo $escaper->escapeHtml($lang['AbleToAcceptMitigations']); ?></td></tr>
-                          <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td><input name="review_insignificant" type="checkbox"<?php if ($review_insignificant) echo " checked" ?> />&nbsp;<?php echo $escaper->escapeHtml($lang['AbleToReviewInsignificantRisks']); ?></td></tr>
-                          <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td><input name="review_low" type="checkbox"<?php if ($review_low) echo " checked" ?> />&nbsp;<?php echo $escaper->escapeHtml($lang['AbleToReviewLowRisks']); ?></td></tr>
-                          <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td><input name="review_medium" type="checkbox"<?php if ($review_medium) echo " checked" ?> />&nbsp;<?php echo $escaper->escapeHtml($lang['AbleToReviewMediumRisks']); ?></td></tr>
-                          <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td><input name="review_high" type="checkbox"<?php if ($review_high) echo " checked" ?> />&nbsp;<?php echo $escaper->escapeHtml($lang['AbleToReviewHighRisks']); ?></td></tr>
-                          <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td><input name="review_veryhigh" type="checkbox"<?php if ($review_veryhigh) echo " checked" ?> />&nbsp;<?php echo $escaper->escapeHtml($lang['AbleToReviewVeryHighRisks']); ?></td></tr>
-                          <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td><input name="comment_risk_management" type="checkbox"<?php if ($comment_risk_management) echo " checked" ?> />&nbsp;<?php echo $escaper->escapeHtml($lang['AbleToCommentRiskManagement']); ?></td></tr>
-                          <tr><td colspan="2"><?php echo $escaper->escapeHtml($lang['Compliance']); ?></td></tr>
-                          <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td><input name="compliance" type="checkbox"<?php if ($compliance) echo " checked" ?> />&nbsp;<?php echo $escaper->escapeHtml($lang['AllowAccessToComplianceMenu']); ?></td></tr>
-                          <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td><input name="comment_compliance" type="checkbox"<?php if ($comment_compliance) echo " checked" ?> />&nbsp;<?php echo $escaper->escapeHtml($lang['AbleToCommentCompliance']); ?></td></tr>
-                          <tr><td colspan="2"><?php echo $escaper->escapeHtml($lang['AssetManagement']); ?></td></tr>
-                          <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td><input name="asset" type="checkbox"<?php if ($asset) echo " checked" ?> />&nbsp;<?php echo $escaper->escapeHtml($lang['AllowAccessToAssetManagementMenu']); ?></td></tr>
-                          
-                          <tr><td colspan="2"><?php echo $escaper->escapeHtml($lang['Assessments']); ?></td></tr>
-                          <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td><input name="assessments" type="checkbox"<?php if ($assessments) echo " checked" ?> />&nbsp;<?php echo $escaper->escapeHtml($lang['AllowAccessToAssessmentsMenu']); ?></td></tr>
-                          
-                          <tr><td colspan="2"><?php echo $escaper->escapeHtml($lang['Configure']); ?></td></tr>
-                          <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;</td><td><input name="admin" type="checkbox"<?php if ($admin) echo " checked" ?> />&nbsp;<?php echo $escaper->escapeHtml($lang['AllowAccessToConfigureMenu']); ?></td></tr>
-                </table>
-
-<?php
-    if (isset($_SESSION['user_type']) && $_SESSION['user_type'] != "ldap")
-    {
-            echo "<div class=\"hero-unit\">\n";
-        echo "<form name=\"change_password\" method=\"post\" action=\"\">\n";
-        echo "<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\n";
-        echo "<tr><td colspan=\"2\"><h4>" . $escaper->escapeHtml($lang['ChangePassword']) . "</h4></td></tr>\n";
-        
-        $html = "<tr><td colspan=\"2\">";
-        $resetRequestMessages = getPasswordReqeustMessages();
-        if(count($resetRequestMessages)){
-            $html .= "<p><b>Password should have the following requirements.</b></p>\n";
-            $html .= "<ul>\n";
-            foreach($resetRequestMessages as $resetRequestMessage){
-                $html .= "<li>{$resetRequestMessage}</li>\n";
-            }
-            $html .= "</ul>\n";
-        }
-        $html .= "</td></tr>";
-        echo $html;
-        
-        echo "<tr><td>" . $escaper->escapeHtml($lang['CurrentPassword']) . ":&nbsp</td><td><input maxlength=\"100\" name=\"current_pass\" id=\"current_pass\" class=\"input-medium\" type=\"password\" autocomplete=\"off\" /></td></tr>\n";
-        echo "<tr><td>" . $escaper->escapeHtml($lang['NewPassword']) . ":&nbsp</td><td><input maxlength=\"100\" name=\"new_pass\" id=\"new_pass\" class=\"input-medium\" type=\"password\" autocomplete=\"off\" /></td></tr>\n";
-        echo "<tr><td>" . $escaper->escapeHtml($lang['ConfirmPassword']) . ":&nbsp;</td><td><input maxlength=\"100\" name=\"confirm_pass\" id=\"confirm_pass\" class=\"input-medium\" type=\"password\" autocomplete=\"off\" /></td></tr>\n";
-        echo "</table>\n";
-                echo "<div class=\"form-actions\">\n";
-                echo "<button type=\"submit\" name=\"change_password\" class=\"btn btn-primary\">" . $escaper->escapeHtml($lang['Submit']) . "</button>\n";
-                echo "<input class=\"btn\" value=\"" . $escaper->escapeHtml($lang['Reset']) . "\" type=\"reset\">\n";
-                echo "</div>\n";
-                echo "</form>\n";
-                echo "</div>\n";
-    }
-?>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-    <?php display_set_default_date_format_script(); ?>
-
-<?php include_once($_SERVER['DOCUMENT_ROOT'].'/templates/footer.php'); ?>
-</body>
-</html>
+</div>
+<?php 
+    display_set_default_date_format_script();
+    include_once($_SERVER['DOCUMENT_ROOT'].'/templates/footer.php'); 
+?>

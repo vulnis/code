@@ -239,35 +239,29 @@
 ?>
 <!DOCTYPE html>
 <html ng-app="SimpleRisk">
-<?php include_once($_SERVER['DOCUMENT_ROOT'].'/templates/head.php'); ?>
-<body>
-
-<?php
+<?php 
+	include_once($_SERVER['DOCUMENT_ROOT'].'/templates/head.php'); 
 	view_top_menu("Configure");
-
-	// Get any alert messages
 	get_alert();
 ?>
 
-    <div class="container">
-      <div class="row">
+    <div class="container-fluid">
+      <div class="row p-5">
         <div class="col-3">
           <?php view_configure_menu("Register"); ?>
         </div>
         <div class="col-9">
             <div class="row pt-5">
                 <div class="col-12">
-                    <div class="hero-unit">
-                        <h4><?php echo $escaper->escapeHtml($lang['RegisterSimpleRisk']); ?></h4>
-                        <p><?php echo $escaper->escapeHtml($lang['RegistrationText']); ?></p>
-                        <?php
-                            if ($registration_notice === true)
-                            {
-                                echo "<p><form name=\"no_message\" method=\"post\" action=\"\"><input class=\"btn btn-danger btn-lg btn-block\" type=\"submit\" name=\"disable_registration_notice\" value=\"" . $escaper->escapeHtml($lang['DisableRegistrationNotice']) . "\" /></form></p>\n";
-                            }
-                        ?>
-						<small><b>Instance ID:</b>&nbsp;<?php echo $escaper->escapeHtml(get_setting("instance_id")); ?></small>
-                    </div>
+					<h4><?php echo $escaper->escapeHtml($lang['RegisterSimpleRisk']); ?></h4>
+					<p><?php echo $escaper->escapeHtml($lang['RegistrationText']); ?></p>
+					<?php
+						if ($registration_notice === true)
+						{
+							echo "<p><form name=\"no_message\" method=\"post\" action=\"\"><input class=\"btn btn-primary\" type=\"submit\" name=\"disable_registration_notice\" value=\"" . $escaper->escapeHtml($lang['DisableRegistrationNotice']) . "\" /></form></p>\n";
+						}
+					?>
+					<small><b>Instance ID:</b>&nbsp;<?php echo $escaper->escapeHtml(get_setting("instance_id")); ?></small>
                 </div>
             </div>
             <?php if(!is_process("mysqldump")){ ?>
@@ -278,7 +272,7 @@
     							<label for="mysqlDumpPath">Set Mysqldump Path</label>
 								<input id="mysqlDumpPath" placeholder="/mysql/dump/path" name="mysqldump_path" value="<?php echo get_settting_by_name('mysqldump_path') ?>" type="text"></td>
 							</div>
-							<input class="btn btn-lg btn-block btn-danger" value="Submit" name="submit_mysqlpath" type="submit">
+							<input class="btn btn-primary" value="Submit" name="submit_mysqlpath" type="submit">
 						</form>
                     </div>
                 </div>
@@ -349,5 +343,3 @@
     </div>
 
 <?php include_once($_SERVER['DOCUMENT_ROOT'].'/templates/footer.php'); ?>
-</body>
-</html>

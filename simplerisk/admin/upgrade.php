@@ -132,8 +132,9 @@
 	// If access was not granted display the login form
 	if (!isset($_SESSION["access"]) || $_SESSION["access"] != "granted")
 	{
-		// Display the login form
-		display_login_form();
+    set_unauthenticated_redirect();
+    header("Location: ../index.php");
+    exit(0);
 	}
 	// Otherwise access was granted so check if the user is an admin
 	else if (isset($_SESSION["admin"]) && $_SESSION["admin"] == "1")

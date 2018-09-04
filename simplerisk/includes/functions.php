@@ -647,10 +647,10 @@ function create_multiple_dropdown($name, $selected = NULL, $rename = NULL, $opti
 
     if ($rename != NULL)
     {
-        echo "<select {$customHtml} multiple=\"multiple\" id=\"" . $escaper->escapeHtml($rename) . "\" name=\"" . $escaper->escapeHtml($rename) . "[]\">\n";
+        echo "<select class=\"form-control\" {$customHtml} multiple id=\"" . $escaper->escapeHtml($rename) . "\" name=\"" . $escaper->escapeHtml($rename) . "[]\">\n";
     }
     else {
-        echo "<select {$customHtml} multiple=\"multiple\" id=\"" . $escaper->escapeHtml($name) . "\" name=\"" . $escaper->escapeHtml($name) . "[]\">\n";
+        echo "<select class=\"form-control\" {$customHtml} multiple id=\"" . $escaper->escapeHtml($name) . "\" name=\"" . $escaper->escapeHtml($name) . "[]\">\n";
     }
 
     // Get the list of options

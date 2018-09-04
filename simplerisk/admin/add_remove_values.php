@@ -806,7 +806,6 @@
 <html ng-app="SimpleRisk">
 <?php include_once($_SERVER['DOCUMENT_ROOT'].'/templates/head.php'); ?>
 
-    <body>
 
         <?php
             view_top_menu("Configure");
@@ -989,5 +988,3 @@
             </div>
         </div>
 <?php include_once($_SERVER['DOCUMENT_ROOT'].'/templates/footer.php'); ?>
-</body>
-</html>

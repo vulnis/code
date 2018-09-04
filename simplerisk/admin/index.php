@@ -375,79 +375,17 @@
 	// Get the max upload size setting
 	$simplerisk_max_upload_size = get_setting('max_upload_size');
 ?>
-
-<!DOCTYPE html>
-<html ng-app="SimpleRisk">
-<?php include_once($_SERVER['DOCUMENT_ROOT'].'/templates/head.php'); ?>
-<body>
-  <script>
-      function dropdown_transport()
-      {
-        smtp = document.getElementsByClassName("smtp");
-        smtpauth = document.getElementsByClassName("smtpauth");
-        dropdown = document.getElementById("transport");
-        if(dropdown.options[dropdown.selectedIndex].text == "smtp")
-        {
-          for(i=0; i<smtp.length; i++)
-          {
-            smtp[i].style.display = "";
-          }
-
-          checkbox = document.getElementById("smtpauth");
-          if(checkbox.checked)
-          {
-            for(i=0; i<smtpauth.length; i++)
-            {
-              smtpauth[i].style.display = "";
-            }
-          }
-        }
-        else
-        {
-          for(i=0; i<smtp.length; i++)
-          {
-            smtp[i].style.display = "none";
-          }
-
-          for(i=0; i<smtpauth.length; i++)
-          {
-            smtpauth[i].style.display = "none";
-          }
-        }
-      }
-
-      function checkbox_smtpauth()
-      {
-        elements = document.getElementsByClassName("smtpauth");
-        checkbox = document.getElementById("smtpauth");
-        if(checkbox.checked)
-        {
-          for(i=0; i<elements.length; i++)
-          {
-            elements[i].style.display = "";
-          }
-        }
-        else
-        {
-          for(i=0; i<elements.length; i++)
-          {
-            elements[i].style.display = "none";
-          }
-        }
-      }
-    </script>
-<?php
+<?php 
+    include_once($_SERVER['DOCUMENT_ROOT'].'/templates/head.php'); 
     view_top_menu("Configure");
-
-    // Get any alert messages
     get_alert();
 ?>
     <div class="container-fluid">
-      <div class="row-fluid">
-        <div class="span3">
+      <div class="row p-5">
+        <div class="col-3">
           <?php view_configure_menu("Settings"); ?>
         </div>
-        <div class="span9">
+        <div class="col-9">
           <div class="wrap">
             <ul class="tabs group">
               <li><a class="active" href="#/general"><?php echo $escaper->escapeHtml($lang['General']); ?></a></li>
@@ -851,15 +789,9 @@
                 </form>
               </div>
 
-              <!-- Extras Setting Tab -->
-              <!--<div id="extras" style="display: none;">
-                Extra Text
-              </div>-->
 
           </div>
         </div>
       </div>
     </div>
 <?php include_once($_SERVER['DOCUMENT_ROOT'].'/templates/footer.php'); ?>
-</body>
-</html>

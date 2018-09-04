@@ -110,70 +110,31 @@ function display()
 }
 
 ?>
-
-<!doctype html>
-<html>
-
-  <head>
-    <title>SimpleRisk: Enterprise Risk Management Simplified</title>
-    <script src="../js/jquery.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
-    <script src="../js/jquery-ui.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="../css/jquery-ui.min.css" />
-
-    <script src="../js/bootstrap-multiselect.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
-    <link rel="stylesheet" href="../css/bootstrap.css">
-    <link rel="stylesheet" href="../css/bootstrap-responsive.css">
-
-    <link rel="stylesheet" href="../css/divshot-util.css">
-    <link rel="stylesheet" href="../css/divshot-canvas.css">
-    <link rel="stylesheet" href="../css/display.css">
-
-    <link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../css/bootstrap-multiselect.css">
-    <link rel="stylesheet" href="../css/theme.css">
-
-    <script type="text/javascript" src="../js/jquery.tree.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="../css/jquery.tree.min.css" />
-
-    <script type="text/javascript">
-    $(function(){
-        $("#complianceforge_frameworks").multiselect({
-            allSelectedText: '<?php echo $escaper->escapeHtml($lang['AllFrameworks']); ?>',
-            includeSelectAllOption: true
-        });
-    });
-    </script>
-  </head>
-
-  <body>
-
-<?php
+<!DOCTYPE html>
+<html ng-app="SimpleRisk">
+<?php 
+    include_once($_SERVER['DOCUMENT_ROOT'].'/templates/head.php'); 
     view_top_menu("Configure");
-
-    // Get any alert messages
     get_alert();
 ?>
-    <div class="container-fluid">
-      <div class="row-fluid">
-        <div class="span3">
-          <?php view_configure_menu("Extras"); ?>
+<div class="container">
+    <div class="row">
+        <div class="col-3">
+            <?php view_configure_menu("Extras"); ?>
         </div>
-        <div class="span9">
-          <div class="row-fluid">
-            <div class="span12">
-              <div class="hero-unit">
+        <div class="col-9">
+            <div class="row">
+            <div class="col-12">
+                
                 <h4>ComplianceForge SCF Extra</h4>
                 <?php display(); ?>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <?php display_set_default_date_format_script(); ?>
-  </body>
 
-</html>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+<?php 
+    display_set_default_date_format_script();
+    include_once($_SERVER['DOCUMENT_ROOT'].'/templates/footer.php'); 
+?>

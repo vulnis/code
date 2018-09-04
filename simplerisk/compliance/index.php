@@ -185,8 +185,8 @@ if(isset($_POST['delete_test'])){
           </div>
           
           <div class="form-group text-right">
-            <button class="btn btn-default" data-dismiss="modal" aria-hidden="true"><?php echo $escaper->escapeHtml($lang['Cancel']); ?></button>
-            <button type="submit" name="add_test" class="btn btn-danger"><?php echo $escaper->escapeHtml($lang['Add']); ?></button>
+            <button class="btn btn-secondary" data-dismiss="modal" aria-hidden="true"><?php echo $escaper->escapeHtml($lang['Cancel']); ?></button>
+            <button type="submit" name="add_test" class="btn btn-primary"><?php echo $escaper->escapeHtml($lang['Add']); ?></button>
           </div>
         </form>
 
@@ -230,8 +230,8 @@ if(isset($_POST['delete_test'])){
           </div>
           
           <div class="form-group text-right">
-            <button class="btn btn-default" data-dismiss="modal" aria-hidden="true"><?php echo $escaper->escapeHtml($lang['Cancel']); ?></button>
-            <button type="submit" name="update_test" class="btn btn-danger"><?php echo $escaper->escapeHtml($lang['Update']); ?></button>
+            <button class="btn btn-secondary" data-dismiss="modal" aria-hidden="true"><?php echo $escaper->escapeHtml($lang['Cancel']); ?></button>
+            <button type="submit" name="update_test" class="btn btn-primary"><?php echo $escaper->escapeHtml($lang['Update']); ?></button>
           </div>
         </form>
 
@@ -249,8 +249,8 @@ if(isset($_POST['delete_test'])){
           </div>
 
           <div class="form-group text-center project-delete-actions">
-            <button class="btn btn-default" data-dismiss="modal" aria-hidden="true"><?php echo $escaper->escapeHtml($lang['Cancel']); ?></button>
-            <button type="submit" name="delete_test" class="btn btn-danger"><?php echo $escaper->escapeHtml($lang['Yes']); ?></button>
+            <button class="btn btn-secondary" data-dismiss="modal" aria-hidden="true"><?php echo $escaper->escapeHtml($lang['Cancel']); ?></button>
+            <button type="submit" name="delete_test" class="btn btn-primary"><?php echo $escaper->escapeHtml($lang['Yes']); ?></button>
           </div>
         </form>
 

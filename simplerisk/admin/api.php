@@ -119,13 +119,9 @@ function display()
 
 <!DOCTYPE html>
 <html ng-app="SimpleRisk">
-<?php include_once($_SERVER['DOCUMENT_ROOT'].'/templates/head.php'); ?>
-<body>
-
-<?php
-	view_top_menu("Configure");
-
-	// Get any alert messages
+<?php 
+include_once($_SERVER['DOCUMENT_ROOT'].'/templates/head.php');
+    view_top_menu("Configure");
 	get_alert();
 ?>
     <div class="container">
@@ -147,5 +143,3 @@ function display()
     </div>
 
 <?php include_once($_SERVER['DOCUMENT_ROOT'].'/templates/footer.php'); ?>
-</body>
-</html>

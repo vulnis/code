@@ -110,8 +110,8 @@ if (isset($_POST['password_reset']))
 						    echo "</table>\n";
 						?>
 						<div class="form-actions text-right">
-							<input class="btn" value="<?php echo $escaper->escapeHtml($lang['Reset']); ?>" type="reset">
-							<button type="submit" name="password_reset" class="btn btn-danger"><?php echo $escaper->escapeHtml($lang['Submit']); ?></button>
+							<input class="btn btn-secondary" value="<?php echo $escaper->escapeHtml($lang['Reset']); ?>" type="reset">
+							<button type="submit" name="password_reset" class="btn btn-primary"><?php echo $escaper->escapeHtml($lang['Submit']); ?></button>
 						</div>
 					</form>
 				</div>

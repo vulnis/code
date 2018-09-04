@@ -401,8 +401,8 @@ if (isset($_POST['delete_project']))
       </div>
 
       <div class="form-group">
-        <button class="btn btn-danger" data-dismiss="modal" aria-hidden="true">Cancel</button>
-        <button type="submit" class="btn btn-default">Add</button>
+        <button class="btn btn-secondary" data-dismiss="modal" aria-hidden="true">Cancel</button>
+        <button type="submit" class="btn btn-primary">Add</button>
       </div>
     </form>
 

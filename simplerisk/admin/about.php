@@ -53,82 +53,56 @@
                 exit(0);
         }
 ?>
-
-<!DOCTYPE html>
-<html ng-app="SimpleRisk">
-<?php include_once($_SERVER['DOCUMENT_ROOT'].'/templates/head.php'); ?>
-  <body>
-
-    <?php view_top_menu("Configure"); ?>
-
-    <div class="container">
-      <div class="row">
+<?php 
+    include_once($_SERVER['DOCUMENT_ROOT'].'/templates/head.php'); 
+    view_top_menu("Configure");
+    get_alert();
+?>
+<div class="container-fluid">
+    <div class="row p-5">
         <div class="col-3">
-          <?php view_configure_menu("About"); ?>
+            <?php view_configure_menu("About"); ?>
         </div>
         <div class="col-9">
-          <div class="row">
-            <div class="col-12">
-              <div class="hero-unit">
-                <p>The use of this software is subject to the terms of the <a href="http://mozilla.org/MPL/2.0/" target="newwindow">Mozilla Public License, v. 2.0</a>.</p>
-                <p><h4>Application Version</h4>
-                <ul>
-                  <li>The latest Application version is <?php echo $escaper->escapeHtml(latest_version("app")); ?></li>
-                  <li>You are running Application version <?php echo $escaper->escapeHtml(current_version("app")); ?></li>
-                </ul>
-                </p>
-                <p><h4>Database Version</h4>
-                <ul>
-                  <li>The latest Database version is <?php echo $escaper->escapeHtml(latest_version("db")); ?></li>
-                  <li>You are running Database version <?php echo $escaper->escapeHtml(current_version("db")); ?></li>
-                </ul>
-                </p>
-                <p>You can download the most recent code <a href="https://www.simplerisk.com/download" target="newwindow">here</a>.</p>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-6">
-              <div class="hero-unit">
-                <p><a href="http://www.joshsokol.com" target="newwindow">Josh Sokol</a> wrote this Risk Management system after being fed up with the high-priced alternatives out there.  When your only options are spending tens of thousands of dollars or using a spreadsheet, good risk management is simply unattainable.</p>
-                <p>Josh lives in Austin, TX and has four little ones starving for his time and attention.  If this tool is useful to you and you want to encourage him to keep his attention fixed on developing new features for you, perhaps consider donating via the PayPal form on the right.  It&#39;s also good karma.</p>
-              </div>
-            </div>
-            <div class="col-6">
-              <div class="hero-unit">
-                <!-- START PAYPAL FORM -->
-                <form action="https://www.paypal.com/cgi-bin/webscr" method="post" class="payformmargin">
+            <p>The use of this software is subject to the terms of the <a href="http://mozilla.org/MPL/2.0/" target="newwindow">Mozilla Public License, v. 2.0</a>.</p>
+            <h4>Application Version</h4>
+            <p>
+            <ul>
+                <li>The latest Application version is <?php echo $escaper->escapeHtml(latest_version("app")); ?></li>
+                <li>You are running Application version <?php echo $escaper->escapeHtml(current_version("app")); ?></li>
+            </ul>
+            </p>
+            <h4>Database Version</h4>
+            <p>
+            <ul>
+                <li>The latest Database version is <?php echo $escaper->escapeHtml(latest_version("db")); ?></li>
+                <li>You are running Database version <?php echo $escaper->escapeHtml(current_version("db")); ?></li>
+            </ul>
+            </p>
+            <p>You can download the most recent code <a href="https://www.simplerisk.com/download" target="newwindow">here</a>.</p>
+            <h4>Donate</h4>
+            <p><a href="http://www.joshsokol.com" target="newwindow">Josh Sokol</a> wrote this Risk Management system after being fed up with the high-priced alternatives out there.  When your only options are spending tens of thousands of dollars or using a spreadsheet, good risk management is simply unattainable.</p>
+            <!-- START PAYPAL FORM -->
+            <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
                 <input type="hidden" name="cmd" value="_xclick">
                 <input type="hidden" name="business" value="josh@simplerisk.org">
                 <input type="hidden" name="item_name" value="Donation for Risk Management Software">
                 <input type="hidden" name="no_note" value="1">
                 <input type="hidden" name="currency_code" value="USD">
-
-                <table cellpadding="8" cellspacing="0" border="0"><tr><td valign="top" align="center" class="payformbox">
-
-                <table cellpadding="3" cellspacing="0" border="0"><tr><td align="left">
-
-                Enter amount:<br>
-                <input type="text" name="amount" value="50.00" class="payform"><br>
-
-                </td><td rowspan="3">
-
-                <img src="../images/paypal-custom.gif" alt="Payments through Paypal"><br>
-
-                </td></tr><tr><td align="left">
-
                 <input type="hidden" name="on0" value="Project Details">
-
-                Payment notes:<br>
-                <textarea name="os0" rows="3" cols="17" class="payform"></textarea><br>
-
-                </td></tr><tr><td align="left">
-
-                <input type="submit" name="PaypalPayment" value="Send Payment" class="payformbutton"><br>
-
-                </td></tr></table>
-                </td></tr></table>
-
+                <div class="form-group">
+                    <label for="amount">Enter amount</label>
+                    <input type="text" name="amount" value="50.00" class="form-control">
+                    <small class="text text-muted">Josh lives in Austin, TX and has four little ones starving for his time and attention.  If this tool is useful to you and you want to encourage him to keep his attention fixed on developing new features for you, perhaps consider donating via the PayPal form on the right.  It&#39;s also good karma.</small>
+                </div>
+                <div class="form-group">
+                    <label for="os0">Payment notes</label>
+                    <textarea name="os0" rows="3" cols="17" class="form-control"></textarea>
+                </div>
+                <button type="submit" name="PaypalPayment" class="btn btn-lg btn-success">
+                    <i class="fa fa-paypal" aria-hidden="true"></i>
+                    Donate with Paypal
+                </button>
                 </form>
                 <!-- END PAYPAL FORM -->
               </div>
@@ -138,5 +112,3 @@
       </div>
     </div>
 <?php include_once($_SERVER['DOCUMENT_ROOT'].'/templates/footer.php'); ?>
-</body>
-</html>

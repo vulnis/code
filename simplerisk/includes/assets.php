@@ -747,7 +747,7 @@ function create_asset_valuation_dropdown($name, $selected = NULL)
         $stmt->execute();
         $values = $stmt->fetchAll();
 
-	echo "<select id=\"" . $escaper->escapeHtml($name) . "\" name=\"" . $escaper->escapeHtml($name) . "\" class=\"form-field\" style=\"width:auto;\" >\n";
+	echo "<select id=\"" . $escaper->escapeHtml($name) . "\" name=\"" . $escaper->escapeHtml($name) . "\" class=\"form-control\" >\n";
 
         // For each asset value
         foreach ($values as $value)

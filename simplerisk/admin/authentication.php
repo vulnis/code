@@ -127,36 +127,28 @@
     }
 
 ?>
-
 <!DOCTYPE html>
 <html ng-app="SimpleRisk">
-<?php include_once($_SERVER['DOCUMENT_ROOT'].'/templates/head.php'); ?>
-<body>
-
-<?php
+<?php 
+    include_once($_SERVER['DOCUMENT_ROOT'].'/templates/head.php'); 
     view_top_menu("Configure");
-
-    // Get any alert messages
     get_alert();
 ?>
-    <div class="container">
-      <div class="row">
-        <div class="col-3">
-          <?php view_configure_menu("Extras"); ?>
-        </div>
-        <div class="col-9">
-          <div class="row">
-            <div class="col-12">
-              <div class="hero-unit">
-                <h4>Custom Authentication Extra</h4>
-                <?php display(); ?>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+<div class="container">
+    <div class="row">
+    <div class="col-3">
+        <?php view_configure_menu("Extras"); ?>
     </div>
-
+    <div class="col-9">
+        <div class="row">
+        <div class="col-12">
+            <div class="hero-unit">
+            <h4>Custom Authentication Extra</h4>
+            <?php display(); ?>
+            </div>
+        </div>
+        </div>
+    </div>
+    </div>
+</div>
 <?php include_once($_SERVER['DOCUMENT_ROOT'].'/templates/footer.php'); ?>
-</body>
-</html>

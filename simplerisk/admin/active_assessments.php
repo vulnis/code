@@ -85,18 +85,8 @@
 <!DOCTYPE html>
 <html ng-app="SimpleRisk">
 <?php include_once($_SERVER['DOCUMENT_ROOT'].'/templates/head.php'); ?>
-
-  <body>
-    
     <script type="text/javascript">
-      function checkAll(bx) {
-        var cbs = document.getElementsByTagName('input');
-        for(var i=0; i < cbs.length; i++) {
-          if (cbs[i].type == 'checkbox') {
-            cbs[i].checked = bx.checked;
-          }
-        }
-      }
+      
     </script>
 
 <?php
@@ -122,5 +112,3 @@
       </div>
     </div>
 <?php include_once($_SERVER['DOCUMENT_ROOT'].'/templates/footer.php'); ?>
-</body>
-</html>

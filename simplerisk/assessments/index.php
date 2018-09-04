@@ -123,19 +123,12 @@ else
       // Get any alert messages
       get_alert();
   ?>
-  <div class="container-fluid">
-    <div class="row-fluid">
-      <div class="span3">
+  <div class="container">
+    <div class="row">
+      <div class="col-3">
         <?php view_assessments_menu($menu); ?>
       </div>
-      <div class="span9">
-        <div id="show-alert">
-            <?php  
-                // Get any alert messages
-                get_alert();
-            ?>
-        </div>
-
+      <div class="col-9">
         <?php
         // If the action was create
         if ((isset($_GET['action']) && $_GET['action'] == "create") || (isset($_POST['action']) && $_POST['action'] == "create"))

@@ -509,8 +509,8 @@ if (isset($_POST['update_control']))
       </div>
       
       <div class="form-group text-right">
-        <button class="btn btn-default" data-dismiss="modal" aria-hidden="true"><?php echo $escaper->escapeHtml($lang['Cancel']); ?></button>
-        <button type="submit" name="add_framework" class="btn btn-danger"><?php echo $escaper->escapeHtml($lang['Add']); ?></button>
+        <button class="btn btn-secondary" data-dismiss="modal" aria-hidden="true"><?php echo $escaper->escapeHtml($lang['Cancel']); ?></button>
+        <button type="submit" name="add_framework" class="btn btn-primary"><?php echo $escaper->escapeHtml($lang['Add']); ?></button>
       </div>
     </form>
 
@@ -535,8 +535,8 @@ if (isset($_POST['update_control']))
         </div>
 
         <div class="form-group text-right">
-            <button class="btn btn-default" data-dismiss="modal" aria-hidden="true"><?php echo $escaper->escapeHtml($lang['Cancel']); ?></button>
-            <button type="submit" name="update_framework" class="btn btn-danger"><?php echo $escaper->escapeHtml($lang['Update']); ?></button>
+            <button class="btn btn-secondary" data-dismiss="modal" aria-hidden="true"><?php echo $escaper->escapeHtml($lang['Cancel']); ?></button>
+            <button type="submit" name="update_framework" class="btn btn-primary"><?php echo $escaper->escapeHtml($lang['Update']); ?></button>
         </div>
     </form>
 
@@ -554,8 +554,8 @@ if (isset($_POST['update_control']))
       </div>
 
       <div class="form-group text-center project-delete-actions">
-        <button class="btn btn-default" data-dismiss="modal" aria-hidden="true"><?php echo $escaper->escapeHtml($lang['Cancel']); ?></button>
-        <button type="submit" name="delete_framework" class="delete_project btn btn-danger"><?php echo $escaper->escapeHtml($lang['Yes']); ?></button>
+        <button class="btn btn-secondary" data-dismiss="modal" aria-hidden="true"><?php echo $escaper->escapeHtml($lang['Cancel']); ?></button>
+        <button type="submit" name="delete_framework" class="delete_project btn btn-primary"><?php echo $escaper->escapeHtml($lang['Yes']); ?></button>
       </div>
     </form>
 
@@ -606,8 +606,8 @@ if (isset($_POST['update_control']))
       </div>
       
       <div class="form-group text-right">
-        <button class="btn btn-default" data-dismiss="modal" aria-hidden="true"><?php echo $escaper->escapeHtml($lang['Cancel']); ?></button>
-        <button type="submit" name="add_control" class="btn btn-danger"><?php echo $escaper->escapeHtml($lang['Add']); ?></button>
+        <button class="btn btn-secondary" data-dismiss="modal" aria-hidden="true"><?php echo $escaper->escapeHtml($lang['Cancel']); ?></button>
+        <button type="submit" name="add_control" class="btn btn-primary"><?php echo $escaper->escapeHtml($lang['Add']); ?></button>
       </div>
     </form>
 
@@ -658,8 +658,8 @@ if (isset($_POST['update_control']))
       </div>
       
       <div class="form-group text-right">
-        <button class="btn btn-default" data-dismiss="modal" aria-hidden="true"><?php echo $escaper->escapeHtml($lang['Cancel']); ?></button>
-        <button type="submit" name="update_control" class="btn btn-danger"><?php echo $escaper->escapeHtml($lang['Update']); ?></button>
+        <button class="btn btn-secondary" data-dismiss="modal" aria-hidden="true"><?php echo $escaper->escapeHtml($lang['Cancel']); ?></button>
+        <button type="submit" name="update_control" class="btn btn-primary"><?php echo $escaper->escapeHtml($lang['Update']); ?></button>
       </div>
     </form>
 
@@ -677,8 +677,8 @@ if (isset($_POST['update_control']))
       </div>
 
       <div class="form-group text-center control-delete-actions">
-        <button class="btn btn-default" data-dismiss="modal" aria-hidden="true"><?php echo $escaper->escapeHtml($lang['Cancel']); ?></button>
-        <button type="submit" name="delete_control" class="delete_control btn btn-danger"><?php echo $escaper->escapeHtml($lang['Yes']); ?></button>
+        <button class="btn btn-secondary" data-dismiss="modal" aria-hidden="true"><?php echo $escaper->escapeHtml($lang['Cancel']); ?></button>
+        <button type="submit" name="delete_control" class="delete_control btn btn-primary"><?php echo $escaper->escapeHtml($lang['Yes']); ?></button>
       </div>
     </form>
 

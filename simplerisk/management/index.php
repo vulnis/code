@@ -229,26 +229,22 @@ if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQ
 
 
 ?>
-
 <!DOCTYPE html>
 <html ng-app="SimpleRisk">
-<?php include_once($_SERVER['DOCUMENT_ROOT'].'/templates/head.php'); ?>
-<body>
-    <?php display_asset_autocomplete_script(get_entered_assets()); ?>
-        <?php
-            view_top_menu("RiskManagement");
-
-            // Get any alert messages
-            get_alert();
-        ?>
+<?php 
+    include_once($_SERVER['DOCUMENT_ROOT'].'/templates/head.php');
+    display_asset_autocomplete_script(get_entered_assets()); 
+    view_top_menu("RiskManagement");
+    get_alert();
+?>
         <div id="risk_hid_id" style="display: none"  > <?php if (isset($risk_id)) echo $escaper->escapeHtml($risk_id);?></div>
         <div class="tabs new-tabs">
-        <div class="container-fluid">
+        <div class="container">
 
-          <div class="row-fluid">
+          <div class="row">
 
-            <div class="span3"> </div>
-            <div class="span9">
+            <div class="col-3"> </div>
+            <div class="col-9">
 
               <div class="tab add" id='add-tab'>
                 <span>+</span>
@@ -264,16 +260,16 @@ if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQ
 
         </div>
         </div>
-        <div class="container-fluid">
-          <div class="row-fluid">
-            <div class="span3">
+        <div class="container">
+          <div class="row">
+            <div class="col-3">
               <?php view_risk_management_menu("SubmitYourRisks"); ?>
             </div>
-            <div class="span9">
+            <div class="col-3">
 
               <div id="show-alert"></div>
 
-              <div class="row-fluid" id="tab-content-container">
+              <div class="row" id="tab-content-container">
                 <div class='tab-data' id="tab-container">
 
                     <?php
@@ -288,15 +284,14 @@ if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQ
         </div>
 
         <!-- sample form to add as a new form -->
-        <div class="row-fluid" id="tab-append-div" style="display:none;">
+        <div class="row" id="tab-append-div" style="display:none;">
             <?php
                 include(realpath(__DIR__ . '/partials/add.php'));
             ?>
         </div>
         <input type="hidden" id="_delete_tab_alert" value="<?php echo $escaper->escapeHtml($lang['Are you sure you want to close the risk? All changes will be lost!']); ?>">
         <input type="hidden" id="enable_popup" value="<?php echo get_setting('enable_popup'); ?>">
-        <?php display_set_default_date_format_script(); ?>
-    
-<?php include_once($_SERVER['DOCUMENT_ROOT'].'/templates/footer.php'); ?>
-</body>
-</html>
+<?php 
+    display_set_default_date_format_script();
+    include_once($_SERVER['DOCUMENT_ROOT'].'/templates/footer.php'); 
+?>

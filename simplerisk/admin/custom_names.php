@@ -102,69 +102,34 @@
                 }
         }
 ?>
-
-<!doctype html>
-<html>
-
-  <head>
-    <script src="../js/jquery.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
-    <title>SimpleRisk: Enterprise Risk Management Simplified</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
-    <link rel="stylesheet" href="../css/bootstrap.css">
-    <link rel="stylesheet" href="../css/bootstrap-responsive.css">
-
-    <link rel="stylesheet" href="../css/divshot-util.css">
-    <link rel="stylesheet" href="../css/divshot-canvas.css">
-    <link rel="stylesheet" href="../css/display.css">
-
-    <link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../css/theme.css">
-  </head>
-
-  <body>
-
-<?php
-	view_top_menu("Configure");
-
-	// Get any alert messages
-	get_alert();
+<!DOCTYPE html>
+<html ng-app="SimpleRisk">
+<?php 
+    include_once($_SERVER['DOCUMENT_ROOT'].'/templates/head.php');
+    view_top_menu("Configure");
+    get_alert();
 ?>
-    <div class="container-fluid">
-      <div class="row-fluid">
-        <div class="span3">
-          <?php view_configure_menu("RedefineNamingConventions"); ?>
+<div class="container">
+    <div class="row">
+        <div class="col-3">
+        <?php view_configure_menu("RedefineNamingConventions"); ?>
         </div>
-        <div class="span9">
-          <div class="row-fluid">
-            <div class="span12">
-              <div class="hero-unit">
-                <form name="impact" method="post" action="">
-                <p>
+        <div class="col-9">
+            <form name="impact" method="post" action="">
                 <h4><?php echo $escaper->escapeHtml($lang['Impact']); ?>:</h4>
-                <?php echo $escaper->escapeHtml($lang['Change']); ?> <?php create_dropdown("impact") ?> <?php echo $escaper->escapeHtml($lang['to']); ?> <input name="new_name" type="text" size="20" />&nbsp;&nbsp;<input type="submit" value="<?php echo $escaper->escapeHtml($lang['Update']); ?>" name="update_impact" /></p>
-                </form>
-              </div>
-              <div class="hero-unit">
-                <form name="likelihood" method="post" action="">
-                <p>
+                <?php echo $escaper->escapeHtml($lang['Change']); ?> <?php create_dropdown("impact") ?> <?php echo $escaper->escapeHtml($lang['to']); ?> <input name="new_name" type="text" size="20" />&nbsp;&nbsp;<input type="submit" value="<?php echo $escaper->escapeHtml($lang['Update']); ?>" name="update_impact" />
+            </form>
+            <form name="likelihood" method="post" action="">
                 <h4><?php echo $escaper->escapeHtml($lang['Likelihood']); ?>:</h4>
-                <?php echo $escaper->escapeHtml($lang['Change']); ?> <?php create_dropdown("likelihood") ?> <?php echo $escaper->escapeHtml($lang['to']); ?> <input name="new_name" type="text" size="20" />&nbsp;&nbsp;<input type="submit" value="<?php echo $escaper->escapeHtml($lang['Update']); ?>" name="update_likelihood" /></p>
-                </form>
-              </div>
-              <div class="hero-unit">
-                <form name="mitigation_effort" method="post" action="">
-                <p>
+                <?php echo $escaper->escapeHtml($lang['Change']); ?> <?php create_dropdown("likelihood") ?> <?php echo $escaper->escapeHtml($lang['to']); ?> <input name="new_name" type="text" size="20" />&nbsp;&nbsp;<input type="submit" value="<?php echo $escaper->escapeHtml($lang['Update']); ?>" name="update_likelihood" />
+            </form>
+            <form name="mitigation_effort" method="post" action="">
                 <h4><?php echo $escaper->escapeHtml($lang['MitigationEffort']); ?>:</h4>
-                <?php echo $escaper->escapeHtml($lang['Change']); ?> <?php create_dropdown("mitigation_effort") ?> <?php echo $escaper->escapeHtml($lang['to']); ?> <input name="new_name" type="text" size="20" />&nbsp;&nbsp;<input type="submit" value="<?php echo $escaper->escapeHtml($lang['Update']); ?>" name="update_mitigation_effort" /></p>
-                </form>
-              </div>
-            </div>
-          </div>
+                <?php echo $escaper->escapeHtml($lang['Change']); ?> <?php create_dropdown("mitigation_effort") ?> <?php echo $escaper->escapeHtml($lang['to']); ?> <input name="new_name" type="text" size="20" />&nbsp;&nbsp;<input type="submit" value="<?php echo $escaper->escapeHtml($lang['Update']); ?>" name="update_mitigation_effort" />
+            </form>
         </div>
-      </div>
     </div>
-  </body>
-
-</html>
+</div>
+<?php 
+    include_once($_SERVER['DOCUMENT_ROOT'].'/templates/footer.php'); 
+?>

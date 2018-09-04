@@ -74,14 +74,14 @@ enforce_permission_riskmanagement();
     
 <!-- Cancel and update mitigations -->
     <div class="tabs--action">
-        <a href='/management/view.php?id=$risk_id&type=1' id="cancel_disable" class="btn"><?php echo $escaper->escapeHtml($lang['Cancel']); ?> </a>
-        <button type="submit" name="update_mitigation" class="btn btn-danger"><?php echo $escaper->escapeHtml($lang['SaveMitigation']) ?></button>
+        <a href='/management/view.php?id=$risk_id&type=1' id="cancel_disable" class="btn btn-secondary"><?php echo $escaper->escapeHtml($lang['Cancel']); ?> </a>
+        <button type="submit" name="update_mitigation" class="btn btn-primary"><?php echo $escaper->escapeHtml($lang['SaveMitigation']) ?></button>
     </div>
 
 <!-- Cancel and update risk -->
     <div class="tabs--action">
-        <a href='/management/view.php?id=$id&type=0' id="cancel_disable" class="btn"><?php echo $escaper->escapeHtml($lang['Cancel']); ?></a>
-        <button type="submit" name="update_details" class="btn btn-danger"><?php echo $escaper->escapeHtml($lang['SaveDetails']); ?></button>
+        <a href='/management/view.php?id=$id&type=0' id="cancel_disable" class="btn btn-secondary"><?php echo $escaper->escapeHtml($lang['Cancel']); ?></a>
+        <button type="submit" name="update_details" class="btn btn-primary"><?php echo $escaper->escapeHtml($lang['SaveDetails']); ?></button>
     </div>
         
         

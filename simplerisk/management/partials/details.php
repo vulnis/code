@@ -72,9 +72,7 @@ enforce_permission_riskmanagement();
                 <?php if(@$isAjax && (!isset($action) || $action != 'editdetail')): ?>
                     <!-- Edit th risk details-->
                     <div class="tabs--action">
-                        <button type="button" name="edit_details" class="btn on-view"><?php echo $escaper->escapeHtml($lang['EditDetails']); ?></button>
-                        <!--<a href="/management/view.php?id=3472&amp;type=0" class="btn cancel-edit on-edit" >Cancel</a>
-                        <button type="button" name="update_details" class="btn btn-danger save-details on-edit">Save Details</button>-->
+                        <button type="button" name="edit_details" class="btn btn-primary"><?php echo $escaper->escapeHtml($lang['EditDetails']); ?></button>
                     </div>
                 <?php endif; ?>
 

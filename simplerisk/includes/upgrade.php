@@ -83,28 +83,6 @@ function upgrade_logout()
     header( 'Location: upgrade.php' );
 }
 
-/********************************
- * FUNCTION: DISPLAY LOGIN FORM *
- ********************************/
-function display_login_form()
-{
-    global $lang;
-    global $escaper;
-
-    echo "<h1 class=\"text-center welcome--msg\">Upgrade the SimpleRisk Database </h1>";
-        echo "<form name=\"authenticate\" method=\"post\" action=\"\" class=\"loginForm\">\n";
-    echo "<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\n";
-    echo "<tr><td colspan=\"2\"><label class=\"login--label\">" . $escaper->escapeHtml($lang['LogInHere']) . "</label></td></tr>\n";
-    echo "<tr><td width=\"20%\"><label for=\"\">" . $escaper->escapeHtml($lang['Username']) . ":&nbsp;</label></td><td class=\"80%\"><input class=\"form-control input-medium\" name=\"user\" id=\"user\" type=\"text\" /></td></tr>\n";
-    echo "<tr><td width=\"20%\"><label for=\"\">" . $escaper->escapeHtml($lang['Password']) . ":&nbsp;</label></td><td class=\"80%\"><input class=\"form-control input-medium\" name=\"pass\" id=\"pass\" type=\"password\" autocomplete=\"off\" /></td></tr>\n";
-    echo "</table>\n";
-    echo "<div class=\"form-actions\">\n";
-        echo "<button type=\"submit\" name=\"submit\" class=\"btn btn-primary pull-right\">" . $escaper->escapeHtml($lang['Login']) . "</button>\n";
-    echo "<input class=\"btn btn-default pull-right\" value=\"" . $escaper->escapeHtml($lang['Reset']) . "\" type=\"reset\">\n";
-    echo "</div>\n";
-        echo "</form>\n";
-}
-
 /**********************************
  * FUNCTION: DISPLAY UPGRADE INFO *
  **********************************/

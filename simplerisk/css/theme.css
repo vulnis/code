@@ -1085,47 +1085,6 @@ input[type="submit"]:hover,
 input[type="submit"]:active {
   background-color: #ed3139;
 }
-.btn:visited,
-button:visited,
-input[type="button"]:visited,
-input[type="submit"]:visited {
-  background-color: #3a3a3a;
-}
-
-.btn.btn-danger {
-  background-color: #ed3139;
-}
-.btn.btn-danger:hover, .btn.btn-danger:active, .btn.btn-danger:visited {
-  background-color: #eb1a22;
-}
-
-.btn.btn-default {
-  background-color: #6f6f6f;
-}
-.btn.btn-default:hover, .btn.btn-default:active {
-  background-color: #626262;
-}
-.btn.btn-default:visited {
-  background-color: #6f6f6f;
-}
-
-.btn-group > .btn:last-child,
-.btn-group > .dropdown-toggle {
-  border-radius: 2px;
-  padding: 8px 10px;
-  min-width: 250px;
-  text-align: left;
-  background-color: #fff !important;
-  color: #3f3f3f !important;
-  border: 1px solid #d1d3d4;
-}
-.btn-group > .btn:last-child .caret,
-.btn-group > .dropdown-toggle .caret {
-  margin-top: 8px;
-  margin-left: 0;
-  position: absolute;
-  right: 10px;
-}
 
 .colorSelector {
   position: relative;
