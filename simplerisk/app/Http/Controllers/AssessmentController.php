@@ -32,7 +32,7 @@ class AssessmentController extends Controller
         return $menu;
     }
 
-    public function newindex($id = 0, $query = null)
+    public function newindex($id = 0, $query = null, $json = false)
     {
         if($id > 0){
             $assessment = Assessment::find($id);
@@ -44,7 +44,9 @@ class AssessmentController extends Controller
             }
 
             $out = Question::where($whereclause)->orderBy('order')->get();
-
+            if($json){
+                return $out;
+            }
             return view('assessment.index',[
                 'prefix' => 'assessments',
                 'menu' => $this->getSideMenu(),
@@ -53,6 +55,9 @@ class AssessmentController extends Controller
                 'filter' => $query
             ]);
         } else {
+            if($json){
+                return Assessment::all();
+            }
             return view('assessment.index',[
                 'prefix' => 'assessments',
                 'menu' => $this->getSideMenu(),
@@ -64,6 +69,13 @@ class AssessmentController extends Controller
 
     public function index(Request $request)
     {
+        if ($request->wantsJson()) {
+            // Define the response
+            $response = [
+                'errors' => 'Sorry, something went wrong.'
+            ];
+            return response()->json($this->newindex($request->input('id'),  $request->input('q'), true), 200);
+        }
         return $this->newindex($request->input('id'),  $request->input('q'));
     }
 
