@@ -41,7 +41,7 @@
                         <input type="text" name="os0" class="form-control" placeholder="Thank you for this wonderful tool"/>
                     </div>
                     <button type="submit" name="PaypalPayment" class="btn btn-primary">
-                        <i class="fa fa-paypal" aria-hidden="true"></i> Donate
+                        <i class="fab fa-paypal fa-fw" aria-hidden="true"></i> Donate
                     </button>
                 </form>
             </div>

@@ -6,7 +6,9 @@ use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Setting;
 use App\Repositories\RiskRepository;
-
+use App\Charts\PieChart;
+use App\RiskLevel;
+use App\Risk;
 class ReportController extends Controller
 {
     protected $risks;
@@ -51,15 +53,20 @@ class ReportController extends Controller
 
     public function index()
     {
+        
+
+        //$risklevels = RiskLevel::orderBy('value', 'desc')
+        //    ->get();
+        //var_dump($this->risks->getOpenedRisks("month"));
         return view('reports.index',[
             'prefix' => 'reports',
             'menu' => $this->getSideMenu(),
-            'collections' => [
-                'bystatus' => $this->risks->byStatus(),
-                'closedornot' => $this->risks->closedOrNot(),
-                'mitigatedornot' => $this->risks->mitigatedOrNot(),
-                'reviewedornot' => $this->risks->reviewedOrNot()
-            ]
+            'charts' => [
+                new PieChart(trans('messages.OpenVsClosed'), 'pie', $this->risks->closedOrNot()),
+                new PieChart(trans('messages.MitigatedVsUnmitigated'), 'pie', $this->risks->mitigatedOrNot()),
+                new PieChart(trans('messages.ReviewedVsUnreviewed'), 'pie', $this->risks->reviewedOrNot())
+            ],
+            'table' => $this->risks->risksByMonth()
         ]);
     }
 

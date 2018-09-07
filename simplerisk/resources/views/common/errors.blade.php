@@ -1,16 +1,16 @@
 <!-- resources/views/common/errors.blade.php -->
 
 @if (count($errors) > 0)
-    <!-- Form Error List -->
-    <div class="alert alert-danger">
-        <strong>Whoops! Something went wrong!</strong>
-
-        <br><br>
-
-        <ul>
+<div class="alert alert-danger m-1" role="alert">
+    <div class="row">
+        <div class="col-1">
+            <strong><i class="fas fa-exclamation-triangle fa-fw fa-lg"></i></strong>
+        </div>
+        <div class="col-auto">
             @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
+                {{ $error }}
             @endforeach
-        </ul>
+        </div>
     </div>
+</div>
 @endif

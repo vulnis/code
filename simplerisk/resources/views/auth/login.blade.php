@@ -41,7 +41,7 @@
 
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary">
-                            <i class="fa fa-btn fa-sign-in"></i> @lang('messages.Login')
+                            <i class="fa fa-btn fa-sign-in-alt fa-fw"></i> @lang('messages.Login')
                         </button>
 
                         <a class="btn btn-link" href="{{ url('/password/reset') }}">@lang('messages.ForgotYourPassword')</a>

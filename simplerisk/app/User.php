@@ -3,7 +3,7 @@
 namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
-
+use App\Risk;
 class User extends Authenticatable
 {
     protected $table = 'user';
@@ -25,4 +25,9 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function tasks()
+    {
+        return $this->hasMany(Risk::class);
+    }
 }

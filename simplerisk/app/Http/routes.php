@@ -114,9 +114,8 @@ Route::group(['middleware' => 'auth', 'prefix' => 'api'],function () {
 
 /* Assessments Routes */
 Route::group(['middleware' => 'auth', 'prefix' => 'assessments'],function () {
-    Route::get('/', function () {
-        return view('default');
-    });
+    Route::get('index.php', 'AssessmentController@index');
+    Route::get('risks.php', 'AssessmentController@risks');
     Route::get('assessments.php', function () {
         return view('default');
     });
@@ -129,9 +128,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'assessments'],function () {
     Route::get('importexport.php', function () {
         return view('default');
     });
-    Route::get('index.php', function () {
-        return view('default');
-    });
+    
     Route::get('questionnaire_compare.php', function () {
         return view('default');
     });
@@ -244,6 +241,28 @@ Route::group(['prefix' => 'reports'],function () {
 
 /* Main Routes */
 Route::auth();
+
+Route::get('/mitigations', 'MitigationController@index');
+Route::post('/mitigation', 'MitigationController@store');
+Route::get('/mitigation', 'MitigationController@new');
+Route::delete('/mitigation/{mitigation}', 'MitigationController@destroy');
+
+Route::get('/assets', 'AssetController@index');
+Route::post('/asset', 'AssetController@store');
+Route::get('/asset', 'AssetController@new');
+Route::delete('/asset/{asset}', 'AssetController@destroy');
+
+Route::get('/assessments', 'AssessmentController@index');
+Route::get('/assessment/{id?}/{query?}', 'StandardController@index');
+Route::post('/assesment', 'AssessmentController@store');
+Route::get('/assesment', 'AssessmentController@new');
+Route::delete('/assesment/{assesment}', 'AssessmentController@destroy');
+
+/* Risks */
+Route::get('/risks', 'RiskController@index');
+Route::post('/risk', 'RiskController@store');
+Route::get('/risk', 'RiskController@new');
+Route::delete('/risk/{risk}', 'RiskController@destroy');
 
 Route::get('/', 'HomeController@index');
 Route::get('/index.php', 'HomeController@index');

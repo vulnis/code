@@ -1,0 +1,20 @@
+.nav-link-side.active {
+    color: #fff;
+    background-color: #343a40 !important;
+}
+.nav-link-side {
+    color: #343a40;
+}
+
+.nav-link-side:hover {
+    color: #343a40;
+}
+
+.nav-item-side:after {
+	bottom: 6px;
+	-moz-transform: rotate(120deg);
+	-ms-transform: rotate(120deg);
+	-o-transform: rotate(120deg);
+	-webkit-transform: rotate(120deg);
+	transform: rotate(120deg);
+}

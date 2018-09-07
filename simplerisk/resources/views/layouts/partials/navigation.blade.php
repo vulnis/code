@@ -22,6 +22,17 @@
                         <span>@lang('messages.Reporting')</span>
                     </a>
                 </li>
+                <li class="nav-item dropdown">
+                    <a href="#" id="addDropdown" class="nav-link dropdown-toggle bg-primary rounded" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    <span class=""><i class="fa fa-plus fa-fw text-white" aria-hidden="true"></i></span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="addDropdown">
+                        <a class="dropdown-item" href="{{ url('assessment') }}" role="button"><i class="fas fa-user-ninja fa-fw"></i> Assessment</a>
+                        <a class="dropdown-item" href="{{ url('asset') }}" role="button"><i class="fas fa-cart-plus fa-fw"></i> Asset</a>
+                        <a class="dropdown-item" href="{{ url('mitigation') }}" role="button"><i class="fas fa-fire-extinguisher fa-fw"></i> Mitigation</a>
+                        <a class="dropdown-item" href="{{ url('risk') }}" role="button"><i class="fas fa-fire fa-fw"></i> Risk</a>
+                    </div>
+                </li>
                 
             @endif
         </ul>
@@ -38,8 +49,8 @@
                     <span class="rounded-circle bg-success p-1"><i class="fa fa-user fa-fw text-white" aria-hidden="true"></i></span> {{ Auth::user()->name }}
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="userDropdown">
-                        <a class="dropdown-item" href="{{ url('/account/profile.php') }}"><i class="fa fa-btn fa-cog"></i> @lang('messages.MyProfile')</a>
-                        <a class="dropdown-item" href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i> @lang('messages.Logout')</a>
+                        <a class="dropdown-item" href="{{ url('/account/profile.php') }}"><i class="fa fa-btn fa-cog fa-fw"></i> @lang('messages.MyProfile')</a>
+                        <a class="dropdown-item" href="{{ url('/logout') }}"><i class="fas fa-btn fa-sign-out-alt fa-fw"></i> @lang('messages.Logout')</a>
                     </div>
                 </li>
             @endif
