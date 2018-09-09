@@ -30,9 +30,14 @@
                     <td class="table-text text-left">
                         <a href="{{ url('risk/' . $risk->id) }}">{{ $risk->subject }}</a>
                     </td>
-                    <td class="table-text">
-                        0
+                    @if($risk->score)
+                    <td class="table-text" title="{{ $risk->score->getLevel()['name'] }}" style="background-color:{{ $risk->score->getLevel()['color'] }}">
+                        {{ $risk->score->calculated_risk }}
                     </td>
+                    @else
+                    <td></td>
+                    @endif
+
                     <td class="table-text">
                         {{ $risk->submission_date->toDateString() }}
                     </td>

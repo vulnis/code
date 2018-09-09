@@ -15,6 +15,14 @@ class Risk extends Model
         return $this->belongsTo(User::class);
     }
 
+    /**
+     * Get the user that owns the task.
+     */
+    public function score()
+    {
+        return $this->hasOne(Risk\Score::class, 'id');
+    }
+
     const CREATED_AT = 'submission_date';
     const UPDATED_AT = 'last_update';
 

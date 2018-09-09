@@ -1,12 +1,13 @@
 <?php
 
-namespace App;
+namespace App\Risk;
 
 use Illuminate\Database\Eloquent\Model;
 
-class RiskLevel extends Model
+class Source extends Model
 {
-    protected $table = 'risk_levels';
+    protected $table = 'source';
     protected $primaryKey = null;
     public $incrementing = false;
+    public $timestamps = false;
 }

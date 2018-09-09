@@ -4,21 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use Illuminate\Http\Request;
-use App\Repositories\AssessmentRepository;
-use App\Question;
+
 use App\Assessment;
+use App\Assessment\Question;
+
 class AssessmentController extends Controller
 {
-    protected $assessments;
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct(AssessmentRepository $assessments)
+    public function __construct()
     {
         $this->middleware('auth');
-        $this->assessments = $assessments;
     }
 
     /**
@@ -61,7 +60,7 @@ class AssessmentController extends Controller
             return view('assessment.index',[
                 'prefix' => 'assessments',
                 'menu' => $this->getSideMenu(),
-                'assessments' => $this->assessments->getAssessments(),
+                'assessments' => Assessment::all(),
             ]);
         }
         

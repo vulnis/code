@@ -4,7 +4,7 @@ namespace App\Repositories;
 
 use Illuminate\Support\Facades\DB;
 use App\Risk;
-use App\Closure;
+use App\Risk\Closure;
 class RiskRepository
 {
     /**
