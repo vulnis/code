@@ -125,7 +125,7 @@ class AdminController extends Controller
 
     public function addremovevalues()
     {
-        return view('admin.index',[
+        return view('admin.add_remove_values',[
             'prefix' => 'admin',
             'menu' => $this->getSideMenu()
         ]);
