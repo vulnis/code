@@ -262,7 +262,9 @@ Route::delete('/assesment/{assesment}', 'AssessmentController@destroy');
 Route::get('/risks', 'RiskController@index');
 Route::post('/risk', 'RiskController@store');
 Route::get('/risk', 'RiskController@new');
+Route::get('/risk/{risk}', 'RiskController@detail');
 Route::delete('/risk/{risk}', 'RiskController@destroy');
+
 
 Route::get('/', 'HomeController@index');
 Route::get('/index.php', 'HomeController@index');

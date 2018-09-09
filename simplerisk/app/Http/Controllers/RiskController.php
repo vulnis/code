@@ -46,13 +46,21 @@ class RiskController extends Controller
         $sources = Source::all();
 
         return view('risks.new',[
-            'prefix' => 'risks',
-
             'categories' => $categories,
             'impacts' => $impacts,
             'sources' => $sources,
             'probabilities' => $probabilities,
         ]);
+    }
+    
+    public function detail()
+    {
+        $categories = Category::all();
+        $impacts = Impact::all();
+        $probabilities = Probability::all();
+        $sources = Source::all();
+
+        return view('risks.detail');
     }
 
     public function store(Request $request)

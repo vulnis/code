@@ -20,16 +20,11 @@ class Score extends Model
     public function getLevel()
     {
         $levels = Level::orderBy('value')->get();
-        $out = [
-            'color' => "#ffffff"
-        ];
+        $out = new Level();
 
         foreach ($levels as $level) {
             if($this->calculated_risk > $level->value){
-                $out = [
-                    'color' => $level->getColor(),
-                    'name' => $level->display_name
-                ];
+                $out = $level;
             }
         }
         return $out;

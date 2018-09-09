@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 <div class="row">
-    <@include('layouts.partials.side')
+    @include('layouts.partials.side')
     <div class="col-9">
         <div class="row p-3 mb-2 bg-light">
             <form name="no_message" method="post">

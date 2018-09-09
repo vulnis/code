@@ -31,7 +31,7 @@
                         <a href="{{ url('risk/' . $risk->id) }}">{{ $risk->subject }}</a>
                     </td>
                     @if($risk->score)
-                    <td class="table-text" title="{{ $risk->score->getLevel()['name'] }}" style="background-color:{{ $risk->score->getLevel()['color'] }}">
+                    <td class="table-text" title="{{ $risk->score->getLevel()->display_name }}" style="background-color:{{ $risk->score->getLevel()->color }}">
                         {{ $risk->score->calculated_risk }}
                     </td>
                     @else
