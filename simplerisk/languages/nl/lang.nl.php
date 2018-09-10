@@ -1036,6 +1036,7 @@ $lang = array(
     'Unmitigated' => 'Niet gemitigeerd',
     'Reviewed' => 'Gereviewed',
     'Unreviewed' => 'Niet gereviewed',
+    'NewRiskInstruction' => 'Vul de velden in om een risico op te nemen in het risicobeheerproces',
     'New' => 'Nieuw',
     'ManagementReviewed' => 'Gereviewed',
     'Reopened' => 'Heropend',
