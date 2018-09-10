@@ -63,11 +63,11 @@
                     <td>
                     @if ($risk->mitigation_id === 0)
                         <a href="{{ url('management/mitigate.php?type=1&amp;id=' .$risk->id) }}">
-                            <i class="fas fa-check text-success fa-fw" title="@lang('messages.Yes')"></i>
+                            <i class="fas fa-times text-danger fa-fw" title="@lang('messages.No')"></i>
                         </a>
                     @else
                         <a href="{{ url('management/mitigate.php?type=1&amp;id=' .$risk->id) }}">
-                            <i class="fas fa-times text-danger fa-fw" title="@lang('messages.No')"></i>
+                            <i class="fas fa-check text-success fa-fw" title="@lang('messages.Yes')"></i>
                         </a>
                     @endif
                     </td>

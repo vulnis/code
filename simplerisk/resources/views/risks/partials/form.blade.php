@@ -40,43 +40,75 @@
             <div class="simple">
                 <div class="form-group">
                     <label for="risk-subject">@lang('messages.Subject')</label>
-                    <input type="text" name="subject" id="risk-subject" class="form-control">
+                    <input type="text" name="subject" id="risk-subject" class="form-control" @if($risk) value="{{$risk->subject}}" disabled @endif>
                 </div>
                 <div class="form-group">
                     <label for="risk-category">@lang('messages.Category')</label>
-                    <select class="form-control" id="risk-category" name="category">
+                    <select class="form-control" id="risk-category" name="category" @if($risk) disabled @endif>
                         @foreach ($categories as $i => $category)
-                            <option @if ($i === 0) selected @endif value="{{ $category->value}}">{{ $category->name }}</option>
+                            @if($risk)
+                                @if($risk->category === $category->value) 
+                                <option selected value="{{ $category->value}}">{{ $category->name }}</option>
+                                @else
+                                <option value="{{ $category->value}}">{{ $category->name }}</option>
+                                @endif
+                            @else
+                                <option @if ($i = 0) selected @endif value="{{ $category->value}}">{{ $category->name }}</option>
+                            @endif
                         @endforeach
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="risk-source">@lang('messages.RiskSource')</label>
-                    <select class="form-control" id="risk-source" name="source">
+                    <select class="form-control" id="risk-source" name="source" @if($risk) disabled @endif>
                         @foreach ($sources as $i => $source)
-                            <option @if ($i === 0) selected @endif value="{{ $source->value}}">{{ $source->name }}</option>
+                        @if($risk)
+                                @if($risk->source === $source->value) 
+                                <option selected value="{{ $source->value}}">{{ $source->name }}</option>
+                                @else
+                                <option value="{{ $source->value}}">{{ $source->name }}</option>
+                                @endif
+                            @else
+                                <option @if ($i = 0) selected @endif value="{{ $source->value}}">{{ $source->name }}</option>
+                            @endif
                         @endforeach
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="risk-likelihood">@lang('messages.Likelihood')</label>
-                    <select class="form-control" id="risk-likelihood" name="likelihood">
+                    <select class="form-control" id="risk-likelihood" name="likelihood" @if($risk) disabled @endif>
                         @foreach ($probabilities as $i => $probability)
-                            <option @if ($i === 0) selected @endif value="{{ $probability->value}}">{{ $probability->name }}</option>
+                            @if($risk)
+                                @if($risk->score->CLASSIC_likelihood == $probability->value) 
+                                <option selected value="{{ $probability->value}}">{{ $probability->name }}</option>
+                                @else
+                                <option value="{{ $probability->value}}">{{ $probability->name }}</option>
+                                @endif
+                            @else
+                                <option @if ($i = 0) selected @endif value="{{ $probability->value}}">{{ $probability->name }}</option>
+                            @endif
                         @endforeach
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="risk-impact">@lang('messages.Impact')</label>
-                    <select class="form-control" id="risk-impact" name="impact">
+                    <select class="form-control" id="risk-impact" name="impact" @if($risk) disabled @endif>
                         @foreach ($impacts as $i => $impact)
-                            <option @if ($i === 0) selected @endif value="{{ $impact->value}}">{{ $impact->name }}</option>
+                            @if($risk)
+                                @if($risk->score->CLASSIC_impact == $impact->value) 
+                                <option selected value="{{ $impact->value}}">{{ $impact->name }}</option>
+                                @else
+                                <option value="{{ $impact->value}}">{{ $impact->name }}</option>
+                                @endif
+                            @else
+                                <option @if ($i = 0) selected @endif value="{{ $impact->value}}">{{ $impact->name }}</option>
+                            @endif
                         @endforeach
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="risk-notes">@lang('messages.AdditionalNotes')</label>
-                    <textarea name="notes" class="form-control" id="risk-notes" rows="3"></textarea>
+                    <textarea name="notes" class="form-control" id="risk-notes" rows="3" @if($risk) disabled>{{$risk->notes}}  @else > @endif</textarea>
                 </div>
             </div>
             <div class="advanced" style="display:none;">
@@ -197,7 +229,9 @@
         <!--<input type='button' name='cvssSubmit' id='cvssSubmit' value='Score Using CVSS' />
         <input type='button' name='dreadSubmit' id='dreadSubmit' value='Score Using DREAD' onclick='javascript: popupdread();' />
         <input type='button' name='owaspSubmit' id='owaspSubmit' value='Score Using OWASP' onclick='javascript: popupowasp();' />-->
+        @if(!$risk)
         <button type="submit" name="submit" class="btn btn-primary pull-right save-risk-form">@lang('messages.Submit')</button>
+        @endif
         <!--<input class="btn pull-right" value="Reset" type="reset">-->
     </div>
 </form>

@@ -1041,6 +1041,9 @@ $lang = array(
     'Reopened' => 'Heropend',
     'Treated' => 'Behandeld',
     'Untreated' => 'Niet behandeld',
+    'passwords' => [
+        'user' => 'Onbekende gebruiker'
+    ],
     '' => '',
 );
 

@@ -32,7 +32,7 @@ class RiskController extends Controller
     public function index()
     {
         $risks = Risk::orderBy('submission_date', 'asc')->get();
-        return view('risks.index',[
+        return view('risks.risks',[
             'prefix' => 'risks',
             'risks' => $risks
         ]);
@@ -45,7 +45,8 @@ class RiskController extends Controller
         $probabilities = Probability::all();
         $sources = Source::all();
 
-        return view('risks.new',[
+        return view('risks.risk',[
+            'risk' => null,
             'categories' => $categories,
             'impacts' => $impacts,
             'sources' => $sources,
@@ -53,14 +54,25 @@ class RiskController extends Controller
         ]);
     }
     
-    public function detail()
+    public function detail($id)
     {
+        $risk = Risk::find($id);
         $categories = Category::all();
         $impacts = Impact::all();
         $probabilities = Probability::all();
         $sources = Source::all();
-
-        return view('risks.detail');
+        if($risk)
+        {
+            return view('risks.risk',[
+                'risk' => $risk,
+                'categories' => $categories,
+                'impacts' => $impacts,
+                'sources' => $sources,
+                'probabilities' => $probabilities,
+            ]);
+        }
+        return redirect('/risks');
+        
     }
 
     public function store(Request $request)
@@ -74,6 +86,7 @@ class RiskController extends Controller
         $risk->subject = $request->subject;
         $risk->category = $request->category;
         $risk->source = $request->source;
+        $risk->status = 'New';
         $risk->notes = $request->notes;
         $risk->submitted_by = Auth::user()->value;
         $risk->save();
