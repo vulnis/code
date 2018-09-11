@@ -188,9 +188,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'compliance'],function () {
     Route::get('download.php', function () {
         return view('default');
     });
-    Route::get('index.php', function () {
-        return view('default');
-    });
+    Route::get('index.php', 'TestController@index');
     Route::get('past_audits.php', function () {
         return view('default');
     });
