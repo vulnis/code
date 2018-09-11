@@ -32,7 +32,7 @@ class RiskController extends Controller
     public function index()
     {
         $risks = Risk::orderBy('submission_date', 'asc')->get();
-        return view('risks.risks',[
+        return view('risks',[
             'prefix' => 'risks',
             'risks' => $risks
         ]);
@@ -45,7 +45,7 @@ class RiskController extends Controller
         $probabilities = Probability::all();
         $sources = Source::all();
 
-        return view('risks.risk',[
+        return view('risks',[
             'risk' => null,
             'categories' => $categories,
             'impacts' => $impacts,
@@ -63,7 +63,7 @@ class RiskController extends Controller
         $sources = Source::all();
         if($risk)
         {
-            return view('risks.risk',[
+            return view('risk',[
                 'risk' => $risk,
                 'categories' => $categories,
                 'impacts' => $impacts,
@@ -71,7 +71,7 @@ class RiskController extends Controller
                 'probabilities' => $probabilities,
             ]);
         }
-        return redirect('/risks');
+        return redirect('/management/index.php');
         
     }
 
@@ -100,6 +100,6 @@ class RiskController extends Controller
         $score->ClASSIC_likelihood = $request->likelihood;
         $score->ClASSIC_impact = $request->impact;
         $score->save();
-        return redirect('/risks');
+        return redirect('/management/index.php');
     }
 }

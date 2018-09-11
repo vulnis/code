@@ -81,7 +81,7 @@
                                         <span class="badge badge-pill badge-light">{{ $question->id }}</span><!--<small class="text-muted">/{{ $questions->count()}}</small>-->
                                     </div>
                                     <div class="col-10">
-                                        <p class="mb-1"><?=str_replace($filter, '<b class="bg-info text-white">' . $filter . '</b>', $question->question)?></p>
+                                        <p class="mb-1"><?=str_replace($filter, '<mark>' . $filter . '</mark>', $question->question)?></p>
                                     </div>
                                 </div>
                             </div>

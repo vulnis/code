@@ -18,3 +18,9 @@
 	-webkit-transform: rotate(120deg);
 	transform: rotate(120deg);
 }
+
+.badge-risk {
+	padding-top:7px;
+	width:28px;
+	height:28px;
+}

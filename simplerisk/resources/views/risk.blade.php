@@ -1,3 +1,8 @@
+@extends('layouts.app')
+@section('scripts')
+@append
+
+@section('content')
 <form method="POST" action="{{ url('risk') }}" class="form">
     {{ csrf_field() }}
     <input type='hidden' name='AccessVector' id='AccessVector' value='N' />
@@ -235,3 +240,4 @@
         <!--<input class="btn pull-right" value="Reset" type="reset">-->
     </div>
 </form>
+@endsection

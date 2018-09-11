@@ -3,11 +3,12 @@
 namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use App\Risk;
+
 class User extends Authenticatable
 {
     protected $table = 'user';
     protected $primaryKey = 'value';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -26,7 +27,7 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function tasks()
+    public function risks()
     {
         return $this->hasMany(Risk::class);
     }

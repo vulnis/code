@@ -22,7 +22,7 @@ class MitigationController extends Controller
     public function index()
     {
         $mitigations = Mitigation::orderBy('submission_date', 'asc')->get();
-        return view('mitigations.index',[
+        return view('mitigations',[
             'prefix' => 'mitigations',
             'mitigations' => $mitigations
         ]);

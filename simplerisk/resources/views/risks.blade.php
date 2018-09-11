@@ -27,12 +27,14 @@
             @foreach ($risks as $risk)
                 <tr>
                     
-                    <td class="table-text text-left">
+                    <td class="table-text text-left" style="border-left: 3px solid @if($risk->score) {{ $risk->score->getLevel()->color }} @else #fff;@endif">
                         <a href="{{ url('risk/' . $risk->id) }}">{{ $risk->subject }}</a>
                     </td>
                     @if($risk->score)
-                    <td class="table-text" title="{{ $risk->score->getLevel()->display_name }}" style="background-color:{{ $risk->score->getLevel()->color }}">
+                    <td class="table-text" title="{{ $risk->score->getLevel()->display_name }}">
+                        <span class="badge badge-risk border" style="background-color:{{ $risk->score->getLevel()->getColor() }}">
                         {{ $risk->score->calculated_risk }}
+                        </span>
                     </td>
                     @else
                     <td></td>

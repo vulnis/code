@@ -220,18 +220,14 @@ Route::group(['middleware' => 'auth', 'prefix' => 'governance'],function () {
 
 /* Management Routes */
 Route::group(['middleware' => 'auth', 'prefix' => 'management'],function () {
-    Route::get('/', function () {
-        return view('default');
-    });
+    Route::get('/', 'RiskController@index');
     Route::get('documentation.php', function () {
         return view('default');
     });
     Route::get('download.php', function () {
         return view('default');
     });
-    Route::get('index.php', function () {
-        return view('default');
-    });
+    Route::get('index.php', 'RiskController@index');
 });
 
 /* Report Routes */

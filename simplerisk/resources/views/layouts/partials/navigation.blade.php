@@ -12,7 +12,7 @@
         <ul class="navbar-nav mr-auto">
             @if (Auth::check())
                 <li {!! (Request::is('*governance/*') ? 'class="nav-item active"' : 'class="nav-item"') !!}><a class="nav-link" href="{{ url('/governance/index.php') }}">@lang('messages.Governance')</a></li>
-                <li {!! (Request::is('*management/*') ? 'class="nav-item active"' : 'class="nav-item"') !!}><a class="nav-link" href="{{ url('/management/index.php') }}">@lang('messages.RiskManagement')</a></li>
+                <li {!! (Request::is('*management/*') ? 'class="nav-item active"' : 'class="nav-item"') !!} {!! (Request::is('*risks') ? 'class="nav-item active"' : 'class="nav-item"') !!}><a class="nav-link" href="{{ url('/management/index.php') }}">@lang('messages.RiskManagement')</a></li>
                 <li {!! (Request::is('*compliance/*') ? 'class="nav-item active"' : 'class="nav-item"') !!}><a class="nav-link" href="{{ url('/compliance/index.php') }}">@lang('messages.Compliance')</a></li>
                 <li {!! (Request::is('*assets/*') ? 'class="nav-item active"' : 'class="nav-item"') !!}><a class="nav-link" href="{{ url('/assets/index.php') }}">@lang('messages.AssetManagement')</a></li>
                 <li {!! (Request::is('*assessments/*') ? 'class="nav-item active"' : 'class="nav-item"') !!}><a class="nav-link" href="{{ url('/assessments/index.php') }}">@lang('messages.RiskAssessment')</a></li>
