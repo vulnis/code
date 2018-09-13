@@ -3,7 +3,6 @@
 namespace App\Risk;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Risk\Level;
 
 class Score extends Model
 {

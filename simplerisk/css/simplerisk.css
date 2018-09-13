@@ -24,3 +24,31 @@
 	width:28px;
 	height:28px;
 }
+
+/* CUSTOMIZE THE CAROUSEL
+-------------------------------------------------- */
+
+/* Carousel base class */
+.carousel {
+	margin-bottom: 4rem;
+	margin-left: -15px;
+	margin-right: -15px;
+  }
+  /* Since positioning the image, we need to help out the caption */
+  .carousel-caption {
+	bottom: 3rem;
+	z-index: 10;
+  }
+  
+  /* Declare heights because of positioning of img element */
+  .carousel-item {
+	height: 32rem;
+	background-color: #777;
+  }
+  .carousel-item > img {
+	position: absolute;
+	top: 0;
+	left: 0;
+	min-width: 100%;
+	height: 32rem;
+  }

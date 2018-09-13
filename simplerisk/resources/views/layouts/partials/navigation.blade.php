@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<header><nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <!-- Branding Image -->
     <a class="navbar-brand" href="{{ url('/') }}">
         <img src='/images/logo@2x.png' alt='SimpleRisk Logo' />
@@ -56,4 +56,4 @@
             @endif
         </ul>
     </div>
-</nav>
+</nav></header>
