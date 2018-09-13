@@ -21,3 +21,10 @@ https://www.simplerisk.com/download
 Then check out the SimpleRisk Installation Guide to get started:
 
 https://www.simplerisk.com/documentation
+
+
+# References
+[The Vulnerability of UAVs to Cyber Attacks](https://ccdcoe.org/cycon/2013/proceedings/d3r2s2_hartmann.pdf)
+[Safety Risk Assessment For UAV Operation](https://miningquiz.com/pdf/Drone_Safety/Safety-Risk-Assessment-for-UAV-Operation-Rev.-1.1.compressed.pdf)
+[CIA Triad](https://www.techrepublic.com/blog/it-security/the-cia-triad/)
+[The Assessment of Risk and Harm](https://www.communities.qld.gov.au/resources/childsafety/practice-manual/pg-assess-risk-of-harm.pdf)
