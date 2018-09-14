@@ -9,11 +9,11 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
 use App\Risk;
-use App\Risk\Category;
+use App\Category;
 use App\Risk\Impact;
 use App\Risk\Score;
-use App\Risk\Source;
-use App\Risk\Probability;
+use App\Source;
+use App\Probability;
 
 use App\Library\RiskCalculator;
 
@@ -40,12 +40,12 @@ class RiskController extends Controller
 
     public function new()
     {
-        $categories = Category::all();
+        $categories = Category::where('type', 'Risk')->get();
         $impacts = Impact::all();
         $probabilities = Probability::all();
-        $sources = Source::all();
+        $sources = Source::where('type', 'Risk')->get();
 
-        return view('risks',[
+        return view('risk',[
             'risk' => null,
             'categories' => $categories,
             'impacts' => $impacts,
@@ -57,22 +57,16 @@ class RiskController extends Controller
     public function detail($id)
     {
         $risk = Risk::find($id);
-        $categories = Category::all();
-        $impacts = Impact::all();
-        $probabilities = Probability::all();
-        $sources = Source::all();
         if($risk)
         {
             return view('risk',[
                 'risk' => $risk,
-                'categories' => $categories,
-                'impacts' => $impacts,
-                'sources' => $sources,
-                'probabilities' => $probabilities,
+                'categories' => Category::where('type', 'Risk')->get(),
+                'impacts' => Impact::all(),
+                'sources' => Source::where('type', 'Risk')->get(),
+                'probabilities' => Probability::all(),
             ]);
         }
-        return redirect('/management/index.php');
-        
     }
 
     public function store(Request $request)

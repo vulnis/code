@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Risk;
+namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
 class Probability extends Model
 {
     protected $table = 'likelihood';
-    protected $primaryKey = null;
-    public $incrementing = false;
+    protected $primaryKey = 'value';
     public $timestamps = false;
 }

@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class UpdateUser extends Migration
+class UpdateCategory extends Migration
 {
     /**
      * Run the migrations.
@@ -12,10 +12,8 @@ class UpdateUser extends Migration
      */
     public function up()
     {
-        Schema::table('user', function (Blueprint $table) {
-            $table->string('email',200)->change();
-            $table->unique('email','user_email_unique');
-            $table->rememberToken();
+        Schema::table('category', function (Blueprint $table) {
+            $table->enum('type',['Risk','Hazard'])->default('Risk');
             $table->timestamps();
         });
     }
@@ -27,10 +25,8 @@ class UpdateUser extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropUnique('user_email_unique');
-            $table->binary('email', 65535)->change();
-            $table->dropColumn('remember_token');
+        Schema::table('category', function (Blueprint $table) {
+            $table->dropColumn('type');
             $table->dropColumn('created_at');
             $table->dropColumn('updated_at');
         });

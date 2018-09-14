@@ -1045,6 +1045,14 @@ $lang = array(
     'passwords' => [
         'user' => 'Onbekende gebruiker'
     ],
+    'Hazard' => 'Gevaar',
+    'Stage' => 'Operationele fase',
+    'Cause' => 'Oorzaak',
+    'Order' => 'Volgnummer',
+    'Consequence' => 'Gevolgen',
+    'Source' => 'Bron',
+    'Probability'=>'Waarschijnlijkheid',
+    'Severity' => 'Ernst',
     '' => '',
 );
 

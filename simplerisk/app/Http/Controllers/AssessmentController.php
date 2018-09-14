@@ -7,7 +7,11 @@ use Illuminate\Http\Request;
 
 use App\Assessment;
 use App\Assessment\Question;
-
+use App\Hazard;
+use App\Sra;
+use App\Cause;
+use App\Probability;
+use App\Severity;
 class AssessmentController extends Controller
 {
     /**
@@ -78,6 +82,7 @@ class AssessmentController extends Controller
         return $this->newindex($request->input('id'),  $request->input('q'));
     }
 
+
     public function new()
     {
         return view('assessment.new',[
@@ -94,6 +99,56 @@ class AssessmentController extends Controller
         $assessment = new Assessment;
         $assessment->subject = $request->subject;
         $assessment->submitted_by = Auth::user()->value;
+        $assessment->save();
+        return redirect('/assessments');
+    }
+
+    public function indexSra()
+    {
+        return view('sras',[]);
+    }
+
+    public function newSra()
+    {
+        // Hazards
+        // Root causes
+        // Probability
+        // Severity
+        // Risk level
+
+        return view('sra',[
+            'sra' => null,
+            'hazards' => Hazard::all(),
+            'causes' => Cause::all(),
+            'probabilities' => Probability::all(),
+            'severities' => Severity::all()
+        ]);
+    }
+
+    public function detailSra($id){
+        $sra = Sra::find($id);
+        if($sra)
+        {
+            return view('sra',[
+                'sra' => $sra,
+                'hazards' => Hazard::all(),
+                'causes' => Cause::all(),
+                'probabilities' => Probability::all(),
+                'severities' => Severity::all()
+            ]);
+        }
+    }
+    public function storeSra(Request $request)
+    {
+        $assessment = new Sra;
+        $hazard = Hazard::find($request->hazard);
+        $assessment->hazard()->associate($hazard);
+        $cause = Cause::find($request->cause);
+        $assessment->cause()->associate($cause);
+        $severity = Severity::find($request->severity);
+        $assessment->severity()->associate($severity);
+        $probability = Probability::find($request->probability);
+        $assessment->probability()->associate($probability);
         $assessment->save();
         return redirect('/assessments');
     }

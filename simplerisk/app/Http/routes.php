@@ -246,11 +246,14 @@ Route::post('/asset', 'AssetController@store');
 Route::get('/asset', 'AssetController@new');
 Route::delete('/asset/{asset}', 'AssetController@destroy');
 
-Route::get('/assessments', 'AssessmentController@index');
-Route::get('/assessment/{id?}/{query?}', 'StandardController@index');
-Route::post('/assesment', 'AssessmentController@store');
-Route::get('/assesment', 'AssessmentController@new');
-Route::delete('/assesment/{assesment}', 'AssessmentController@destroy');
+Route::get('/assessments', 'AssessmentController@indexSra');
+//Route::get('/assessment/{id?}/{query?}', 'AssessmentController@index');
+Route::delete('/assessment/{assesment}', 'AssessmentController@destroy');
+
+// Sra
+Route::get('/assessment', 'AssessmentController@newSra');
+Route::post('/assessment', 'AssessmentController@storeSra');
+Route::get('/assessment/{id}', 'AssessmentController@detailSra');
 
 /* Risks */
 Route::get('/risks', 'RiskController@index');
@@ -262,3 +265,21 @@ Route::delete('/risk/{risk}', 'RiskController@destroy');
 
 Route::get('/', 'HomeController@index');
 Route::get('/index.php', 'HomeController@index');
+
+Route::get('/hazard/{hazard}', 'HazardController@detail');
+Route::get('/hazard', 'HazardController@new');
+Route::post('/hazard', 'HazardController@store');
+Route::get('/hazards', 'HazardController@index');
+
+Route::post('/category', 'CategoryController@store');
+Route::get('/category', 'CategoryController@new');
+Route::post('/stage', 'StageController@store');
+Route::get('/stage', 'StageController@new');
+Route::post('/cause', 'CauseController@store');
+Route::get('/cause', 'CauseController@new');
+
+Route::post('/consequence', 'ConsequenceController@store');
+Route::get('/consequence', 'ConsequenceController@new');
+
+Route::post('/source', 'SourceController@store');
+Route::get('/source', 'SourceController@new');

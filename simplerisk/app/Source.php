@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Risk;
+namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -8,6 +8,4 @@ class Source extends Model
 {
     protected $table = 'source';
     protected $primaryKey = 'value';
-    public $incrementing = false;
-    public $timestamps = false;
 }
