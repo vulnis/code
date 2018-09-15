@@ -30,9 +30,9 @@
                     <td class="table-text text-left">
                         {{ $hazard->description }}
                     </td>
-                    <td>{{ $hazard->category()->first()->name }}</td>
-                    <td>{{ $hazard->source()->first()->name }}</td>
-                    <td>{{ $hazard->stage()->first()->name }}</td>
+                    <td>{{ $hazard->category->name }}</td>
+                    <td>{{ $hazard->source->name }}</td>
+                    <td>{{ $hazard->stage->name }}</td>
                 </tr>
                 
             @endforeach
