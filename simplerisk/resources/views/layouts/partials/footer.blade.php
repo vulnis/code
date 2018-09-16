@@ -9,9 +9,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/6.0.6/highcharts.js" charset="utf-8"></script>
 <script>
     $(document).ready(function(){
-        $.getJSON( "/assessments", function( data ) {
-            console.log(data);
-        });
+        //$.getJSON( "/causes", function( data ) {
+        //    console.log(data);
+        //});
         setTimeout(function(){
             $('.alert').hide();
         }, 2000);

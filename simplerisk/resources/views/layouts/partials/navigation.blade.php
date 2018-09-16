@@ -27,10 +27,13 @@
                     <span class=""><i class="fa fa-plus fa-fw text-white" aria-hidden="true"></i></span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="addDropdown">
-                        <a class="dropdown-item" href="{{ url('assessment') }}" role="button"><i class="fas fa-user-ninja fa-fw"></i> Assessment</a>
-                        <a class="dropdown-item" href="{{ url('asset') }}" role="button"><i class="fas fa-cart-plus fa-fw"></i> Asset</a>
-                        <a class="dropdown-item" href="{{ url('mitigation') }}" role="button"><i class="fas fa-fire-extinguisher fa-fw"></i> Mitigation</a>
-                        <a class="dropdown-item" href="{{ url('risk') }}" role="button"><i class="fas fa-fire fa-fw"></i> Risk</a>
+                        <a class="dropdown-item" href="{{ url('hazards/create') }}" role="button"><i class="fas fa-fire fa-fw"></i> @lang('messages.Hazard')</a>
+                        <a class="dropdown-item" href="{{ url('assessments/create') }}" role="button"><i class="fas fa-search fa-fw"></i> @lang('messages.Assessment')</a>
+                        <a class="dropdown-item" href="{{ url('categories/create') }}" role="button"><i class="fas fa-list-alt fa-fw"></i> @lang('messages.Category')</a>
+                        <a class="dropdown-item" href="{{ url('causes/create') }}" role="button"><i class="fas fa-lightbulb fa-fw"></i> @lang('messages.Cause')</a>
+                        <a class="dropdown-item" href="{{ url('consequences/create') }}" role="button"><i class="far fa-lightbulb fa-fw"></i> @lang('messages.Consequence')</a>
+                        <a class="dropdown-item" href="{{ url('stages/create') }}" role="button"><i class="fas fa-chalkboard-teacher fa-fw"></i> @lang('messages.Stage')</a>
+                        <a class="dropdown-item" href="{{ url('sources/create') }}" role="button"><i class="fas fa-user-ninja fa-fw"></i> @lang('messages.Source')</a>
                     </div>
                 </li>
                 

@@ -129,8 +129,6 @@ class RiskRepository
         // Get the opened risks array by month
         $open = $this->getOpenedRisks("month");
         $closed = $this->getClosedRisks("month");
-        //var_dump($open);
-        //echo($open["2018-09"]);
         // For each of the past 12 months
         for ($i=11; $i>=0; $i--)
         {
@@ -152,7 +150,6 @@ class RiskRepository
             };
             $months[$month]['trend'] = $months[$month]['open'] - $months[$month]['closed'];
         }
-        //var_dump($months);
         return $months;
     }
 

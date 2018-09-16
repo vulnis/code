@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use App\Library\NameValue;
 use Illuminate\Support\Facades\Auth;
 
 use App\Source;
@@ -23,18 +23,36 @@ class SourceController extends Controller
     }
 
     
-    public function new()
+    public function create()
     {
         return view('source',[
             'source' => null,
             'types' => [
-                new valName(trans('messages.Risk'), 'Risk'),
-                new valName(trans('messages.Hazard'), 'Hazard'),
-                new valName(trans('messages.Cause'), 'Cause')
+                new NameValue(trans('messages.Risk'), 'Risk'),
+                new NameValue(trans('messages.Hazard'), 'Hazard'),
+                new NameValue(trans('messages.Cause'), 'Cause')
             ]
         ]);
     }
     
+    public function index(Request $request)
+    {
+        if ($request->wantsJson())
+        {
+            return response()->json(
+                Source::all()
+            );
+        }
+        return view('sources',[
+            'sources' => Source::all(),
+            'types' => [
+                new NameValue(trans('messages.Risk'), 'Risk'),
+                new NameValue(trans('messages.Hazard'), 'Hazard'),
+                new NameValue(trans('messages.Cause'), 'Cause')
+            ]
+        ]);
+    }
+
     public function store(Request $request)
     {
         // Validate the request...
@@ -47,17 +65,5 @@ class SourceController extends Controller
         $source->name = $request->name;
         $source->save();
         return redirect('/sources');
-    }
-}
-
-class valName {
-
-    public $name;
-    public $value;
-
-    public function __construct($name, $value)
-    {
-        $this->name = $name;
-        $this->value = $value;
     }
 }

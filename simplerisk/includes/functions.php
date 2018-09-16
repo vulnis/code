@@ -6498,7 +6498,6 @@ function clone_risk_project($project_id, $risk_id)
 
     // Store the list in the array
     $array = $stmt->fetchAll();
-//        var_dump($array[0]['project_id']);
 //        exit;
 
     if (!empty ($array) && $array[0]['project_id'] != 0)

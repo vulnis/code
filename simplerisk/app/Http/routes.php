@@ -13,7 +13,7 @@
 use App\Risk;
 use Illuminate\Http\Request;
 
-/* Account Routes */
+/* Account Routes
 Route::group(['middleware' => 'auth', 'prefix' => 'account'],function () {
     Route::get('/', function () {
         return view('default');
@@ -25,8 +25,9 @@ Route::group(['middleware' => 'auth', 'prefix' => 'account'],function () {
         return view('default');
     });
 });
+*/
 
-/* Admin Routes */
+/* Admin Routes
 Route::group(['prefix' => 'admin'],function () {
     Route::get('/', 'AdminController@index');
     Route::get('about.php', 'AdminController@about');
@@ -98,8 +99,8 @@ Route::group(['prefix' => 'admin'],function () {
         return view('default');
     });
 });
-
-/* Api Routes */
+*/
+/* Api Routes
 Route::group(['middleware' => 'auth', 'prefix' => 'api'],function () {
     Route::get('/', function () {
         return view('default');
@@ -111,8 +112,9 @@ Route::group(['middleware' => 'auth', 'prefix' => 'api'],function () {
         return view('default');
     });
 });
+ */
 
-/* Assessments Routes */
+/* Assessments Routes
 Route::group(['middleware' => 'auth', 'prefix' => 'assessments'],function () {
     Route::get('index.php', 'AssessmentController@index');
     Route::get('risks.php', 'AssessmentController@risks');
@@ -154,8 +156,9 @@ Route::group(['middleware' => 'auth', 'prefix' => 'assessments'],function () {
         return view('default');
     });
 });
+ */
 
-/* Assets Routes */
+/* Assets Routes
 Route::group(['middleware' => 'auth', 'prefix' => 'assets'],function () {
     Route::get('/', function () {
         return view('default');
@@ -173,8 +176,8 @@ Route::group(['middleware' => 'auth', 'prefix' => 'assets'],function () {
         return view('default');
     });
 });
-
-/* Assets Routes */
+ */
+/* Compliance Routes
 Route::group(['middleware' => 'auth', 'prefix' => 'compliance'],function () {
     Route::get('/', function () {
         return view('default');
@@ -199,8 +202,8 @@ Route::group(['middleware' => 'auth', 'prefix' => 'compliance'],function () {
         return view('default');
     });
 });
-
-/* Governance Routes */
+ */
+/* Governance Routes
 Route::group(['middleware' => 'auth', 'prefix' => 'governance'],function () {
     Route::get('/', function () {
         return view('default');
@@ -215,8 +218,8 @@ Route::group(['middleware' => 'auth', 'prefix' => 'governance'],function () {
         return view('default');
     });
 });
-
-/* Management Routes */
+ */
+/* Management Routes
 Route::group(['middleware' => 'auth', 'prefix' => 'management'],function () {
     Route::get('/', 'RiskController@index');
     Route::get('documentation.php', function () {
@@ -227,59 +230,51 @@ Route::group(['middleware' => 'auth', 'prefix' => 'management'],function () {
     });
     Route::get('index.php', 'RiskController@index');
 });
-
-/* Report Routes */
+ */
+/* Report Routes
 Route::group(['prefix' => 'reports'],function () {
     Route::get('index.php', 'ReportController@index');
 });
-
+ */
 /* Main Routes */
-Route::auth();
 
-Route::get('/mitigations', 'MitigationController@index');
-Route::post('/mitigation', 'MitigationController@store');
-Route::get('/mitigation', 'MitigationController@new');
-Route::delete('/mitigation/{mitigation}', 'MitigationController@destroy');
 
-Route::get('/assets', 'AssetController@index');
-Route::post('/asset', 'AssetController@store');
-Route::get('/asset', 'AssetController@new');
-Route::delete('/asset/{asset}', 'AssetController@destroy');
+//Route::get('/mitigations', 'MitigationController@index');
+//Route::post('/mitigation', 'MitigationController@store');
+//Route::get('/mitigation', 'MitigationController@new');
+//Route::delete('/mitigation/{mitigation}', 'MitigationController@destroy');
 
-Route::get('/assessments', 'AssessmentController@indexSra');
+//Route::get('/assets', 'AssetController@index');
+//Route::post('/asset', 'AssetController@store');
+//Route::get('/asset', 'AssetController@new');
+//Route::delete('/asset/{asset}', 'AssetController@destroy');
+
+
 //Route::get('/assessment/{id?}/{query?}', 'AssessmentController@index');
-Route::delete('/assessment/{assesment}', 'AssessmentController@destroy');
+//Route::delete('/assessment/{assesment}', 'AssessmentController@destroy');
 
 // Sra
-Route::get('/assessment', 'AssessmentController@newSra');
-Route::post('/assessment', 'AssessmentController@storeSra');
-Route::get('/assessment/{id}', 'AssessmentController@detailSra');
+//Route::get('/assessments', 'AssessmentController@indexSra');
+//Route::get('/assessment', 'AssessmentController@newSra');
+//Route::post('/assessment', 'AssessmentController@storeSra');
+//Route::get('/assessment/{id}', 'AssessmentController@detailSra');
 
-/* Risks */
+/* Risks
 Route::get('/risks', 'RiskController@index');
 Route::post('/risk', 'RiskController@store');
 Route::get('/risk', 'RiskController@new');
 Route::get('/risk/{risk}', 'RiskController@detail');
 Route::delete('/risk/{risk}', 'RiskController@destroy');
+ */
 
-
+Route::auth();
 Route::get('/', 'HomeController@index');
-Route::get('/index.php', 'HomeController@index');
+//Route::get('/index.php', 'HomeController@index');
 
-Route::get('/hazard/{hazard}', 'HazardController@detail');
-Route::get('/hazard', 'HazardController@new');
-Route::post('/hazard', 'HazardController@store');
-Route::get('/hazards', 'HazardController@index');
-
-Route::post('/category', 'CategoryController@store');
-Route::get('/category', 'CategoryController@new');
-Route::post('/stage', 'StageController@store');
-Route::get('/stage', 'StageController@new');
-Route::post('/cause', 'CauseController@store');
-Route::get('/cause', 'CauseController@new');
-
-Route::post('/consequence', 'ConsequenceController@store');
-Route::get('/consequence', 'ConsequenceController@new');
-
-Route::post('/source', 'SourceController@store');
-Route::get('/source', 'SourceController@new');
+Route::resource('/assessments', 'AssessmentController');
+Route::resource('/hazards', 'HazardController');
+Route::resource('/stages','StageController');
+Route::resource('/categories', 'CategoryController');
+Route::resource('/causes', 'CauseController');
+Route::resource('/consequences', 'ConsequenceController');
+Route::resource('/sources', 'SourceController');

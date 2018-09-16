@@ -23,7 +23,7 @@ class ConsequenceController extends Controller
     }
 
     
-    public function new()
+    public function create()
     {
         return view('consequence',[
             'consequence' => null
@@ -41,18 +41,6 @@ class ConsequenceController extends Controller
         $consequence->name = $request->name;
         $consequence->description = $request->description;
         $consequence->save();
-        return redirect('/consequences');
-    }
-}
-
-class valName {
-
-    public $name;
-    public $value;
-
-    public function __construct($name, $value)
-    {
-        $this->name = $name;
-        $this->value = $value;
+        return redirect('/consequence');
     }
 }

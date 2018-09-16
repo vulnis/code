@@ -3,7 +3,7 @@
 @append
 
 @section('content')
-<form method="POST" action="{{ url('source') }}" class="form">
+<form method="POST" action="{{ url('sources') }}" class="form">
     {{ csrf_field() }}
     <div class="row">
         <div class="col-sm-12 col-md-4">

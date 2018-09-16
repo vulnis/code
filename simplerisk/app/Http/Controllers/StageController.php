@@ -22,14 +22,19 @@ class StageController extends Controller
         $this->middleware('auth');
     }
 
-    
-    public function new()
+    public function index(Request $request)
     {
-        return view('stage',[
-            'stage' => null
+        if ($request->wantsJson())
+        {
+            return response()->json(
+                Stage::all()
+            );
+        }
+        return view('stages',[
+            'stages' => Stage::all()
         ]);
     }
-    
+
     public function store(Request $request)
     {
         // Validate the request...
@@ -39,7 +44,23 @@ class StageController extends Controller
         ]);
         $stage = new Stage;
         $stage->name = $request->name;
+        $stage->description = $request->description;
         $stage->save();
         return redirect('/stages');
     }
+
+    public function create()
+    {
+        return view('stage',[
+            'stage' => null
+        ]);
+    }
+
+    public function show($stage)
+    {
+        return view('stage',[
+            'stage' => Stage::find($stage)
+        ]);
+    }
+
 }

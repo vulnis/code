@@ -25,14 +25,20 @@ class HazardController extends Controller
         $this->middleware('auth');
     }
 
-    public function index()
+    public function index(Request $request)
     {
+        if ($request->wantsJson())
+        {
+            return response()->json(
+                Hazard::all()
+            );
+        }
         return view('hazards',[
             'hazards' => Hazard::all()
         ]);
     }
 
-    public function detail($id)
+    public function show($id)
     {
         $hazard = Hazard::find($id);
         if($hazard)
@@ -46,7 +52,7 @@ class HazardController extends Controller
         }
     }
 
-    public function new()
+    public function create()
     {
         return view('hazard',[
             'hazard' => null,

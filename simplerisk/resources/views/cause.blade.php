@@ -3,7 +3,7 @@
 @append
 
 @section('content')
-<form method="POST" action="{{ url('cause') }}" class="form">
+<form method="POST" action="{{ url('causes') }}" class="form">
     {{ csrf_field() }}
     <div class="row">
         <div class="col-sm-12 col-md-4">
@@ -11,10 +11,6 @@
                 <div class="form-group">
                     <label for="cause-description">@lang('messages.Description')</label>
                     <textarea name="description" class="form-control" id="cause-description" rows="3" @if($cause) disabled>{{$cause->description}}  @else > @endif</textarea>
-                </div>
-                <div class="form-group">
-                    <label for="cause-order">@lang('messages.Order')</label>
-                    <input type="number" step="1" name="order" class="form-control" id="cause-order" @if($cause) disabled />{{$cause->order}}  @else /> @endif
                 </div>
                 <div class="form-group">
                     <label for="cause-category">@lang('messages.Category')</label>

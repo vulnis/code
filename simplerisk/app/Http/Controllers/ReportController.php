@@ -53,11 +53,6 @@ class ReportController extends Controller
 
     public function index()
     {
-        
-
-        //$risklevels = RiskLevel::orderBy('value', 'desc')
-        //    ->get();
-        //var_dump($this->risks->getOpenedRisks("month"));
         return view('reports.index',[
             'prefix' => 'reports',
             'menu' => $this->getSideMenu(),

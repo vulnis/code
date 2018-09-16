@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests;
+use App\Library\NameValue;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -22,15 +23,32 @@ class CategoryController extends Controller
         $this->middleware('auth');
     }
 
+    public function index(Request $request)
+    {
+        if ($request->wantsJson())
+        {
+            return response()->json(
+                Category::all()
+            );
+        }
+        return view('categories',[
+            'categories' => Category::all(),
+            'types' => [
+                new NameValue(trans('messages.Risk'), 'Risk'),
+                new NameValue(trans('messages.Hazard'), 'Hazard'),
+                new NameValue(trans('messages.Cause'), 'Cause')
+            ]
+        ]);
+    }
     
-    public function new()
+    public function create()
     {
         return view('category',[
             'category' => null,
             'types' => [
-                new valName(trans('messages.Risk'), 'Risk'),
-                new valName(trans('messages.Hazard'), 'Hazard'),
-                new valName(trans('messages.Cause'), 'Cause')
+                new NameValue(trans('messages.Risk'), 'Risk'),
+                new NameValue(trans('messages.Hazard'), 'Hazard'),
+                new NameValue(trans('messages.Cause'), 'Cause')
             ]
         ]);
     }
@@ -47,17 +65,5 @@ class CategoryController extends Controller
         $category->name = $request->name;
         $category->save();
         return redirect('/categories');
-    }
-}
-
-class valName {
-
-    public $name;
-    public $value;
-
-    public function __construct($name, $value)
-    {
-        $this->name = $name;
-        $this->value = $value;
     }
 }

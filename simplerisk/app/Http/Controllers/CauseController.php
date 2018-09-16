@@ -24,7 +24,7 @@ class CauseController extends Controller
         $this->middleware('auth');
     }
 
-    public function new()
+    public function create()
     {
         $categories = Category::where('type', 'Cause')->get();
         $consequences = Consequence::all();
@@ -34,7 +34,31 @@ class CauseController extends Controller
             'consequences' => $consequences
         ]);
     }
+
+    public function show($cause)
+    {
+        $categories = Category::where('type', 'Cause')->get();
+        $consequences = Consequence::all();
+        return view('cause',[
+            'cause' => Cause::find($cause),
+            'categories' => $categories,
+            'consequences' => $consequences
+        ]);
+    }
     
+    public function index(Request $request)
+    {
+        if ($request->wantsJson())
+        {
+            return response()->json(
+                Cause::all()
+            );
+        }
+        return view('causes',[
+            'causes' => Cause::all()
+        ]);
+    }
+
     public function store(Request $request)
     {
         // Validate the request...
@@ -42,20 +66,24 @@ class CauseController extends Controller
         $this->validate($request, [
             'description' => 'required',
         ]);
-        var_dump($request->consequence);
         $cause = new Cause;
         $cause->description = $request->description;
-        $cause->order = $request->order;
-        $cause->category = $request->category;
+        $category = Category::find($request->category);
+        $cause->category()->associate($category);
         $consequence_array = [];
-        foreach ($request->consequence as $c){
-            $consequence_array[] = (int)$c;
-            // Code Here
+
+        if($request->consequence)
+        {
+            foreach ($request->consequence as $c){
+                $consequence_array[] = (int)$c;
+                // Code Here
+            }
         }
+
         $cause->save();
         $cause->consequences()->sync($consequence_array);
         
 
-        return redirect('/hazards');
+        return redirect('/causes');
     }
 }
