@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 
-use App\Assessment;
 use App\Assessment\Question;
 use App\Hazard;
 use App\Sra;
@@ -52,7 +51,7 @@ class AssessmentController extends Controller
         // Risk level
 
         return view('assessment',[
-            'sra' => null,
+            'assessment' => null,
             'hazards' => Hazard::all(),
             'causes' => Cause::all(),
             'probabilities' => Probability::all(),
@@ -61,11 +60,11 @@ class AssessmentController extends Controller
     }
 
     public function show($id){
-        $sra = Sra::find($id);
-        if($sra)
+        $assessment = Sra::find($id);
+        if($assessment)
         {
             return view('assessment',[
-                'sra' => $sra,
+                'assessment' => $assessment,
                 'hazards' => Hazard::all(),
                 'causes' => Cause::all(),
                 'probabilities' => Probability::all(),
