@@ -35,6 +35,13 @@ class AssessmentController extends Controller
         return $menu;
     }
 
+    public function index()
+    {
+        return view('assessments', [
+            'assessments' => Sra::all()
+            ]
+        );
+    }
 
     public function create()
     {
@@ -44,7 +51,7 @@ class AssessmentController extends Controller
         // Severity
         // Risk level
 
-        return view('sra',[
+        return view('assessment',[
             'sra' => null,
             'hazards' => Hazard::all(),
             'causes' => Cause::all(),
@@ -57,7 +64,7 @@ class AssessmentController extends Controller
         $sra = Sra::find($id);
         if($sra)
         {
-            return view('sra',[
+            return view('assessment',[
                 'sra' => $sra,
                 'hazards' => Hazard::all(),
                 'causes' => Cause::all(),
@@ -78,7 +85,7 @@ class AssessmentController extends Controller
         $probability = Probability::find($request->probability);
         $assessment->probability()->associate($probability);
         $assessment->save();
-        return redirect('/assessment');
+        return redirect('/assessments');
     }
 
 }
