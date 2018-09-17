@@ -253,12 +253,6 @@ Route::group(['prefix' => 'reports'],function () {
 //Route::get('/assessment/{id?}/{query?}', 'AssessmentController@index');
 //Route::delete('/assessment/{assesment}', 'AssessmentController@destroy');
 
-// Sra
-//Route::get('/assessments', 'AssessmentController@indexSra');
-//Route::get('/assessment', 'AssessmentController@newSra');
-//Route::post('/assessment', 'AssessmentController@storeSra');
-//Route::get('/assessment/{id}', 'AssessmentController@detailSra');
-
 /* Risks
 Route::get('/risks', 'RiskController@index');
 Route::post('/risk', 'RiskController@store');
