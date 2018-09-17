@@ -72,9 +72,12 @@ class HazardController extends Controller
         $hazard = new Hazard;
         $hazard->name = $request->name;
         $hazard->description = $request->description;
-        $hazard->category = $request->category;
-        $hazard->stage = $request->stage;
-        $hazard->source = $request->source;
+        $category = Category::find($request->category);
+        $hazard->category()->associate($category);
+        $stage = Stage::find($request->stage);
+        $hazard->stage()->associate($stage);
+        $source = Source::find($request->source);
+        $hazard->source()->associate($source);
         $hazard->save();
 
         return redirect('/hazards');

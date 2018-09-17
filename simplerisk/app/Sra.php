@@ -17,10 +17,10 @@ class Sra extends Model
     }
     public function severity()
     {
-        return $this->belongsTo(Severity::class);
+        return $this->belongsTo(Severity::class, 'severity_id', 'value');
     }
     public function probability()
     {
-        return $this->belongsTo(Probability::class);
+        return $this->belongsTo(Probability::class, 'probability_id', 'value');
     }
 }

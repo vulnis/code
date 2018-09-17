@@ -12,9 +12,10 @@ class Kernel extends ConsoleKernel
      *
      * @var array
      */
-    protected $commands = [
-        // Commands\Inspire::class,
-    ];
+    protected function commands()
+    {
+        $this->load(__DIR__.'/Commands');
+    }
 
     /**
      * Define the application's command schedule.
