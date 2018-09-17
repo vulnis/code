@@ -53,10 +53,15 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="userDropdown">
                         <a class="dropdown-item" href="{{ url('/account/profile.php') }}"><i class="fa fa-btn fa-cog fa-fw"></i> @lang('messages.MyProfile')</a>
-                        <a class="dropdown-item" href="{{ url('/logout') }}"><i class="fas fa-btn fa-sign-out-alt fa-fw"></i> @lang('messages.Logout')</a>
+                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();"><i class="fas fa-btn fa-sign-out-alt fa-fw"></i> @lang('messages.Logout')</a>
                     </div>
                 </li>
             @endif
         </ul>
     </div>
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+        @csrf
+    </form>
 </nav></header>
+                                    

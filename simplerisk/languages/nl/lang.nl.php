@@ -1046,7 +1046,7 @@ $lang = array(
         'user' => 'Onbekende gebruiker'
     ],
     'Assessment' => 'Assessment',
-    'Hazard' => 'Risico',
+    'Hazard' => 'Gevaar',
     'Stage' => 'Operationele fase',
     'Cause' => 'Oorzaak',
     'Order' => 'Volgnummer',

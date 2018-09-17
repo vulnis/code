@@ -22,6 +22,18 @@ class ConsequenceController extends Controller
         $this->middleware('auth');
     }
 
+    public function index(Request $request)
+    {
+        if ($request->wantsJson())
+        {
+            return response()->json(
+                Source::all()
+            );
+        }
+        return view('consequences',[
+            'consequences' => Consequence::all()
+        ]);
+    }
     
     public function create()
     {
@@ -41,6 +53,6 @@ class ConsequenceController extends Controller
         $consequence->name = $request->name;
         $consequence->description = $request->description;
         $consequence->save();
-        return redirect('/consequence');
+        return redirect('/consequences');
     }
 }
