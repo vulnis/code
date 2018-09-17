@@ -2,19 +2,19 @@
 
 namespace App\Library;
 
-use App\Risk\Probability;
-use App\Risk\Impact;
+use App\Probability;
+use App\Severity;
 
 class RiskCalculator {
 
-    public function getRiskScore($probability, $impact, $model)
+    public function getRiskScore($probability, $impact, $model = 1)
     {
         // Required from settings or calculated from tables:
         // Sum of impact
         // Sum of probability
         // Default score as fallback
         //get_table is a simple select *
-        $impacts = Impact::count();
+        $impacts = Severity::count();
         $probabilities = Probability::count();
         
         switch($model)

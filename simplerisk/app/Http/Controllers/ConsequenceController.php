@@ -35,6 +35,13 @@ class ConsequenceController extends Controller
         ]);
     }
     
+    public function show($consequence)
+    {
+        return view('consequence',[
+            'consequence' => Consequence::find($consequence)
+        ]);
+    }
+
     public function create()
     {
         return view('consequence',[

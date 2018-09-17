@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Library\RiskCalculator;
 
 class Sra extends Model
 {
@@ -22,5 +23,11 @@ class Sra extends Model
     public function probability()
     {
         return $this->belongsTo(Probability::class, 'probability_id', 'value');
+    }
+
+    public function getLevel()
+    {
+        $riskCalculator = new RiskCalculator();
+        return $riskCalculator->getRiskScore($this->probability->value, $this->severity->value);
     }
 }

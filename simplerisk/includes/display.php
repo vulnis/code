@@ -4778,7 +4778,7 @@ function report_likelihood_impact(){
 
         </style>
     ';
-    
+     
     $chart = new Highchart();
     $chart->includeExtraScripts();
     $chart->title->text = "";

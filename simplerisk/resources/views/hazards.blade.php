@@ -22,7 +22,7 @@
                 <tr>
                     
                     <td class="table-text text-left">
-                        <a href="{{ url('hazard/' . $hazard->id) }}">{{ $hazard->name }}</a>
+                        <a href="{{ url('hazards/' . $hazard->id) }}">{{ $hazard->name }}</a>
                     </td>
                     <td class="table-text">
                         {{ $hazard->created_at->toDateString() }}

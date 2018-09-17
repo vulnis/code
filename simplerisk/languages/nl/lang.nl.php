@@ -1050,10 +1050,11 @@ $lang = array(
     'Stage' => 'Operationele fase',
     'Cause' => 'Oorzaak',
     'Order' => 'Volgnummer',
-    'Consequence' => 'Gevolgen',
+    'Consequence' => 'Gevolg|Gevolgen',
     'Source' => 'Bron',
     'Probability'=>'Waarschijnlijkheid',
     'Severity' => 'Ernst',
+    'Score' => 'Score',
     '' => '',
 );
 

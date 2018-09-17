@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Library\NameValue;
 use Illuminate\Support\Facades\Auth;
-
+use Datatables;
 use App\Source;
 
 class SourceController extends Controller
@@ -51,6 +51,11 @@ class SourceController extends Controller
                 new NameValue(trans('messages.Cause'), 'Cause')
             ]
         ]);
+    }
+
+    public function anyData()
+    {
+        return Datatables::of(Source::query())->make(true);
     }
 
     public function store(Request $request)

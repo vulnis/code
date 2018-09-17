@@ -29,7 +29,7 @@
                     </select>
                 </div>
                 <fieldset class="form-group">
-                <legend>@lang('messages.Consequence')</legend>
+                <legend>@choice('messages.Consequence', 2)</legend>
                 @foreach ($consequences as $i => $consequence)
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" name="consequence[]" type="checkbox" id="cause-consequence{{ $consequence->id }}" value="{{ $consequence->id }}">

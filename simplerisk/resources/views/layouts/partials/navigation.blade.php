@@ -31,7 +31,7 @@
                         <a class="dropdown-item" href="{{ url('assessments/create') }}" role="button"><i class="fas fa-search fa-fw"></i> @lang('messages.Assessment')</a>
                         <a class="dropdown-item" href="{{ url('categories/create') }}" role="button"><i class="fas fa-list-alt fa-fw"></i> @lang('messages.Category')</a>
                         <a class="dropdown-item" href="{{ url('causes/create') }}" role="button"><i class="fas fa-lightbulb fa-fw"></i> @lang('messages.Cause')</a>
-                        <a class="dropdown-item" href="{{ url('consequences/create') }}" role="button"><i class="far fa-lightbulb fa-fw"></i> @lang('messages.Consequence')</a>
+                        <a class="dropdown-item" href="{{ url('consequences/create') }}" role="button"><i class="far fa-lightbulb fa-fw"></i> @choice('messages.Consequence', 1)</a>
                         <a class="dropdown-item" href="{{ url('stages/create') }}" role="button"><i class="fas fa-chalkboard-teacher fa-fw"></i> @lang('messages.Stage')</a>
                         <a class="dropdown-item" href="{{ url('sources/create') }}" role="button"><i class="fas fa-user-ninja fa-fw"></i> @lang('messages.Source')</a>
                     </div>

@@ -31,7 +31,7 @@ class RiskRepository
             ->select(DB::raw('count(*) as risks, CASE WHEN status = "Closed" THEN "'. trans('messages.Closed') . 
                 '" ELSE "' . trans('messages.Open') . '" END as name,' . 
                 ' CASE WHEN status = "Closed" THEN "#00ff00" ELSE "#ff0000" END as color'))
-            ->groupBy('name')
+            ->groupBy('name')->groupBy('status')
             ->get();
     }
 
@@ -46,7 +46,7 @@ class RiskRepository
             ->select(DB::raw('count(*) as risks, CASE WHEN mitigation_id > 0 THEN "'. trans('messages.Mitigated') . 
                 '" ELSE "' . trans('messages.Unmitigated') . '" END as name,' . 
                 ' CASE WHEN mitigation_id > 0 THEN "#00ff00" ELSE "#ff0000" END as color'))
-            ->groupBy('name')
+            ->groupBy('name')->groupBy('mitigation_id')
             ->get();
     }
 
@@ -61,7 +61,7 @@ class RiskRepository
             ->select(DB::raw('count(*) as risks, CASE WHEN mgmt_review > 0 THEN "'. trans('messages.Reviewed') . 
                 '" ELSE "' . trans('messages.Unreviewed') . '" END as name,' . 
                 ' CASE WHEN mgmt_review > 0 THEN "#00ff00" ELSE "#ff0000" END as color'))
-            ->groupBy('name')
+            ->groupBy('name')->groupBy('mgmt_review')
             ->get();
     }
 

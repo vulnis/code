@@ -8,6 +8,7 @@
         <thead>
             <th class="text-left">@lang('messages.Description')</th>
             <th>@lang('messages.Category')</th>
+            <th>@choice('messages.Consequence', 2)</th>
         </thead>
         <tbody>
             @foreach ($causes as $cause)
@@ -18,6 +19,11 @@
                     </td>
                     <td>
                         {{ $cause->category->name }}
+                    </td>
+                    <td>
+                        @foreach ($cause->consequences as $consequence)
+                        <a href="{{ url('consequences/' . $consequence->id) }}" class="badge badge-light p-2">{{$consequence->name}}</a>&nbsp;
+                        @endforeach
                     </td>
                 </tr>
             @endforeach
