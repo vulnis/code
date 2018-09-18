@@ -88,6 +88,14 @@
                         @endforeach
                     </select>
                 </div>
+                @if($assessment)
+                    <div style="border-right: 4px solid @if($assessment->mitigations->count() == 0) #ff0000 @else #00ff00 @endif">
+                        <span class="p-2"  title="{{ $assessment->getLevelAttribute() }}" style="background-color:{{$assessment->getColorAttribute()}};">{{ $assessment->getScoreAttribute() }}</span>
+                    </div>
+                    @foreach ($assessment->mitigations as $mitigation)
+                        <div>{{$mitigation->submission_date}} - {{$mitigation->current_solution}}</div>
+                    @endforeach
+                @endif
             </div>
         </div>
     </div>

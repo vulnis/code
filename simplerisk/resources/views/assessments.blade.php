@@ -23,7 +23,7 @@
             @foreach ($assessments as $assessment)
                 <tr>
                     
-                    <td class="table-text text-left" title="{{ $assessment->getLevelAttribute() }}" style="border-left: 4px solid {{$assessment->getColorAttribute()}};">
+                    <td class="table-text text-left" style="border-left: 4px solid {{$assessment->getColorAttribute()}};">
                         <a href="{{ url('assessments/' . $assessment->id) }}">{{ $assessment->risk->subject }}</a>
                     </td>
                     <td>{{ $assessment->sub_id }}</td>
@@ -31,9 +31,10 @@
                     {{ $assessment->cause->description }}
                     </td>
                     <td>{{ $assessment->probability->name }}</td>
-                    <td>{{ $assessment->severity->name }} {{$assessment->mitigations->count()}}</td>
-                    <td title="@if ($assessment->mitigations->count() == 0)@lang('messages.None')@else{{ $assessment->mitigations->count() }} @choice('messages.Mitigation',$assessment->mitigations->count())@endif" style="border-right: 4px solid @if($assessment->mitigations->count() == 0) #ff0000 @else #00ff00 @endif">
-                        <span class="p-2" style="background-color:{{$assessment->getColorAttribute()}};">{{ $assessment->getScoreAttribute() }}</span></td>
+                    <td>{{ $assessment->severity->name }}</td>
+                    <td style="border-right: 4px solid @if($assessment->mitigations->count() == 0) #ff0000 @else #00ff00 @endif">
+                        <span class="p-2"  title="{{ $assessment->getLevelAttribute() }}" style="background-color:{{$assessment->getColorAttribute()}};">{{ $assessment->getScoreAttribute() }}</span>
+                    </td>
                 </tr>
                 
             @endforeach
