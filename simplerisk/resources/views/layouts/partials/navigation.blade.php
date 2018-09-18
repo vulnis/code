@@ -1,6 +1,9 @@
 <header><nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <button id="sidebarCollapse" class="navbar-toggler d-block" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
     <!-- Branding Image -->
-    <a class="navbar-brand" href="{{ url('/') }}">
+    <a class="navbar-brand pl-3" href="{{ url('/') }}">
         <img src='/images/logo@2x.png' alt='SimpleRisk Logo' />
     </a>
     <!-- Collapsed Hamburger -->
@@ -14,21 +17,6 @@
                 <li {!! (Request::is('*risks*') ? 'class="nav-item active"' : 'class="nav-item"') !!}><a class="nav-link" href="{{ url('/risks') }}">@choice('messages.Risk',2)</a></li>
                 <li {!! (Request::is('*causes*') ? 'class="nav-item active"' : 'class="nav-item"') !!}><a class="nav-link" href="{{ url('/causes') }}">@choice('messages.Cause',2)</a></li>
                 <li {!! (Request::is('*assessments*') ? 'class="nav-item active"' : 'class="nav-item"') !!}><a class="nav-link" href="{{ url('/assessments') }}">@choice('messages.Assessment',2)</a></li>
-                <li class="nav-item dropdown">
-                    <a href="#" id="addDropdown" class="nav-link dropdown-toggle bg-primary rounded" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                    <span class=""><i class="fa fa-plus fa-fw text-white" aria-hidden="true"></i></span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="addDropdown">
-                        <a class="dropdown-item" href="{{ url('risks/create') }}" role="button"><i class="fas fa-fire fa-fw"></i> @choice('messages.Risk',1)</a>
-                        <a class="dropdown-item" href="{{ url('assessments/create') }}" role="button"><i class="fas fa-search fa-fw"></i> @choice('messages.Assessment',1)</a>
-                        <a class="dropdown-item" href="{{ url('categories/create') }}" role="button"><i class="fas fa-list-alt fa-fw"></i> @lang('messages.Category')</a>
-                        <a class="dropdown-item" href="{{ url('causes/create') }}" role="button"><i class="fas fa-lightbulb fa-fw"></i> @choice('messages.Cause',1)</a>
-                        <a class="dropdown-item" href="{{ url('consequences/create') }}" role="button"><i class="far fa-lightbulb fa-fw"></i> @choice('messages.Consequence', 1)</a>
-                        <a class="dropdown-item" href="{{ url('stages/create') }}" role="button"><i class="fas fa-chalkboard-teacher fa-fw"></i> @lang('messages.Stage')</a>
-                        <a class="dropdown-item" href="{{ url('sources/create') }}" role="button"><i class="fas fa-user-ninja fa-fw"></i> @lang('messages.Source')</a>
-                    </div>
-                </li>
-                
             @endif
         </ul>
         <!-- Right Side Of Navbar -->

@@ -20,3 +20,9 @@ Vue.component('table-component', require('./components/TableComponent.vue'));
 const app = new Vue({
     el: '#app'
 });
+
+$(document).ready(function () {
+    $('#sidebarCollapse').on('click', function () {
+        $('#sidebar').toggleClass('active');
+    });
+});

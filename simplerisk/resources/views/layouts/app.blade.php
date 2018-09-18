@@ -17,8 +17,10 @@
     <link href="{{ mix('css/simplerisk.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app">
-        @include('layouts.partials.navigation')
+    @include('layouts.partials.navigation')
+    <div class="wrapper">
+    @include('layouts.partials.sidebar')
+    <div id="app" class="content">
         <main class="py-4">
             <div class="container">
                 <div class="row justify-content-center">
@@ -28,7 +30,9 @@
                 </div>
             </div>
         </main>
+        @include('layouts.partials.footer')
     </div>
-    @include('layouts.partials.footer')
+    
+</div>
 </body>
 </html>
