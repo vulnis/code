@@ -3,25 +3,21 @@
 @append
 
 @section('content')
-<form method="POST" action="{{ url('hazards') }}" class="form">
+<form method="POST" action="{{ url('risks') }}" class="form">
     {{ csrf_field() }}
     <div class="row">
         <div class="col-sm-12 col-md-4">
             <div class="simple">
                 <div class="form-group">
-                    <label for="hazard-name">@lang('messages.Name')</label>
-                    <input type="text" name="name" id="hazard-name" class="form-control" @if($hazard) value="{{$hazard->name}}" disabled @endif>
+                    <label for="risk-subject">@lang('messages.Subject')</label>
+                    <input type="text" name="subject" id="risk-subject" class="form-control" @if($risk) value="{{$risk->subject}}" disabled @endif>
                 </div>
                 <div class="form-group">
-                    <label for="hazard-description">@lang('messages.Description')</label>
-                    <textarea name="description" class="form-control" id="hazard-description" rows="3" @if($hazard) disabled>{{$hazard->description}}  @else > @endif</textarea>
-                </div>
-                <div class="form-group">
-                    <label for="hazard-category">@lang('messages.Category')</label>
-                    <select class="form-control" id="hazard-category" name="category" @if($hazard) disabled @endif>
+                    <label for="risk-category">@lang('messages.Category')</label>
+                    <select class="form-control" id="risk-category" name="category" @if($risk) disabled @endif>
                         @foreach ($categories as $i => $category)
-                            @if($hazard)
-                                @if($hazard->category === $category->value) 
+                            @if($risk)
+                                @if($risk->category === $category->value) 
                                 <option selected value="{{ $category->value}}">{{ $category->name }}</option>
                                 @else
                                 <option value="{{ $category->value}}">{{ $category->name }}</option>
@@ -33,11 +29,11 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="hazard-source">@lang('messages.Source')</label>
-                    <select class="form-control" id="hazard-source" name="source" @if($hazard) disabled @endif>
+                    <label for="risk-source">@lang('messages.Source')</label>
+                    <select class="form-control" id="risk-source" name="source" @if($risk) disabled @endif>
                         @foreach ($sources as $i => $source)
-                            @if($hazard)
-                                @if($hazard->source === $source->value) 
+                            @if($risk)
+                                @if($risk->source === $source->value) 
                                 <option selected value="{{ $source->value}}">{{ $source->name }}</option>
                                 @else
                                 <option value="{{ $source->value}}">{{ $source->name }}</option>
@@ -49,11 +45,11 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="hazard-stage">@lang('messages.Stage')</label>
-                    <select class="form-control" id="hazard-category" name="stage" @if($hazard) disabled @endif>
+                    <label for="risk-stage">@lang('messages.Stage')</label>
+                    <select class="form-control" id="risk-category" name="stage" @if($risk) disabled @endif>
                         @foreach ($stages as $i => $stage)
-                            @if($hazard)
-                                @if($hazard->stage === $stage->value) 
+                            @if($risk)
+                                @if($risk->stage === $stage->value) 
                                 <option selected value="{{ $stage->id}}">{{ $stage->name }}</option>
                                 @else
                                 <option value="{{ $stage->id}}">{{ $stage->name }}</option>
@@ -68,8 +64,8 @@
         </div>
     </div>
     <div class="row">
-        @if(!$hazard)
-        <button type="submit" name="submit" class="btn btn-primary pull-right save-hazard-form">@lang('messages.Submit')</button>
+        @if(!$risk)
+        <button type="submit" name="submit" class="btn btn-primary pull-right save-risk-form">@lang('messages.Submit')</button>
         @endif
     </div>
 </form>

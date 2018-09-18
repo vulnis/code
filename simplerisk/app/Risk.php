@@ -7,10 +7,23 @@ use Illuminate\Database\Eloquent\Model;
 class Risk extends Model
 {
     protected $table = 'risks';
+    protected $hidden = ['category','source'];
 
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category','value');
+    }
+    public function source()
+    {
+        return $this->belongsTo(Source::class, 'source','value');
+    }
+    public function stage()
+    {
+        return $this->belongsTo(Risk\Stage::class);
+    }
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'submitted_by');
     }
 
     public function score()
@@ -24,5 +37,4 @@ class Risk extends Model
     }
     const CREATED_AT = 'submission_date';
     const UPDATED_AT = 'last_update';
-
 }

@@ -5,8 +5,8 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./bootstrap');
-
+import './bootstrap';
+import 'chart.js'
 window.Vue = require('vue');
 
 /**
@@ -15,8 +15,8 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
-
+//Vue.component('chart-component', require('./components/ChartComponent.vue'));
+Vue.component('table-component', require('./components/TableComponent.vue'));
 const app = new Vue({
     el: '#app'
 });

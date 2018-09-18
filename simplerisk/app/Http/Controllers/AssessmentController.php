@@ -6,8 +6,8 @@ use App\Http\Requests;
 use Illuminate\Http\Request;
 
 use App\Assessment\Question;
-use App\Hazard;
-use App\Sra;
+use App\Risk;
+use App\Assessment;
 use App\Cause;
 use App\Probability;
 use App\Severity;
@@ -34,17 +34,32 @@ class AssessmentController extends Controller
         return $menu;
     }
 
-    public function index()
+    public function index(Request $request)
     {
+        if ($request->wantsJson())
+        {
+            return response()->json(
+                [
+                'columns' => [
+                    ['field' => 'risk.subject', 'label' => trans_choice('messages.Risk',1)],
+                    ['field' => 'sub_id'],
+                    ['field' => 'cause.description', 'label' => trans_choice('messages.Cause',1)],
+                    ['field' => 'probability.name', 'label' => trans('messages.Probability')],
+                    ['field' => 'severity.name', 'label' => trans('messages.Severity')],
+                    ['field' => 'level', 'label' => trans('messages.Score'), 'type' => 'number'],
+                ],
+                'rows' => Assessment::with(['severity', 'probability', 'cause', 'risk'])->get()
+                ]
+            );
+        }
         return view('assessments', [
-            'assessments' => Sra::all()
+            'assessments' => Assessment::all()
             ]
         );
     }
 
     public function create()
     {
-        // Hazards
         // Root causes
         // Probability
         // Severity
@@ -52,7 +67,7 @@ class AssessmentController extends Controller
 
         return view('assessment',[
             'assessment' => null,
-            'hazards' => Hazard::all(),
+            'risks' => Risk::all(),
             'causes' => Cause::all(),
             'probabilities' => Probability::all(),
             'severities' => Severity::all()
@@ -60,12 +75,12 @@ class AssessmentController extends Controller
     }
 
     public function show($id){
-        $assessment = Sra::find($id);
+        $assessment = Assessment::find($id);
         if($assessment)
         {
             return view('assessment',[
                 'assessment' => $assessment,
-                'hazards' => Hazard::all(),
+                'risks' => Risk::all(),
                 'causes' => Cause::all(),
                 'probabilities' => Probability::all(),
                 'severities' => Severity::all()
@@ -74,9 +89,9 @@ class AssessmentController extends Controller
     }
     public function store(Request $request)
     {
-        $assessment = new Sra;
-        $hazard = Hazard::find($request->hazard);
-        $assessment->hazard()->associate($hazard);
+        $assessment = new Assessment;
+        $risk = Risk::find($request->risk);
+        $assessment->risk()->associate($risk);
         $cause = Cause::find($request->cause);
         $assessment->cause()->associate($cause);
         $severity = Severity::find($request->severity);

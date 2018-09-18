@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Category;
 use App\Consequence;
 use App\Cause;
-
+use App\Source;
 class CauseController extends Controller
 {
     /**

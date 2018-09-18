@@ -156,7 +156,13 @@ class Level extends Model
 
     public function getColor()
     {
-        $val = $this->colours[$this->color];
-        return $val ? $val : $this->color;
+        if(substr( $this->color, 0, 1 ) === "#")
+        {
+            return $this->color;
+        } else {
+            $val = $this->colours[$this->color];
+            return $val ? $val : $this->color;
+        }
+        
     }
 }

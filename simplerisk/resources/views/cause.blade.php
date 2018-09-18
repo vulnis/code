@@ -39,15 +39,17 @@
                 </div>
             </div>
         </div>
-    </div>
+
     <div class="row">
-        <!--<input type='button' name='cvssSubmit' id='cvssSubmit' value='Score Using CVSS' />
-        <input type='button' name='dreadSubmit' id='dreadSubmit' value='Score Using DREAD' onclick='javascript: popupdread();' />
-        <input type='button' name='owaspSubmit' id='owaspSubmit' value='Score Using OWASP' onclick='javascript: popupowasp();' />-->
-        @if(!$cause)
-        <button type="submit" name="submit" class="btn btn-primary pull-right save-cause-form">@lang('messages.Submit')</button>
-        @endif
+        <div class="col-sm-12 col-md-4">
+            <!--<input type='button' name='cvssSubmit' id='cvssSubmit' value='Score Using CVSS' />
+            <input type='button' name='dreadSubmit' id='dreadSubmit' value='Score Using DREAD' onclick='javascript: popupdread();' />
+            <input type='button' name='owaspSubmit' id='owaspSubmit' value='Score Using OWASP' onclick='javascript: popupowasp();' />-->
+            @if(!$cause)
+            <button type="submit" name="submit" class="btn btn-primary pull-right save-cause-form">@lang('messages.Submit')</button>
+            @endif
         <!--<input class="btn pull-right" value="Reset" type="reset">-->
+        </div>
     </div>
 </form>
 @endsection

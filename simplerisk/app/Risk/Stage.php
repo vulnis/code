@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Hazard;
+namespace App\Risk;
 
 use Illuminate\Database\Eloquent\Model;
 
 class Stage extends Model
 {
     protected $table = 'stages';
-    public function hazard()
+    public function risk()
     {
-        return $this->belongsTo(Hazard::class);
+        return $this->belongsTo(Risk::class);
     }
 }

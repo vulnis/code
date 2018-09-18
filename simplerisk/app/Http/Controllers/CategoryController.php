@@ -34,9 +34,8 @@ class CategoryController extends Controller
         return view('categories',[
             'categories' => Category::all(),
             'types' => [
-                new NameValue(trans('messages.Risk'), 'Risk'),
-                new NameValue(trans('messages.Hazard'), 'Hazard'),
-                new NameValue(trans('messages.Cause'), 'Cause')
+                new NameValue(trans_choice('messages.Risk',1), 'Risk'),
+                new NameValue(trans_choice('messages.Cause',1), 'Cause')
             ]
         ]);
     }
@@ -46,9 +45,8 @@ class CategoryController extends Controller
         return view('category',[
             'category' => null,
             'types' => [
-                new NameValue(trans('messages.Risk'), 'Risk'),
-                new NameValue(trans('messages.Hazard'), 'Hazard'),
-                new NameValue(trans('messages.Cause'), 'Cause')
+                new NameValue(trans_choice('messages.Risk',1), 'Risk'),
+                new NameValue(trans_choice('messages.Cause',1), 'Cause')
             ]
         ]);
     }

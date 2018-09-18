@@ -20,8 +20,9 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('/assessments', 'AssessmentController');
-Route::resource('/hazards', 'HazardController');
+Route::resource('/risks', 'RiskController');
 Route::resource('/stages','StageController');
+Route::resource('/frameworks','FrameworkController');
 Route::resource('/categories', 'CategoryController');
 Route::resource('/causes', 'CauseController');
 Route::resource('/consequences', 'ConsequenceController');

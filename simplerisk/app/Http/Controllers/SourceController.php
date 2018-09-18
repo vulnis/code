@@ -28,9 +28,8 @@ class SourceController extends Controller
         return view('source',[
             'source' => null,
             'types' => [
-                new NameValue(trans('messages.Risk'), 'Risk'),
-                new NameValue(trans('messages.Hazard'), 'Hazard'),
-                new NameValue(trans('messages.Cause'), 'Cause')
+                new NameValue(trans_choice('messages.Risk',1), 'Risk'),
+                new NameValue(trans_choice('messages.Cause',1), 'Cause')
             ]
         ]);
     }
@@ -46,9 +45,8 @@ class SourceController extends Controller
         return view('sources',[
             'sources' => Source::all(),
             'types' => [
-                new NameValue(trans('messages.Risk'), 'Risk'),
-                new NameValue(trans('messages.Hazard'), 'Hazard'),
-                new NameValue(trans('messages.Cause'), 'Cause')
+                new NameValue(trans_choice('messages.Risk',1), 'Risk'),
+                new NameValue(trans_choice('messages.Cause',1), 'Cause')
             ]
         ]);
     }

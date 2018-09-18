@@ -22,7 +22,7 @@
                     </td>
                     <td>
                         @foreach ($cause->consequences as $consequence)
-                        <a href="{{ url('consequences/' . $consequence->id) }}" class="badge badge-light p-2">{{$consequence->name}}</a>&nbsp;
+                        <a href="{{ url('consequences/' . $consequence->id) }}" class="badge badge-primary p-2">{{$consequence->name}}</a>&nbsp;
                         @endforeach
                     </td>
                 </tr>

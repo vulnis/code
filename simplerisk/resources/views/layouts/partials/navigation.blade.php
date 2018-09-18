@@ -11,26 +11,18 @@
         <!-- Left Side Of Navbar -->
         <ul class="navbar-nav mr-auto">
             @if (Auth::check())
-                <li {!! (Request::is('*governance/*') ? 'class="nav-item active"' : 'class="nav-item"') !!}><a class="nav-link" href="{{ url('/governance/index.php') }}">@lang('messages.Governance')</a></li>
-                <li {!! (Request::is('*management/*') ? 'class="nav-item active"' : 'class="nav-item"') !!}><a class="nav-link" href="{{ url('/management/index.php') }}">@lang('messages.RiskManagement')</a></li>
-                <li {!! (Request::is('*compliance/*') ? 'class="nav-item active"' : 'class="nav-item"') !!}><a class="nav-link" href="{{ url('/compliance/index.php') }}">@lang('messages.Compliance')</a></li>
-                <li {!! (Request::is('*assets/*') ? 'class="nav-item active"' : 'class="nav-item"') !!}><a class="nav-link" href="{{ url('/assets/index.php') }}">@lang('messages.AssetManagement')</a></li>
-                <li {!! (Request::is('*assessments/*') ? 'class="nav-item active"' : 'class="nav-item"') !!}><a class="nav-link" href="{{ url('/assessments/index.php') }}">@lang('messages.RiskAssessment')</a></li>
-                <li {!! (Request::is('*reports/*') ? 'class="nav-item active"' : 'class="nav-item"') !!}>
-                    <a class="nav-link" href="{{ url('/reports/index.php') }}">
-                        <!--<i class="fa fa-tachometer" title="@lang('messages.Reporting')" aria-hidden="true"></i>&nbsp;-->
-                        <span>@lang('messages.Reporting')</span>
-                    </a>
-                </li>
+                <li {!! (Request::is('*risks*') ? 'class="nav-item active"' : 'class="nav-item"') !!}><a class="nav-link" href="{{ url('/risks') }}">@choice('messages.Risk',2)</a></li>
+                <li {!! (Request::is('*causes*') ? 'class="nav-item active"' : 'class="nav-item"') !!}><a class="nav-link" href="{{ url('/causes') }}">@choice('messages.Cause',2)</a></li>
+                <li {!! (Request::is('*assessments*') ? 'class="nav-item active"' : 'class="nav-item"') !!}><a class="nav-link" href="{{ url('/assessments') }}">@choice('messages.Assessment',2)</a></li>
                 <li class="nav-item dropdown">
                     <a href="#" id="addDropdown" class="nav-link dropdown-toggle bg-primary rounded" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                     <span class=""><i class="fa fa-plus fa-fw text-white" aria-hidden="true"></i></span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="addDropdown">
-                        <a class="dropdown-item" href="{{ url('hazards/create') }}" role="button"><i class="fas fa-fire fa-fw"></i> @lang('messages.Hazard')</a>
-                        <a class="dropdown-item" href="{{ url('assessments/create') }}" role="button"><i class="fas fa-search fa-fw"></i> @lang('messages.Assessment')</a>
+                        <a class="dropdown-item" href="{{ url('risks/create') }}" role="button"><i class="fas fa-fire fa-fw"></i> @choice('messages.Risk',1)</a>
+                        <a class="dropdown-item" href="{{ url('assessments/create') }}" role="button"><i class="fas fa-search fa-fw"></i> @choice('messages.Assessment',1)</a>
                         <a class="dropdown-item" href="{{ url('categories/create') }}" role="button"><i class="fas fa-list-alt fa-fw"></i> @lang('messages.Category')</a>
-                        <a class="dropdown-item" href="{{ url('causes/create') }}" role="button"><i class="fas fa-lightbulb fa-fw"></i> @lang('messages.Cause')</a>
+                        <a class="dropdown-item" href="{{ url('causes/create') }}" role="button"><i class="fas fa-lightbulb fa-fw"></i> @choice('messages.Cause',1)</a>
                         <a class="dropdown-item" href="{{ url('consequences/create') }}" role="button"><i class="far fa-lightbulb fa-fw"></i> @choice('messages.Consequence', 1)</a>
                         <a class="dropdown-item" href="{{ url('stages/create') }}" role="button"><i class="fas fa-chalkboard-teacher fa-fw"></i> @lang('messages.Stage')</a>
                         <a class="dropdown-item" href="{{ url('sources/create') }}" role="button"><i class="fas fa-user-ninja fa-fw"></i> @lang('messages.Source')</a>
@@ -42,7 +34,7 @@
         <!-- Right Side Of Navbar -->
         <ul class="navbar-nav ml-auto">
             <!-- Authentication Links -->
-            @if (Auth::guest())
+            @guest
                 <li {!! (Request::is('*login') ? 'class="nav-item active"' : 'class="nav-item"') !!}><a class="nav-link" href="{{ url('/login') }}">Login</a></li>
                 <li {!! (Request::is('*register') ? 'class="nav-item active"' : 'class="nav-item"') !!}><a class="nav-link" href="{{ url('/register') }}">Register</a></li>
             @else
@@ -57,7 +49,7 @@
                         document.getElementById('logout-form').submit();"><i class="fas fa-btn fa-sign-out-alt fa-fw"></i> @lang('messages.Logout')</a>
                     </div>
                 </li>
-            @endif
+            @endguest
         </ul>
     </div>
     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

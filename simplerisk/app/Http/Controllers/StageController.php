@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Support\Facades\Auth;
 
-use App\Hazard\Stage;
+use App\Risk\Stage;
 
 class StageController extends Controller
 {

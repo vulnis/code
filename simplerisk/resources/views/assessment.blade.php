@@ -9,27 +9,27 @@
         <div class="col-sm-12 col-md-4">
             <div class="simple">
                 <div class="form-group">
-                    <label for="assessment-hazard">@lang('messages.Hazard')</label>
-                    <select class="form-control" id="assessment-hazard" name="hazard" @if($assessment) disabled @endif>
-                        @foreach ($hazards as $i => $hazard)
-                            @if($hazard)
+                    <label for="assessment-risk">@choice('messages.Risk',1)</label>
+                    <select class="form-control" id="assessment-risk" name="risk" @if($assessment) disabled @endif>
+                        @foreach ($risks as $i => $risk)
+                            @if($risk)
                                 @if($assessment)
-                                    @if($assessment->hazard_id === $hazard->id) 
-                                    <option selected value="{{ $hazard->id}}">{{ $hazard->name }}</option>
+                                    @if($assessment->risk_id === $risk->id) 
+                                    <option selected value="{{ $risk->id}}">{{ $risk->subject }}</option>
                                     @else
-                                    <option value="{{ $hazard->id}}">{{ $hazard->name }}</option>
+                                    <option value="{{ $risk->id}}">{{ $risk->subject }}</option>
                                     @endif
                                 @else
-                                <option @if ($i = 0) selected @endif value="{{ $hazard->id}}">{{ $hazard->name }}</option>
+                                <option @if ($i = 0) selected @endif value="{{ $risk->id}}">{{ $risk->subject }}</option>
                                 @endif
                             @else
-                                <option @if ($i = 0) selected @endif value="{{ $hazard->id}}">{{ $hazard->name }}</option>
+                                <option @if ($i = 0) selected @endif value="{{ $risk->id}}">{{ $risk->subject }}</option>
                             @endif
                         @endforeach
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="assessment-cause">@lang('messages.Cause')</label>
+                    <label for="assessment-cause">@choice('messages.Cause',1)</label>
                     <select class="form-control" id="assessment-cause" name="cause" @if($assessment) disabled @endif>
                         @foreach ($causes as $i => $cause)
                             @if($cause)
@@ -93,7 +93,7 @@
     </div>
     <div class="row">
         @if(!$assessment)
-        <button type="submit" name="submit" class="btn btn-primary pull-right save-hazard-form">@lang('messages.Submit')</button>
+        <button type="submit" name="submit" class="btn btn-primary pull-right save-risk-form">@lang('messages.Submit')</button>
         @endif
     </div>
 </form>

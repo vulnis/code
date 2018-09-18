@@ -13,6 +13,11 @@ class Mitigation extends Model
         return $this->belongsTo(Risk::class, 'risk_id');
     }
 
+    public function assessment()
+    {
+        return $this->belongsTo(Assessment::class, 'assessment_id');
+    }
+
     const CREATED_AT = 'submission_date';
     const UPDATED_AT = 'last_update';
 

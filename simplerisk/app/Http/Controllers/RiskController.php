@@ -10,12 +10,8 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Risk;
 use App\Category;
-use App\Risk\Impact;
-use App\Risk\Score;
 use App\Source;
-use App\Probability;
-
-use App\Library\RiskCalculator;
+use App\Risk\Stage;
 
 class RiskController extends Controller
 {
@@ -29,71 +25,61 @@ class RiskController extends Controller
         $this->middleware('auth');
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $risks = Risk::orderBy('submission_date', 'asc')->get();
+        if ($request->wantsJson())
+        {
+            return response()->json(
+                Risk::all()
+            );
+        }
         return view('risks',[
-            'prefix' => 'risks',
-            'risks' => $risks
+            'risks' => Risk::all()
         ]);
     }
 
-    public function new()
-    {
-        $categories = Category::where('type', 'Risk')->get();
-        $impacts = Impact::all();
-        $probabilities = Probability::all();
-        $sources = Source::where('type', 'Risk')->get();
-
-        return view('risk',[
-            'risk' => null,
-            'categories' => $categories,
-            'impacts' => $impacts,
-            'sources' => $sources,
-            'probabilities' => $probabilities,
-        ]);
-    }
-    
-    public function detail($id)
+    public function show($id)
     {
         $risk = Risk::find($id);
         if($risk)
         {
             return view('risk',[
                 'risk' => $risk,
-                'categories' => Category::where('type', 'Risk')->get(),
-                'impacts' => Impact::all(),
-                'sources' => Source::where('type', 'Risk')->get(),
-                'probabilities' => Probability::all(),
+                'categories' => Category::where('type', 'risk')->get(),
+                'stages' => Stage::all(),
+                'sources' => Source::where('type','Risk')->get()
             ]);
         }
     }
 
+    public function create()
+    {
+        return view('risk',[
+            'risk' => null,
+            'categories' => Category::where('type', 'Risk')->get(),
+            'stages' => Stage::all(),
+            'sources' => Source::where('type', 'Risk')->get()
+        ]);
+    }
+    
     public function store(Request $request)
     {
         // Validate the request...
+
         $this->validate($request, [
-            'subject' => 'required|max:300',
+            'name' => 'required|max:200',
         ]);
         $risk = new Risk;
-        
-        $risk->subject = $request->subject;
-        $risk->category = $request->category;
-        $risk->source = $request->source;
-        $risk->status = 'New';
-        $risk->notes = $request->notes;
-        $risk->submitted_by = Auth::user()->value;
+        $risk->name = $request->name;
+        $risk->description = $request->description;
+        $category = Category::find($request->category);
+        $risk->category()->associate($category);
+        $stage = Stage::find($request->stage);
+        $risk->stage()->associate($stage);
+        $source = Source::find($request->source);
+        $risk->source()->associate($source);
         $risk->save();
 
-        // Calculate the score based on the method
-        $riskCalculator = new RiskCalculator();
-        $score = new Score;
-        $score->id = $risk->id;
-        $score->scoring_method = $request->method;
-        $score->calculated_risk = $riskCalculator->getRiskScore($request->likelihood, $request->impact, $request->method);
-        $score->ClASSIC_likelihood = $request->likelihood;
-        $score->ClASSIC_impact = $request->impact;
-        $score->save();
-        return redirect('/management/index.php');
+        return redirect('/risks');
     }
 }
