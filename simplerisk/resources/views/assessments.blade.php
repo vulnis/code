@@ -19,6 +19,7 @@
                 <th>@lang('messages.Severity')</th>
                 <th>@lang('messages.Score')</th>
                 <th></th>
+                <th></th>
             </tr>
         </thead>
 
@@ -44,6 +45,7 @@
                     @else
                     <td><a class="collapse-switch collapsed" data-toggle="collapse" href="#collapseAction{{$item->id}}" role="button" aria-expanded="false" aria-controls="collapseAction{{ $item->id}}"></a></td>
                     @endif
+                    <td><a href="#"><i data-id="{{ $item->id}}" class="fas fa-trash-alt fa-fw"></i></a></td>
                     
                 </tr>
                 

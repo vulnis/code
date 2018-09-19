@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Library\NameValue;
 use Illuminate\Support\Facades\Auth;
 use App\Source;
-
+use App\Risk;
 class SourceController extends Controller
 {
     public function __construct()
@@ -56,5 +56,26 @@ class SourceController extends Controller
         $item->name = $request->name;
         $item->save();
         return redirect('sources');
+    }
+
+    public function destroy(Request $request, $id)
+    {
+        if($id)
+        {
+            if ($request->wantsJson())
+            {
+                //Since we cannot rely on relations; check to see if a category can be deleted.
+                if(Risk::where('source', $id)->count() > 0)
+                {
+                    return response()->json(['has' => 'risk'], 400);
+                }
+                else
+                {
+                    Source::destroy($id);
+                    return response()->json(['deleted' => $id]);
+                }
+            }
+        }
+        return redirect($this->route);
     }
 }

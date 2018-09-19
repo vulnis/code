@@ -8,7 +8,8 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Support\Facades\Auth;
 
-use App\Risk\Stage;
+use App\Stage;
+use App\Risk;
 
 class StageController extends Controller
 {
@@ -56,4 +57,24 @@ class StageController extends Controller
         return redirect($this->route);
     }
 
+    public function destroy(Request $request, $id)
+    {
+        if($id)
+        {
+            if ($request->wantsJson())
+            {
+                //Since we cannot rely on relations; check to see if a cause can be deleted.
+                if(Stage::find($id)->risks()->count() > 0)
+                {
+                    return response()->json(['has' => 'risks'], 400);
+                }
+                else
+                {
+                    Stage::destroy($id);
+                    return response()->json(['deleted' => $id]);
+                }
+            }
+        }
+        return redirect($this->route);
+    }
 }

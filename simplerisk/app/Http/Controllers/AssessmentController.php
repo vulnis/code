@@ -11,6 +11,7 @@ use App\Assessment;
 use App\Cause;
 use App\Probability;
 use App\Severity;
+use App\Mitigation;
 class AssessmentController extends Controller
 {
     protected $route = 'assessments';
@@ -72,6 +73,27 @@ class AssessmentController extends Controller
         $probability = Probability::find($request->probability);
         $item->probability()->associate($probability);
         $item->save();
+        return redirect($this->route);
+    }
+
+    public function destroy(Request $request, $id)
+    {
+        if($id)
+        {
+            if ($request->wantsJson())
+            {
+                //Since we cannot rely on relations; check to see if a risk can be deleted.
+                if(Mitigation::where('assessment_id', $id)->count() > 0)
+                {
+                    return response()->json(['has' => 'mitigations'], 400);
+                }
+                else
+                {
+                    Assessment::destroy($id);
+                    return response()->json(['deleted' => $id]);
+                }
+            }
+        }
         return redirect($this->route);
     }
 

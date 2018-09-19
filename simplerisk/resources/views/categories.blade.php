@@ -13,6 +13,7 @@
             <thead>
                 <th class="text-left">@lang('messages.Name')</th>
                 <th>@lang('messages.Type')</th>
+                <th></th>
             </thead>
 
             <!-- Table Body -->
@@ -24,8 +25,9 @@
                             <a href="{{ url('categories/' . $item->value) }}">{{ $item->name }}</a>
                         </td>
                         <td>
-                            @choice('messages.' . $item->type,1)
+                            @choice('messages.' . $item->type, 1)
                         </td>
+                        <td><a href="#"><i data-id="{{ $item->value}}" class="fas fa-trash-alt fa-fw"></i></a></td>
                     </tr>
                 @endforeach
             </tbody>
@@ -33,7 +35,7 @@
         @endif
         </div>
         <div class="tab-pane" id="page-new-tab" role="tabpanel" aria-labelledby="new-tab">
-        <form method="POST" action="{{ url('categories') }}" class="form">
+        <form method="POST" action="{{ url('categories') }}" onsubmit="return false;" class="form">
     {{ csrf_field() }}
     <div class="row">
         <div class="col-sm-12 col-md-4">

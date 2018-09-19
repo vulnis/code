@@ -11,6 +11,7 @@
         <thead>
             <th class="text-left">@lang('messages.Name')</th>
             <th>@lang('messages.Description')</th>
+            <th></th>
         </thead>
         <tbody>
             @foreach ($stages as $item)
@@ -22,6 +23,7 @@
                     <td>
                         {{ $item->description }}
                     </td>
+                    <td><a href="#"><i data-id="{{ $item->id}}" class="fas fa-trash-alt fa-fw"></i></a></td>
                 </tr>
             @endforeach
         </tbody>

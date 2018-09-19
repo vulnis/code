@@ -12,6 +12,7 @@ use App\Consequence;
 
 class ConsequenceController extends Controller
 {
+    protected $route = 'consequences';
     public function __construct()
     {
         $this->middleware('auth');
@@ -25,7 +26,7 @@ class ConsequenceController extends Controller
                 Consequence::all()
             );
         }
-        return view('consequences',[
+        return view($this->route,[
             'consequence' => null,
             'consequences' => Consequence::all()
         ]);
@@ -52,6 +53,27 @@ class ConsequenceController extends Controller
         $item->name = $request->name;
         $item->description = $request->description ? $request->description : '';
         $item->save();
-        return redirect('/consequences');
+        return redirect($this->route);
+    }
+
+    public function destroy(Request $request, $id)
+    {
+        if($id)
+        {
+            if ($request->wantsJson())
+            {
+                //Since we cannot rely on relations; check to see if a cause can be deleted.
+                if(Consequence::find($id)->causes()->count() > 0)
+                {
+                    return response()->json(['has' => 'causes'], 400);
+                }
+                else
+                {
+                    Consequence::destroy($id);
+                    return response()->json(['deleted' => $id]);
+                }
+            }
+        }
+        return redirect($this->route);
     }
 }

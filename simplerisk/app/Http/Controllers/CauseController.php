@@ -12,8 +12,10 @@ use App\Category;
 use App\Consequence;
 use App\Cause;
 use App\Source;
+use App\Assessment;
 class CauseController extends Controller
 {
+    protected $route = 'causes';
     public function __construct()
     {
         $this->middleware('auth');
@@ -27,7 +29,7 @@ class CauseController extends Controller
                 Cause::all()
             );
         }
-        return view('causes',[
+        return view($this->route,[
             'causes' => Cause::all(),
             'cause' => null,
             'categories' => Category::where('type', 'Cause')->get(),
@@ -68,6 +70,29 @@ class CauseController extends Controller
         $item->save();
         $item->consequences()->sync($consequence_array);
         
-        return redirect('/causes');
+        return redirect($this->route);
+    }
+
+    public function destroy(Request $request, $id)
+    {
+        if($id)
+        {
+            if ($request->wantsJson())
+            {
+                //Since we cannot rely on relations; check to see if a cause can be deleted.
+                if(Assessment::where('cause_id', $id)->count() > 0)
+                {
+                    return response()->json(['has' => 'assessment'], 400);
+                }
+                else
+                {
+                    // Cascade delete consequences
+                    Cause::find($id)->consequences()->sync([]);
+                    Cause::destroy($id);
+                    return response()->json(['deleted' => $id]);
+                }
+            }
+        }
+        return redirect($this->route);
     }
 }

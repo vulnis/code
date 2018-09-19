@@ -12,6 +12,7 @@
             <th class="text-left">@lang('messages.Description')</th>
             <th>@choice('messages.Category', 1)</th>
             <th>@choice('messages.Consequence', 2)</th>
+            <th></th>
         </thead>
         <tbody>
             @foreach ($causes as $item)
@@ -28,6 +29,7 @@
                         <a href="{{ url('consequences/' . $consequence->id) }}" class="badge badge-primary p-2">{{$consequence->name}}</a>&nbsp;
                         @endforeach
                     </td>
+                    <td><a href="#"><i data-id="{{ $item->id}}" class="fas fa-trash-alt fa-fw"></i></a></td>
                 </tr>
             @endforeach
         </tbody>

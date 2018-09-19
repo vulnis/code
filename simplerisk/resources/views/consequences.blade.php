@@ -22,6 +22,7 @@
                     <td>
                         {{ $item->description }}
                     </td>
+                    <td><a href="#"><i data-id="{{ $item->id}}" class="fas fa-trash-alt fa-fw"></i></a></td>
                 </tr>
             @endforeach
         </tbody>

@@ -19,9 +19,6 @@
         "imagemin": "^6.0.0",
         "jquery": "^3.2",
         "laravel-mix": "^2.0",
-        "popper.js": "^1.12",
-        "vue": "^2.5.7",
-        "vue-chartjs": "^3.4.0",
-        "vue-good-table": "^2.14.1"
+        "popper.js": "^1.12"
     }
 }

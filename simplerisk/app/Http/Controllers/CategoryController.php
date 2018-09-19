@@ -10,9 +10,12 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
 use App\Category;
+use App\Risk;
+use App\Cause;
 
 class CategoryController extends Controller
 {
+    protected $route = 'categories';
     public function __construct()
     {
         $this->middleware('auth');
@@ -26,7 +29,7 @@ class CategoryController extends Controller
                 Category::all()
             );
         }
-        return view('categories',[
+        return view($this->route,[
             'categories' => Category::all(),
             'category' => null,
             'types' => [
@@ -57,6 +60,35 @@ class CategoryController extends Controller
         $item->type = $request->type;
         $item->name = $request->name;
         $item->save();
-        return redirect('/categories');
+        if ($request->wantsJson())
+        {
+            return response()->json($item);
+        }
+        return redirect($this->route);
+    }
+
+    public function destroy(Request $request, $id)
+    {
+        if($id)
+        {
+            if ($request->wantsJson())
+            {
+                //Since we cannot rely on relations; check to see if a category can be deleted.
+                if(Cause::where('category_id', $id)->count() > 0)
+                {
+                    return response()->json(['has' => 'cause'], 400);
+                }
+                elseif(Risk::where('category', $id)->count() > 0)
+                {
+                    return response()->json(['has' => 'risk'], 400);
+                }
+                else
+                {
+                    Category::destroy($id);
+                    return response()->json(['deleted' => $id]);
+                }
+            }
+        }
+        return redirect($this->route);
     }
 }

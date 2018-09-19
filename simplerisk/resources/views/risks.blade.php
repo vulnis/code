@@ -14,6 +14,7 @@
                 <th>@lang('messages.DateSubmitted')</th>
                 <th>@choice('messages.Category',1)</th>
                 <th>@choice('messages.Source',1)</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -34,6 +35,7 @@
                         {{ $item->source()->first()->name }}
                         @endif
                     </td>
+                    <td><a href="#"><i data-id="{{ $item->id}}" class="fas fa-trash-alt fa-fw"></i></a></td>
                 </tr>
             @endforeach
         </tbody>

@@ -11,7 +11,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Risk;
 use App\Category;
 use App\Source;
-use App\Risk\Stage;
+use App\Stage;
+use App\Assessment;
 
 class RiskController extends Controller
 {
@@ -74,6 +75,27 @@ class RiskController extends Controller
         $item->source = $request->source;
         $item->save();
 
+        return redirect($this->route);
+    }
+
+    public function destroy(Request $request, $id)
+    {
+        if($id)
+        {
+            if ($request->wantsJson())
+            {
+                //Since we cannot rely on relations; check to see if a risk can be deleted.
+                if(Assessment::where('hazard_id', $id)->count() > 0)
+                {
+                    return response()->json(['has' => 'assessment'], 400);
+                }
+                else
+                {
+                    Risk::destroy($id);
+                    return response()->json(['deleted' => $id]);
+                }
+            }
+        }
         return redirect($this->route);
     }
 }

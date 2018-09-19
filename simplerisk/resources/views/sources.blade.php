@@ -17,11 +17,12 @@
                 <tr>
                     
                     <td class="table-text">
-                        <a href="{{ url('sources/' . $item->id) }}">{{ $item->name }}</a>
+                        <a href="{{ url('sources/' . $item->value) }}">{{ $item->name }}</a>
                     </td>
                     <td>
                         @choice('messages.' . $item->type,1)
                     </td>
+                    <td><a href="#"><i data-id="{{ $item->value}}" class="fas fa-trash-alt fa-fw"></i></a></td>
                 </tr>
             @endforeach
         </tbody>
