@@ -12,11 +12,6 @@ use App\Consequence;
 
 class ConsequenceController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         $this->middleware('auth');
@@ -27,39 +22,36 @@ class ConsequenceController extends Controller
         if ($request->wantsJson())
         {
             return response()->json(
-                Source::all()
+                Consequence::all()
             );
         }
         return view('consequences',[
+            'consequence' => null,
             'consequences' => Consequence::all()
         ]);
     }
     
-    public function show($consequence)
+    public function show(Request $request, $id)
     {
-        return view('consequence',[
-            'consequence' => Consequence::find($consequence)
-        ]);
+        if ($request->wantsJson())
+        {
+            $item = Consequence::find($id);
+            if($item)
+            {
+                return response()->json($item);
+            }
+        }
     }
 
-    public function create()
-    {
-        return view('consequence',[
-            'consequence' => null
-        ]);
-    }
-    
     public function store(Request $request)
     {
-        // Validate the request...
-
         $this->validate($request, [
             'name' => 'required|max:255',
         ]);
-        $consequence = new consequence;
-        $consequence->name = $request->name;
-        $consequence->description = $request->description;
-        $consequence->save();
+        $item = new Consequence;
+        $item->name = $request->name;
+        $item->description = $request->description ? $request->description : '';
+        $item->save();
         return redirect('/consequences');
     }
 }

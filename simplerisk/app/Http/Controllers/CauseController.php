@@ -14,38 +14,11 @@ use App\Cause;
 use App\Source;
 class CauseController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         $this->middleware('auth');
     }
 
-    public function create()
-    {
-        $categories = Category::where('type', 'Cause')->get();
-        $consequences = Consequence::all();
-        return view('cause',[
-            'cause' => null,
-            'categories' => $categories,
-            'consequences' => $consequences
-        ]);
-    }
-
-    public function show($cause)
-    {
-        $categories = Category::where('type', 'Cause')->get();
-        $consequences = Consequence::all();
-        return view('cause',[
-            'cause' => Cause::find($cause),
-            'categories' => $categories,
-            'consequences' => $consequences
-        ]);
-    }
-    
     public function index(Request $request)
     {
         if ($request->wantsJson())
@@ -55,35 +28,46 @@ class CauseController extends Controller
             );
         }
         return view('causes',[
-            'causes' => Cause::all()
+            'causes' => Cause::all(),
+            'cause' => null,
+            'categories' => Category::where('type', 'Cause')->get(),
+            'consequences' => $consequences = Consequence::all()
         ]);
+    }
+
+    public function show(Request $request, $id)
+    {
+        if ($request->wantsJson())
+        {
+            $item = Cause::find($id);
+            if($item)
+            {
+                return response()->json($item);
+            }
+        }
     }
 
     public function store(Request $request)
     {
-        // Validate the request...
-
         $this->validate($request, [
             'description' => 'required',
         ]);
-        $cause = new Cause;
-        $cause->description = $request->description;
+        $item = new Cause;
+        $item->description = $request->description;
         $category = Category::find($request->category);
-        $cause->category()->associate($category);
+        $item->category()->associate($category);
         $consequence_array = [];
 
         if($request->consequence)
         {
             foreach ($request->consequence as $c){
                 $consequence_array[] = (int)$c;
-                // Code Here
             }
         }
 
-        $cause->save();
-        $cause->consequences()->sync($consequence_array);
+        $item->save();
+        $item->consequences()->sync($consequence_array);
         
-
         return redirect('/causes');
     }
 }

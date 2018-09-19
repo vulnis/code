@@ -12,6 +12,11 @@ class Framework extends Model
 
     public function parent()
     {
-        return $this->belongsTo(Framework::class, 'parent','value');
+        return $this->belongsTo(Framework::class, 'parent', 'value');
+    }
+
+    public function children()
+    {
+        return $this->hasMany(Framework::class);
     }
 }

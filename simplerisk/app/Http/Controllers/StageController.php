@@ -12,11 +12,7 @@ use App\Risk\Stage;
 
 class StageController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
+    protected $route = 'stages';
     public function __construct()
     {
         $this->middleware('auth');
@@ -30,37 +26,34 @@ class StageController extends Controller
                 Stage::all()
             );
         }
-        return view('stages',[
+        return view($this->route,[
+            'stage' => null,
             'stages' => Stage::all()
         ]);
     }
 
+    public function show(Request $request, $id)
+    {
+        if ($request->wantsJson())
+        {
+            $item = Stage::find($id);
+            if($item)
+            {
+                return response()->json($item);
+            }
+        }
+    }
+
     public function store(Request $request)
     {
-        // Validate the request...
-
         $this->validate($request, [
             'name' => 'required|max:50',
         ]);
-        $stage = new Stage;
-        $stage->name = $request->name;
-        $stage->description = $request->description;
-        $stage->save();
-        return redirect('/stages');
-    }
-
-    public function create()
-    {
-        return view('stage',[
-            'stage' => null
-        ]);
-    }
-
-    public function show($stage)
-    {
-        return view('stage',[
-            'stage' => Stage::find($stage)
-        ]);
+        $item = new Stage;
+        $item->name = $request->name;
+        $item->description = $request->description;
+        $item->save();
+        return redirect($this->route);
     }
 
 }

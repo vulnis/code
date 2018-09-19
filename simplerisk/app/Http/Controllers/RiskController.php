@@ -15,11 +15,7 @@ use App\Risk\Stage;
 
 class RiskController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
+    protected $route = 'risks';
     public function __construct()
     {
         $this->middleware('auth');
@@ -33,53 +29,51 @@ class RiskController extends Controller
                 Risk::all()
             );
         }
-        return view('risks',[
-            'risks' => Risk::all()
+        return view($this->route,[
+            'risk' => null,
+            'risks' => Risk::all(),
+            'categories' => Category::where('type', 'risk')->get(),
+            'stages' => Stage::all(),
+            'sources' => Source::where('type','Risk')->get()
         ]);
     }
 
-    public function show($id)
+    public function show(Request $request, $id)
     {
-        $risk = Risk::find($id);
-        if($risk)
+        if ($request->wantsJson())
         {
-            return view('risk',[
-                'risk' => $risk,
-                'categories' => Category::where('type', 'risk')->get(),
-                'stages' => Stage::all(),
-                'sources' => Source::where('type','Risk')->get()
-            ]);
+            $item = Risk::find($id);
+            if($item)
+            {
+                return response()->json($item);
+            }
         }
     }
 
-    public function create()
-    {
-        return view('risk',[
-            'risk' => null,
-            'categories' => Category::where('type', 'Risk')->get(),
-            'stages' => Stage::all(),
-            'sources' => Source::where('type', 'Risk')->get()
-        ]);
-    }
-    
     public function store(Request $request)
     {
-        // Validate the request...
-
         $this->validate($request, [
-            'name' => 'required|max:200',
+            'subject' => 'required|max:200',
         ]);
-        $risk = new Risk;
-        $risk->name = $request->name;
-        $risk->description = $request->description;
-        $category = Category::find($request->category);
-        $risk->category()->associate($category);
-        $stage = Stage::find($request->stage);
-        $risk->stage()->associate($stage);
+        $item = new Risk;
+        $item->subject = $request->subject;
+        $item->notes = $request->description ? $request->description : '';
+        //$category = Category::find($request->category);
+        $item->category = $request->category;
+        //$stage = Stage::find($request->stage);
+        //$item->stage()->associate($stage);
         $source = Source::find($request->source);
-        $risk->source()->associate($source);
-        $risk->save();
+        //$item->source()->associate($source);
+        $item->status = $request->status ? $request->status : 'New';
+        $item->location = $request->location ? $request->location : 0;
+        $item->technology = $request->technology ? $request->technology : 0;
+        $item->owner = $request->owner ? $request->owner : Auth::user()->value;
+        $item->manager = $request->manager ? $request->manager : 0;
+        $item->assessment = $request->assessment ? $request->assessment : '';
+        $item->additional_stakeholders = $request->additional_stakeholders ? $request->additional_stakeholders : '';
+        $item->source = $request->source;
+        $item->save();
 
-        return redirect('/risks');
+        return redirect($this->route);
     }
 }

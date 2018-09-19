@@ -7,13 +7,10 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Asset;
 use Illuminate\Support\Facades\Auth;
+
 class AssetController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
+    protected $route = 'assets';
     public function __construct()
     {
         $this->middleware('auth');
@@ -21,30 +18,35 @@ class AssetController extends Controller
 
     public function index()
     {
-        $assets = Asset::orderBy('submission_date', 'asc')->get();
-        return view('assets.index',[
-            'prefix' => 'Assets',
-            'Assets' => $assets
+        return view($this->route,[
+            'asset' => null,
+            'assets' => Asset::all()
         ]);
     }
 
-    public function new()
+    public function show(Request $request, $id)
     {
-        return view('assets.new',[
-            'prefix' => 'assets'
-        ]);
+        if ($request->wantsJson())
+        {
+            $item = Asset::find($id);
+            if($item)
+            {
+                return response()->json($item);
+            }
+        }
     }
 
     public function store(Request $request)
     {
-        // Validate the request...
         $this->validate($request, [
-            'subject' => 'required|max:300',
+            'name' => 'required|max:300',
         ]);
-        $asset = new Asset;
-        $asset->subject = $request->subject;
-        $asset->submitted_by = Auth::user()->value;
-        $asset->save();
-        return redirect('/assets');
+        $item = new Asset;
+        $item->name = $request->name;
+        $item->details = $request->description;
+        $item->location = $request->location ? $request->location : 0;
+        $item->team = $request->team ? $request->team : 0;
+        $item->save();
+        return redirect($this->route);
     }
 }

@@ -13,25 +13,10 @@ use App\Probability;
 use App\Severity;
 class AssessmentController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
+    protected $route = 'assessments';
     public function __construct()
     {
         $this->middleware('auth');
-    }
-
-    /**
-     * Generate an array that will be used to generate the side menu
-     */
-    private function getSideMenu(){
-        $menu = array(
-            array(trans('messages.AvailableAssessments'), 'index.php'),
-            array(trans('messages.PendingRisks'), 'risks.php')
-        );
-        return $menu;
     }
 
     public function index(Request $request)
@@ -52,54 +37,42 @@ class AssessmentController extends Controller
                 ]
             );
         }
-        return view('assessments', [
-            'assessments' => Assessment::all()
-            ]
-        );
-    }
-
-    public function create()
-    {
-        // Root causes
-        // Probability
-        // Severity
-        // Risk level
-
-        return view('assessment',[
+        return view($this->route, [
+            'assessments' => Assessment::all(),
             'assessment' => null,
             'risks' => Risk::all(),
             'causes' => Cause::all(),
             'probabilities' => Probability::all(),
             'severities' => Severity::all()
-        ]);
+            ]
+        );
     }
 
-    public function show($id){
-        $assessment = Assessment::find($id);
-        if($assessment)
+    public function show(Request $request, $id)
+    {
+        if ($request->wantsJson())
         {
-            return view('assessment',[
-                'assessment' => $assessment,
-                'risks' => Risk::all(),
-                'causes' => Cause::all(),
-                'probabilities' => Probability::all(),
-                'severities' => Severity::all()
-            ]);
+            $item = Assessment::find($id);
+            if($item)
+            {
+                return response()->json($item);
+            }
         }
     }
+
     public function store(Request $request)
     {
-        $assessment = new Assessment;
+        $item = new Assessment;
         $risk = Risk::find($request->risk);
-        $assessment->risk()->associate($risk);
+        $item->risk()->associate($risk);
         $cause = Cause::find($request->cause);
-        $assessment->cause()->associate($cause);
+        $item->cause()->associate($cause);
         $severity = Severity::find($request->severity);
-        $assessment->severity()->associate($severity);
+        $item->severity()->associate($severity);
         $probability = Probability::find($request->probability);
-        $assessment->probability()->associate($probability);
-        $assessment->save();
-        return redirect('/assessments');
+        $item->probability()->associate($probability);
+        $item->save();
+        return redirect($this->route);
     }
 
 }

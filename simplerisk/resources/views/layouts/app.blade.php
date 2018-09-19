@@ -21,6 +21,7 @@
     <div class="wrapper">
     @include('layouts.partials.sidebar')
     <div id="app" class="content">
+    
         <main class="py-4">
             <div class="container">
                 <div class="row justify-content-center">

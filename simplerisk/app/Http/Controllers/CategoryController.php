@@ -13,11 +13,6 @@ use App\Category;
 
 class CategoryController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         $this->middleware('auth');
@@ -33,16 +28,6 @@ class CategoryController extends Controller
         }
         return view('categories',[
             'categories' => Category::all(),
-            'types' => [
-                new NameValue(trans_choice('messages.Risk',1), 'Risk'),
-                new NameValue(trans_choice('messages.Cause',1), 'Cause')
-            ]
-        ]);
-    }
-    
-    public function create()
-    {
-        return view('category',[
             'category' => null,
             'types' => [
                 new NameValue(trans_choice('messages.Risk',1), 'Risk'),
@@ -51,17 +36,27 @@ class CategoryController extends Controller
         ]);
     }
     
+    public function show(Request $request, $id)
+    {
+        if ($request->wantsJson())
+        {
+            $item = Category::find($id);
+            if($item)
+            {
+                return response()->json($item);
+            }
+        }
+    }
+
     public function store(Request $request)
     {
-        // Validate the request...
-
         $this->validate($request, [
             'name' => 'required|max:50',
         ]);
-        $category = new Category;
-        $category->type = $request->type;
-        $category->name = $request->name;
-        $category->save();
+        $item = new Category;
+        $item->type = $request->type;
+        $item->name = $request->name;
+        $item->save();
         return redirect('/categories');
     }
 }

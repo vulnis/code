@@ -7,33 +7,15 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Library\NameValue;
 use Illuminate\Support\Facades\Auth;
-use Datatables;
 use App\Source;
 
 class SourceController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         $this->middleware('auth');
     }
 
-    
-    public function create()
-    {
-        return view('source',[
-            'source' => null,
-            'types' => [
-                new NameValue(trans_choice('messages.Risk',1), 'Risk'),
-                new NameValue(trans_choice('messages.Cause',1), 'Cause')
-            ]
-        ]);
-    }
-    
     public function index(Request $request)
     {
         if ($request->wantsJson())
@@ -44,6 +26,7 @@ class SourceController extends Controller
         }
         return view('sources',[
             'sources' => Source::all(),
+            'source' => null,
             'types' => [
                 new NameValue(trans_choice('messages.Risk',1), 'Risk'),
                 new NameValue(trans_choice('messages.Cause',1), 'Cause')
@@ -51,22 +34,27 @@ class SourceController extends Controller
         ]);
     }
 
-    public function anyData()
+    public function show(Request $request, $id)
     {
-        return Datatables::of(Source::query())->make(true);
+        if ($request->wantsJson())
+        {
+            $item = Source::find($id);
+            if($item)
+            {
+                return response()->json($item);
+            }
+        }
     }
 
     public function store(Request $request)
     {
-        // Validate the request...
-
         $this->validate($request, [
             'name' => 'required|max:50',
         ]);
-        $source = new source;
-        $source->type = $request->type;
-        $source->name = $request->name;
-        $source->save();
-        return redirect('/sources');
+        $item = new source;
+        $item->type = $request->type;
+        $item->name = $request->name;
+        $item->save();
+        return redirect('sources');
     }
 }

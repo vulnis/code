@@ -10,36 +10,11 @@ use App\Framework;
 
 class FrameworkController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         $this->middleware('auth');
     }
 
-    public function show($id)
-    {
-        $risk = Framework::find($id);
-        if($risk)
-        {
-            return view('framework',[
-                'framework' => $framework,
-                'parents' => Framework::all()
-            ]);
-        }
-    }
-
-    public function create()
-    {
-        return view('framework',[
-            'framework' => null,
-            'parents' => Framework::all()
-        ]);
-    }
-    
     public function index(Request $request)
     {
         if ($request->wantsJson())
@@ -49,9 +24,24 @@ class FrameworkController extends Controller
             );
         }
         return view('frameworks',[
+            'framework' => null,
+            'parents' => Framework::all(),
             'frameworks' => Framework::all()
         ]);
     }
+
+    public function show(Request $request, $id)
+    {
+        if ($request->wantsJson())
+        {
+            $item = Framework::find($id);
+            if($item)
+            {
+                return response()->json($item);
+            }
+        }
+    }
+
     public function store(Request $request)
     {
         // Validate the request...
@@ -59,16 +49,17 @@ class FrameworkController extends Controller
         $this->validate($request, [
             'name' => 'required',
         ]);
-        $framework = new Framework;
-        $framework->parent = $request->parent;
-        $framework->name = $request->name;
-        $framework->description = $request->description;
-        $framework->status = $request->status;
-        $framework->order = $request->order;
-        $framework->last_audit_date = $request->last_audit_date;
-        $framework->next_audit_date = $request->next_audit_date;
-        $framework->desired_frequency = $request->desired_frequency;
-        $framework->save();
-        return redirect('/sources');
+        $item = new Framework;
+        $parent = Framework::find($request->parent);
+        $item->parent()->associate($parent);
+        $item->name = $request->name;
+        $item->description = $request->description;
+        $item->status = $request->status;
+        $item->order = $request->order;
+        $item->last_audit_date = $request->last_audit_date;
+        $item->next_audit_date = $request->next_audit_date;
+        $item->desired_frequency = $request->desired_frequency;
+        $item->save();
+        return redirect('/frameworks');
     }
 }
