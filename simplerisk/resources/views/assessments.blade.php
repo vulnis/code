@@ -18,6 +18,7 @@
                 <th>@lang('messages.Probability')</th>
                 <th>@lang('messages.Severity')</th>
                 <th>@lang('messages.Score')</th>
+                <th></th>
             </tr>
         </thead>
 
@@ -35,10 +36,32 @@
                     </td>
                     <td>{{ $item->probability->name }}</td>
                     <td>{{ $item->severity->name }}</td>
-                    <td style="border-right: 4px solid @if($item->mitigations->count() == 0) #ff0000 @else #00ff00 @endif">
+                    <td>
                         <span class="p-2"  title="{{ $item->getLevelAttribute() }}" style="background-color:{{$item->getColorAttribute()}};">{{ $item->getScoreAttribute() }}</span>
                     </td>
+                    @if($item->mitigations->count() == 0)
+                    <td><a href="#"><i class="fas fa-plus fa-fw"></i></a></td>
+                    @else
+                    <td><a class="collapse-switch collapsed" data-toggle="collapse" href="#collapseAction{{$item->id}}" role="button" aria-expanded="false" aria-controls="collapseAction{{ $item->id}}"></a></td>
+                    @endif
+                    
                 </tr>
+                
+                @if($item->mitigations->count() == 0)
+                @else
+                <tr>
+                <td class="p-0 m-0" style="border-top:none !important;" colspan="7">
+                <div class="collapse" id="collapseAction{{ $item->id}}">
+                    <div class="card card-body m-2">
+                        @foreach($item->mitigations as $mit)
+                            {{$mit->type}}
+                            {{$mit->current_solution}}
+                        @endforeach
+                    </div>
+                </div>
+                </td>
+                </tr>
+                @endif
                 
             @endforeach
         </tbody>

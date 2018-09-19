@@ -229,3 +229,22 @@ a.download {
 .nav-tabs {
   margin-bottom: 1rem;
 }
+
+.collapse-switch {
+  color: #3490dc !important;
+}
+.collapse-switch:hover {
+  text-decoration: none;
+}
+.collapse-switch:before {
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 400;
+  content: "\F070";
+  text-decoration: none;
+}
+
+.collapse-switch.collapsed:before {
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 400;
+  content: "\F06E";
+}
