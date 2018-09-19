@@ -39,7 +39,7 @@ class AssetController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|max:300',
+            'name' => 'required|max:200',
         ]);
         $item = new Asset;
         $item->name = $request->name;
@@ -47,6 +47,19 @@ class AssetController extends Controller
         $item->location = $request->location ? $request->location : 0;
         $item->team = $request->team ? $request->team : 0;
         $item->save();
+        return redirect($this->route);
+    }
+
+    public function destroy(Request $request, $id)
+    {
+        if($id)
+        {
+            if ($request->wantsJson())
+            {
+                Asset::destroy($id);
+                return response()->json(['deleted' => $id]);
+            }
+        }
         return redirect($this->route);
     }
 }

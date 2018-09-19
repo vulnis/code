@@ -18,7 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home'              , 'HomeController@index'   )->name('home');
-Route::resource('/assets'       , 'AssetController'        , ['only' => [ 'index', 'show', 'store' ]]);
+Route::resource('/assets'       , 'AssetController'        , ['only' => [ 'index', 'show', 'store', 'destroy' ]]);
 Route::resource('/assessments'  , 'AssessmentController'   , ['only' => [ 'index', 'show', 'store', 'destroy' ]]);
 Route::resource('/risks'        , 'RiskController'         , ['only' => [ 'index', 'show', 'store', 'destroy' ]]);
 Route::resource('/stages'       ,'StageController'         , ['only' => [ 'index', 'show', 'store', 'destroy' ]]);

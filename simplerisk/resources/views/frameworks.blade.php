@@ -9,7 +9,7 @@
 
 @if (count($frameworks) > 0)
 
-    <table class="table">
+    <table class="table table-borderless">
         <thead>
             <tr>
                 <th>@choice('messages.Framework',1)</th>

@@ -7,13 +7,14 @@
 <div class="tab-content" id="pageTab">
         <div class="tab-pane fade show active" id="page-list-tab" role="tabpanel" aria-labelledby="list-tab">
 @if (count($assets) > 0)
-    <table class="table">
+<table class="table table-borderless">
 
         <!-- Table Headings -->
         <thead>
             <tr>
                 <th>@lang('messages.Name')</th>
                 <th>@lang('messages.Description')</th>
+                <th></th>
             </tr>
         </thead>
 
@@ -28,6 +29,7 @@
                     <td class="table-text text-left">
                     {{ $item->details }}
                     </td>
+                    <td><a href="#"><i data-id="{{ $item->id}}" class="fas fa-trash-alt fa-fw"></i></a></td>
                 </tr>
             @endforeach
         </tbody>

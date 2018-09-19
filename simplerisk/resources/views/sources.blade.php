@@ -7,10 +7,13 @@
     <div class="tab-content" id="pageTab">
         <div class="tab-pane fade show active" id="page-list-tab" role="tabpanel" aria-labelledby="list-tab">
     @if (count($sources) > 0)
-    <table class="table">
+    <table class="table table-borderless">
         <thead>
+            <tr>
             <th class="text-left">@lang('messages.Name')</th>
             <th>@lang('messages.Type')</th>
+            <th></th>
+            <tr>
         </thead>
         <tbody>
             @foreach ($sources as $item)

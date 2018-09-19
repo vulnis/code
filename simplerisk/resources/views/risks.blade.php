@@ -7,7 +7,7 @@
     <div class="tab-content" id="pageTab">
         <div class="tab-pane fade show active" id="page-list-tab" role="tabpanel" aria-labelledby="list-tab">
 @if (count($risks) > 0)
-    <table class="table">
+<table class="table table-borderless">
         <thead>
             <tr>
                 <th>@choice('messages.Risk',1)</th>

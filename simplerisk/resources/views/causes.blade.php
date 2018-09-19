@@ -7,7 +7,7 @@
 <div class="tab-content" id="pageTab">
         <div class="tab-pane fade show active" id="page-list-tab" role="tabpanel" aria-labelledby="list-tab">
     @if (count($causes) > 0)
-    <table class="table text-center">
+    <table class="table table-borderless">
         <thead>
             <th class="text-left">@lang('messages.Description')</th>
             <th>@choice('messages.Category', 1)</th>

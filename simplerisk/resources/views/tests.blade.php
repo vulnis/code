@@ -10,7 +10,7 @@
     -->
     <!-- Current Tasks -->
     @if (count($tests) > 0)
-    <table class="table text-center">
+    <table class="table table-borderless">
 
         <!-- Table Headings -->
         <thead>
