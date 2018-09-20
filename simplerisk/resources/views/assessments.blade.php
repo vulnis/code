@@ -1,86 +1,104 @@
-@extends('layouts.app')
-@section('scripts')
-@append
-
+@extends('layouts.app') 
+@section('scripts') @append 
 @section('content')
-@include('layouts.partials.tabs', ['items' => trans_choice('messages.Assessment',2), 'item' => trans_choice('messages.Assessment',1)])
+    @include('layouts.partials.tabs', ['items' => trans_choice('messages.Assessment',2),
+'item' => trans_choice('messages.Assessment',1)])
 <div class="tab-content" id="pageTab">
-        <div class="tab-pane fade show active" id="page-list-tab" role="tabpanel" aria-labelledby="list-tab">
-@if (count($assessments) > 0)
-    <table class="table table-borderless">
+    <div class="tab-pane fade show active" id="page-list-tab" role="tabpanel" aria-labelledby="list-tab">
+        @if (count($assessments) > 0)
+        <table class="table table-borderless">
 
-        <!-- Table Headings -->
-        <thead>
-            <tr>
-                <th>@lang('messages.Subject')</th>
-                <th></th>
-                <th>@choice('messages.Cause',1)</th>
-                <th>@lang('messages.Probability')</th>
-                <th>@lang('messages.Severity')</th>
-                <th>@lang('messages.Score')</th>
-                <th></th>
-                <th></th>
-            </tr>
-        </thead>
-
-        <!-- Table Body -->
-        <tbody>
-            @foreach ($assessments as $item)
+            <!-- Table Headings -->
+            <thead>
                 <tr>
-                    
+                    <th>@lang('messages.Subject')</th>
+                    <th></th>
+                    <th>@choice('messages.Cause',1)</th>
+                    <th>@lang('messages.Probability')</th>
+                    <th>@lang('messages.Severity')</th>
+                    <th>@lang('messages.Score')</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <!-- Table Body -->
+            <tbody>
+                @foreach ($assessments as $item)
+                <tr>
+
                     <td class="table-text text-left" style="border-left: 4px solid {{$item->getColorAttribute()}};">
                         <a href="{{ url('assessments/' . $item->id) }}">{{ $item->risk->subject }}</a>
                     </td>
                     <td>{{ $item->sub_id }}</td>
                     <td class="table-text text-left">
-                    {{ $item->cause->description }}
+                        {{ $item->cause->description }}
                     </td>
                     <td>{{ $item->probability->name }}</td>
                     <td>{{ $item->severity->name }}</td>
                     <td>
-                        <span class="p-2"  title="{{ $item->getLevelAttribute() }}" style="background-color:{{$item->getColorAttribute()}};">{{ $item->getScoreAttribute() }}</span>
+                        <span class="p-2" title="{{ $item->getLevelAttribute() }}" style="background-color:{{$item->getColorAttribute()}};">{{ $item->getScoreAttribute() }}</span>
                     </td>
                     @if($item->mitigations->count() == 0)
-                    <td><a href="#"><i class="fas fa-plus fa-fw"></i></a></td>
+                    <td><a id="add-mitigation{{ $item->id }}" data-id="{{ $item->id }}" href="#" data-toggle="modal" data-target="#mitigation-form"><i class="fas fa-plus fa-fw"></i></a></td>
                     @else
-                    <td><a class="collapse-switch collapsed" data-toggle="collapse" href="#collapseAction{{$item->id}}" role="button" aria-expanded="false" aria-controls="collapseAction{{ $item->id}}"></a></td>
+                    <td><a class="collapse-switch collapsed" data-toggle="collapse" href="#collapseAction{{$item->id}}" role="button"
+                            aria-expanded="false" aria-controls="collapseAction{{ $item->id}}"></a></td>
                     @endif
-                    <td><a href="#"><i data-id="{{ $item->id}}" class="fas fa-trash-alt fa-fw"></i></a></td>
-                    
+                    <td><a href="#"><i data-id="{{ $item->id }}" class="fas fa-trash-alt fa-fw"></i></a></td>
                 </tr>
-                
-                @if($item->mitigations->count() == 0)
-                @else
+
+                @if($item->mitigations->count() == 0) @else
                 <tr>
-                <td class="p-0 m-0" style="border-top:none !important;" colspan="7">
-                <div class="collapse" id="collapseAction{{ $item->id}}">
-                    <div class="card card-body m-2">
-                        @foreach($item->mitigations as $mit)
-                            {{$mit->type}}
-                            {{$mit->current_solution}}
-                        @endforeach
-                    </div>
-                </div>
-                </td>
+                    <td class="p-0 m-0" style="border-top:none !important;" colspan="7">
+                        <div class="collapse" id="collapseAction{{ $item->id}}">
+                            <div class="card card-body m-2">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>@lang('messages.Type')</th>
+                                            <th>@lang('messages.Description')</th>
+                                            <th>@lang('messages.Responsible')</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach($item->mitigations as $mit) 
+                                        <tr>
+                                            <td>
+                                                <i title="@lang('messages.'.$mit->type)" class="fas @if($mit->type == 'CA') fa-highlighter @else fa-shield-alt @endif fa-fw"></i>
+                                            </td>
+                                            <td>
+                                                {{$mit->current_solution}}
+                                            </td>
+                                            <td>
+                                                @if($mit->responsible)
+                                                {{ $mit->responsible->name }}
+                                                @endif
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </td>
                 </tr>
-                @endif
-                
-            @endforeach
-        </tbody>
-    </table>
-           
-    @endif
+                @endif @endforeach
+            </tbody>
+        </table>
+
+        @endif
     </div>
-        <div class="tab-pane" id="page-new-tab" role="tabpanel" aria-labelledby="new-tab">
-        
+    <div class="tab-pane" id="page-new-tab" role="tabpanel" aria-labelledby="new-tab">
+
         <form method="POST" action="{{ url('assessments') }}" class="form">
-    {{ csrf_field() }}
-    <div class="row">
-        <div class="col-sm-12 col-md-4">
-            <div class="simple">
-                <div class="form-group">
-                    <label for="assessment-risk">@choice('messages.Risk',1)</label>
-                    <select class="form-control" id="assessment-risk" name="risk" @if($assessment) disabled @endif>
+            {{ csrf_field() }}
+            <div class="row">
+                <div class="col-sm-12 col-md-4">
+                    <div class="simple">
+                        <div class="form-group">
+                            <label for="assessment-risk">@choice('messages.Risk',1)</label>
+                            <select class="form-control" id="assessment-risk" name="risk" @if($assessment) disabled @endif>
                         @foreach ($risks as $i => $risk)
                             @if($risk)
                                 @if($assessment)
@@ -97,10 +115,10 @@
                             @endif
                         @endforeach
                     </select>
-                </div>
-                <div class="form-group">
-                    <label for="assessment-cause">@choice('messages.Cause',1)</label>
-                    <select class="form-control" id="assessment-cause" name="cause" @if($assessment) disabled @endif>
+                        </div>
+                        <div class="form-group">
+                            <label for="assessment-cause">@choice('messages.Cause',1)</label>
+                            <select class="form-control" id="assessment-cause" name="cause" @if($assessment) disabled @endif>
                         @foreach ($causes as $i => $cause)
                             @if($cause)
                                 @if($assessment)
@@ -117,10 +135,10 @@
                             @endif
                         @endforeach
                     </select>
-                </div>
-                <div class="form-group">
-                    <label for="assessment-probability">@lang('messages.Probability')</label>
-                    <select class="form-control" id="assessment-probability" name="probability" @if($assessment) disabled @endif>
+                        </div>
+                        <div class="form-group">
+                            <label for="assessment-probability">@lang('messages.Probability')</label>
+                            <select class="form-control" id="assessment-probability" name="probability" @if($assessment) disabled @endif>
                         @foreach ($probabilities as $i => $probability)
                             @if($probability)
                                 @if($assessment)
@@ -137,10 +155,10 @@
                             @endif
                         @endforeach
                     </select>
-                </div>
-                <div class="form-group">
-                    <label for="assessment-severity">@lang('messages.Severity')</label>
-                    <select class="form-control" id="assessment-severity" name="severity" @if($assessment) disabled @endif>
+                        </div>
+                        <div class="form-group">
+                            <label for="assessment-severity">@lang('messages.Severity')</label>
+                            <select class="form-control" id="assessment-severity" name="severity" @if($assessment) disabled @endif>
                         @foreach ($severities as $i => $severity)
                             @if($severity)
                                 @if($assessment)
@@ -157,24 +175,23 @@
                             @endif
                         @endforeach
                     </select>
-                </div>
-                @if($assessment)
-                    <div style="border-right: 4px solid @if($assessment->mitigations->count() == 0) #ff0000 @else #00ff00 @endif">
-                        <span class="p-2"  title="{{ $assessment->getLevelAttribute() }}" style="background-color:{{$assessment->getColorAttribute()}};">{{ $assessment->getScoreAttribute() }}</span>
-                    </div>
-                    @foreach ($assessment->mitigations as $mitigation)
+                        </div>
+                        @if($assessment)
+                        <div style="border-right: 4px solid @if($assessment->mitigations->count() == 0) #ff0000 @else #00ff00 @endif">
+                            <span class="p-2" title="{{ $assessment->getLevelAttribute() }}" style="background-color:{{$assessment->getColorAttribute()}};">{{ $assessment->getScoreAttribute() }}</span>
+                        </div>
+                        @foreach ($assessment->mitigations as $mitigation)
                         <div>{{$mitigation->submission_date}} - {{$mitigation->current_solution}}</div>
-                    @endforeach
-                @endif
+                        @endforeach @endif
+                    </div>
+                </div>
             </div>
-        </div>
+            <div class="row">
+                @if(!$assessment)
+                <button type="submit" name="submit" class="btn btn-primary pull-right save-risk-form">@lang('messages.Submit')</button>                @endif
+            </div>
+        </form>
     </div>
-    <div class="row">
-        @if(!$assessment)
-        <button type="submit" name="submit" class="btn btn-primary pull-right save-risk-form">@lang('messages.Submit')</button>
-        @endif
-    </div>
-</form>
 </div>
-        </div>
+@include('forms.mitigation')
 @endsection

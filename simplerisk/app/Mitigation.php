@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Responsible;
 
 class Mitigation extends Model
 {
@@ -16,6 +17,11 @@ class Mitigation extends Model
     public function assessment()
     {
         return $this->belongsTo(Assessment::class, 'assessment_id');
+    }
+
+    public function responsible()
+    {
+        return $this->belongsTo(Responsible::class, 'mitigation_team', 'value');
     }
 
     const CREATED_AT = 'submission_date';

@@ -13,11 +13,11 @@ class MergeMitigationAction extends Migration
     public function up()
     {
         Schema::table('mitigations', function (Blueprint $table) {
-            $table->date('reassessment'); //date at which this action should be reassessed
-            $table->boolean('authorities'); // Should authorities be informed or reported to?
-            $table->boolean('report'); // Should this be included in the management report?
+            $table->date('reassessment')->nullable(); //date at which this action should be reassessed
+            $table->boolean('authorities')->nullable(); // Should authorities be informed or reported to?
+            $table->boolean('report')->nullable(); // Should this be included in the management report?
             $table->timestamps();
-            $table->enum('type',['CA','PA']); // Corrective (CA) or Preventive (PA)?
+            $table->enum('type',['CA','PA'])->default('CA'); // Corrective (CA) or Preventive (PA)?
         });
     }
 

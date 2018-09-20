@@ -12,6 +12,8 @@ use App\Cause;
 use App\Probability;
 use App\Severity;
 use App\Mitigation;
+use App\Responsible;
+
 class AssessmentController extends Controller
 {
     protected $route = 'assessments';
@@ -44,7 +46,8 @@ class AssessmentController extends Controller
             'risks' => Risk::all(),
             'causes' => Cause::all(),
             'probabilities' => Probability::all(),
-            'severities' => Severity::all()
+            'severities' => Severity::all(),
+            'responsibles' => Responsible::all()
             ]
         );
     }
