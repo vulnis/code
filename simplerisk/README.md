@@ -22,6 +22,51 @@ Then check out the SimpleRisk Installation Guide to get started:
 
 https://www.simplerisk.com/documentation
 
+# Laravel version:
+
+### Requirements
+1. PHP >7.1
+2. Composer for PHP installed
+3. Node and NPM installed
+4. A mysql database server (Can also be spun automagically by running docker-compose up from the root directory of this project, which requires docker)
+5. A database schema that corresponds to the settings in the .env file
+6. A database user that corresponds to the settings in the .env file
+
+### Run
+```
+cd simplerisk
+cp .env.example .env
+```
+
+_(Modify the .env file to reflect your settings)_
+
+Install all dependencies, this can take a while
+
+```
+composer update
+npm install
+```
+
+Compile assets:
+
+```
+npm run dev
+```
+
+Prepare the database (warning, may overwrite data!)
+
+```
+php artisan migrate
+php artisan db:seed
+```
+
+If all goes well, you can run:
+```
+php artisan serve
+```
+
+And visit the development version at http://localhost:8000
+
 
 # References
 [The Vulnerability of UAVs to Cyber Attacks](https://ccdcoe.org/cycon/2013/proceedings/d3r2s2_hartmann.pdf)
