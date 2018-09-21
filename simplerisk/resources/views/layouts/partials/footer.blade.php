@@ -4,4 +4,5 @@
       </div>
 </footer>
 <!-- Scripts -->
+
 <script src="{{ mix('js/simplerisk.js') }}" defer></script>

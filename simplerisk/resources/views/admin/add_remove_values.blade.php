@@ -21,7 +21,7 @@
                                 </form>
                                 form name="category" method="post" action="">
                                     <p>
-                                        <h4>@lang('messages.Category')</h4>
+                                        <h4>@choice('messages.Category',1)</h4>
                                         @lang('messages.AddNewCategoryNamed') <input name="new_category" type="text" maxlength="50" size="20" />&nbsp;&nbsp;<input type="submit" value="@lang('messages.Add')" name="add_category" /><br />
                                         @lang('messages.Change') create_dropdown("category", NULL, "update_category_name") @lang('messages.to') <input name="new_name" type="text" size="20" />&nbsp;&nbsp;<input type="submit" value="@lang('messages.Update')" name="update_category" /><br />
                                         @lang('messages.DeleteCurrentCategoryNamed') create_dropdown("category")&nbsp;&nbsp;<input type="submit" value="@lang('messages.Delete')" name="delete_category" />

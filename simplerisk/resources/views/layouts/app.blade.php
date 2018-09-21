@@ -9,11 +9,6 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    
-
-    <!-- Fonts -->
-    
-    <!-- Styles -->
     <link href="{{ mix('css/simplerisk.css') }}" rel="stylesheet">
 </head>
 <body>
@@ -33,7 +28,6 @@
         </main>
         @include('layouts.partials.footer')
     </div>
-    
 </div>
 </body>
 </html>

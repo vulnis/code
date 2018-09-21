@@ -1,22 +1,31 @@
 import './bootstrap';
+import moment from 'moment';
+import flatpickr from 'flatpickr';
 $(document).ready(function () {
 
-
+    var locale = document.getElementsByTagName('html')[0].getAttribute('lang') || window.navigator.userLanguage || window.navigator.language;
     /**
      * Toggle the left side menu
      */
     $('#sidebarCollapse').on('click', function () {
         $('#sidebar').toggleClass('active');
     });
+    flatpickr('.flatpickr', {
+        minDate: 'today',
+        locale: locale
 
+    });
     /**
      * Generic ajax delete function; let the backend do the checkin'
      */
     $('.fa-trash-alt').click(function (e) {
         e.preventDefault();
         var data = $(e.currentTarget).data();
-        console.log(window.location.pathname);
-        axios.delete(window.location.pathname + '/' + data.id)
+        var route = window.location.pathname;
+        if(data.route){
+            route = data.route;
+        }
+        axios.delete(route + '/' + data.id)
             .then(() => {
                 $(e.currentTarget).closest('tr').remove();
             }, (error) => {

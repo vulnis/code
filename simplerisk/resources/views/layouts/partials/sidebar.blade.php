@@ -36,6 +36,10 @@
                 <a href="{{ url('assets') }}" role="button"><i class="fas fa-shopping-cart fa-fw"></i>
                     <span>@choice('messages.Asset',1)</span></a>
             </li>
+            <li {!! (Request::is('*responsibles*') ? 'class="active"' : 'class=""') !!}>
+                <a href="{{ url('responsibles') }}" role="button"><i class="fas fa-user-shield fa-fw"></i>
+                    <span>@choice('messages.Asset',1)</span></a>
+            </li>
         </ul>
         
     </nav>

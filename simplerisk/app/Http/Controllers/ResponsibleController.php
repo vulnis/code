@@ -5,31 +5,24 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use App\Responsible;
+use App\Mitigation;
+use App\Asset;
 use Illuminate\Support\Facades\Auth;
 
-use App\Stage;
-use App\Risk;
-
-class StageController extends Controller
+class ResponsibleController extends Controller
 {
-    protected $route = 'stages';
+    protected $route = 'responsibles';
     public function __construct()
     {
         $this->middleware('auth');
     }
 
-    public function index(Request $request)
+    public function index()
     {
-        if ($request->wantsJson())
-        {
-            return response()->json(
-                Stage::all()
-            );
-        }
         return view($this->route,[
-            'stage' => null,
-            'stages' => Stage::all()
+            'responsible' => null,
+            'responsibles' => Responsible::all()
         ]);
     }
 
@@ -37,7 +30,7 @@ class StageController extends Controller
     {
         if ($request->wantsJson())
         {
-            $item = Stage::find($id);
+            $item = Responsible::find($id);
             if($item)
             {
                 return response()->json($item);
@@ -48,11 +41,10 @@ class StageController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|max:50',
+            'name' => 'required|max:200',
         ]);
-        $item = new Stage;
+        $item = new Responsible;
         $item->name = $request->name;
-        $item->description = $request->description ? $request->description : '';
         $item->save();
         return redirect($this->route);
     }
@@ -63,14 +55,19 @@ class StageController extends Controller
         {
             if ($request->wantsJson())
             {
-                //Since we cannot rely on relations; check to see if a cause can be deleted.
-                if(Stage::find($id)->risks()->count() > 0)
+                // Check relation to asset
+                // Check relation to mitigation
+                if(Mitigation::where('mitigation_team', $id)->count() > 0)
                 {
-                    return response()->json(['has' => 'risks'], 400);
+                    return response()->json(['has' => 'mitigation'], 400);
+                }
+                elseif(Asset::where('team', $id)->count() > 0)
+                {
+                    return response()->json(['has' => 'team'], 400);
                 }
                 else
                 {
-                    Stage::destroy($id);
+                    Responsible::destroy($id);
                     return response()->json(['deleted' => $id]);
                 }
             }

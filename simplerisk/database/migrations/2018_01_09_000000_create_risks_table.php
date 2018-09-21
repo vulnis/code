@@ -39,7 +39,7 @@ class CreateRisksTable extends Migration {
 			$table->integer('submitted_by')->default(1);
 			$table->string('additional_stakeholders', 500);
 
-			$table->foreign('category')->references('id')->on('category');
+			$table->foreign('category')->references('value')->on('category');
 		});
 	}
 

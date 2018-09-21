@@ -10,6 +10,7 @@
             <thead>
                 <tr>
                     <th>@choice('messages.Risk',1)</th>
+                    <th>@lang('messages.Description')</th>
                     <th>@lang('messages.DateSubmitted')</th>
                     <th>@choice('messages.Category',1)</th>
                     <th>@choice('messages.Source',1)</th>
@@ -21,6 +22,9 @@
                 <tr>
                     <td>
                         <a href="{{ url('risks/' . $item->id) }}">{{ $item->subject }}</a>
+                    </td>
+                    <td>
+                        {{ $item->notes }}
                     </td>
                     <td>
                         {{ $item->submission_date->toDateString() }}
@@ -48,7 +52,11 @@
                             <input type="text" name="subject" id="risk-subject" class="form-control" @if($risk) value="{{$risk->subject}}" disabled @endif>
                         </div>
                         <div class="form-group">
-                            <label for="risk-category">@lang('messages.Category')</label>
+                            <label for="risk-description">@lang('messages.Description')</label>
+                            <textarea name="description" class="form-control" id="risk-description" rows="3" @if($risk) disabled>{{$risk->notes}}  @else > @endif</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="risk-category">@choice('messages.Category',1)</label>
                             <select class="form-control" id="risk-category" name="category" @if($risk) disabled @endif>
                         @foreach ($categories as $i => $category)
                             @if($risk)

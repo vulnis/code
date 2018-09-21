@@ -26,7 +26,6 @@
             <tbody>
                 @foreach ($assessments as $item)
                 <tr>
-
                     <td class="table-text text-left" style="border-left: 4px solid {{$item->getColorAttribute()}};">
                         <a href="{{ url('assessments/' . $item->id) }}">{{ $item->risk->subject }}</a>
                     </td>
@@ -39,51 +38,66 @@
                     <td>
                         <span class="p-2" title="{{ $item->getLevelAttribute() }}" style="background-color:{{$item->getColorAttribute()}};">{{ $item->getScoreAttribute() }}</span>
                     </td>
-                    @if($item->mitigations->count() == 0)
-                    <td><a id="add-mitigation{{ $item->id }}" data-id="{{ $item->id }}" href="#" data-toggle="modal" data-target="#mitigation-form"><i class="fas fa-plus fa-fw"></i></a></td>
-                    @else
                     <td><a class="collapse-switch collapsed" data-toggle="collapse" href="#collapseAction{{$item->id}}" role="button"
-                            aria-expanded="false" aria-controls="collapseAction{{ $item->id}}"></a></td>
-                    @endif
+                            aria-expanded="false" aria-controls="collapseAction{{ $item->id}}"></a>
+                    </td>
                     <td><a href="#"><i data-id="{{ $item->id }}" class="fas fa-trash-alt fa-fw"></i></a></td>
                 </tr>
-
-                @if($item->mitigations->count() == 0) @else
                 <tr>
-                    <td class="p-0 m-0" style="border-top:none !important;" colspan="7">
+                    <td class="p-0 m-0" style="border-top:none !important;" colspan="8">
                         <div class="collapse" id="collapseAction{{ $item->id}}">
                             <div class="card card-body m-2">
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>@lang('messages.Type')</th>
-                                            <th>@lang('messages.Description')</th>
-                                            <th>@lang('messages.Responsible')</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach($item->mitigations as $mit) 
-                                        <tr>
-                                            <td>
-                                                <i title="@lang('messages.'.$mit->type)" class="fas @if($mit->type == 'CA') fa-highlighter @else fa-shield-alt @endif fa-fw"></i>
-                                            </td>
-                                            <td>
-                                                {{$mit->current_solution}}
-                                            </td>
-                                            <td>
-                                                @if($mit->responsible)
-                                                {{ $mit->responsible->name }}
-                                                @endif
-                                            </td>
-                                        </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
+                                <div class="row">
+                                    <div class="col">
+                                        <h5>@choice('messages.Mitigation',2)</h5>
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th>@lang('messages.Type')</th>
+                                                    <th>@lang('messages.Description')</th>
+                                                    <th>@lang('messages.MitigationPlanning')</th>
+                                                    <th>@lang('messages.Reassessment')</th>
+                                                    <th>@lang('messages.Responsible')</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach($item->mitigations as $mit) 
+                                                <tr>
+                                                    <td>
+                                                        <i title="@lang('messages.'.$mit->type)" class="fas @if($mit->type == 'CA') fa-highlighter @else fa-shield-alt @endif fa-fw"></i>
+                                                    </td>
+                                                    <td>
+                                                        {{$mit->current_solution}}
+                                                    </td>
+                                                    <td>
+                                                        {{$mit->planning_date}}
+                                                    </td>
+                                                    <td>
+                                                        @if(!$mit->reassessment or $mit->planning_date == $mit->reassessment) <i class="fas fa-times fa-fw"></i>@else {{$mit->reassessment}} @endif
+                                                    </td>
+                                                    <td>
+                                                        @if($mit->responsible)
+                                                        {{ $mit->responsible->name }}
+                                                        @endif
+                                                    </td>
+                                                    <td><a href="#"><i data-id="{{ $mit->id }}" data-route="mitigations" class="fas fa-trash-alt fa-fw"></i></a></td>
+                                                </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="row justify-content-end">
+                                    <div class="col-4 d-flex flex-row-reverse">
+                                        <button type="button" class="btn btn-primary" id="add-mitigation{{ $item->id }}" data-id="{{ $item->id }}" href="#" data-toggle="modal" data-target="#mitigation-form"><i class="fas fa-plus fa-fw"></i></button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </td>
                 </tr>
-                @endif @endforeach
+                @endforeach
             </tbody>
         </table>
 

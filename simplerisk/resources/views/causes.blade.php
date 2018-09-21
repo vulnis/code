@@ -47,7 +47,7 @@
                     <textarea name="description" class="form-control" id="cause-description" rows="3" @if($cause) disabled>{{$cause->description}}  @else > @endif</textarea>
                 </div>
                 <div class="form-group">
-                    <label for="cause-category">@lang('messages.Category')</label>
+                    <label for="cause-category">@choice('messages.Category',1)</label>
                     <select class="form-control" id="cause-category" name="category" @if($cause) disabled @endif>
                         @foreach ($categories as $i => $category)
                             @if($cause)

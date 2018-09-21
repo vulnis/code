@@ -10,6 +10,39 @@ window.Popper = require('popper.js').default;
 try {
     window.$ = window.jQuery = require('jquery');
     require('bootstrap');
+    require('moment');
+    require('flatpickr');
+    //require("flatpickr/dist/l10n/af.js");
+    require("flatpickr/dist/l10n/ar.js");
+    require("flatpickr/dist/l10n/bg.js");
+    //require("flatpickr/dist/l10n/bp.js");
+    //require("flatpickr/dist/l10n/ca.js");
+    require("flatpickr/dist/l10n/cs.js");
+    require("flatpickr/dist/l10n/da.js");
+    require("flatpickr/dist/l10n/de.js");
+    //require("flatpickr/dist/l10n/el.js");
+    require("flatpickr/dist/l10n/es.js");
+    require("flatpickr/dist/l10n/fi.js");
+    require("flatpickr/dist/l10n/fr.js");
+    require("flatpickr/dist/l10n/he.js");
+    require("flatpickr/dist/l10n/hi.js");
+    require("flatpickr/dist/l10n/hu.js");
+    require("flatpickr/dist/l10n/it.js");
+    require("flatpickr/dist/l10n/ja.js");
+    require("flatpickr/dist/l10n/ko.js");
+    require("flatpickr/dist/l10n/nl.js");
+    require("flatpickr/dist/l10n/no.js");
+    require("flatpickr/dist/l10n/pl.js");
+    require("flatpickr/dist/l10n/pt.js");
+    require("flatpickr/dist/l10n/ro.js");
+    require("flatpickr/dist/l10n/ru.js");
+    require("flatpickr/dist/l10n/sk.js");
+    require("flatpickr/dist/l10n/sr.js");
+    require("flatpickr/dist/l10n/sv.js");
+    require("flatpickr/dist/l10n/tr.js");
+    require("flatpickr/dist/l10n/uk.js");
+    //require("flatpickr/dist/l10n/vi.js");
+    require("flatpickr/dist/l10n/zh.js");
 } catch (e) {}
 
 /**

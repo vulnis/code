@@ -23,7 +23,6 @@ class MitigationController extends Controller
         $this->validate($request, [
             'description' => 'required',
         ]);
-        $planning_date = Carbon::now()->addDays(14); //two weeks notice
         $item = new Mitigation;
         $item->risk_id = 0;
         $item->planning_strategy = 0;
@@ -33,9 +32,35 @@ class MitigationController extends Controller
         $item->current_solution = $request->description ? $request->description : '';
         $item->security_requirements = '';
         $item->security_recommendations = '';
+        $planning_date = $request->planning_date ? new Carbon($request->planning_date) : Carbon::now()->addDays(7);
         $item->planning_date = $planning_date;
         $item->mitigation_percent = 0;
-        $item->planning_date = $planning_date->addMonths(1); //
+        if($request->reassessment <> -1)
+        {
+            switch ($request->reassessment)
+            {
+                case "7 days":
+                    $item->reassessment = $planning_date->addDays(7);
+                    break;
+                case "14 days":
+                    $item->reassessment = $planning_date->addDays(14);
+                    break;
+                case "4 weeks":
+                    $item->reassessment = $planning_date->addWeeks(4);
+                    break;
+                case "1 month":
+                    $item->reassessment = $planning_date->addMonths(1);
+                    break;
+                case "2 months":
+                    $item->reassessment = $planning_date->addMonths(2);
+                    break;
+                case "1 year":
+                    $item->reassessment = $planning_date->addYears(1);
+                    break;
+                // In all other cases, the value is incorrect, we do nothing to the reassessment date
+             }
+        }
+
         $item->mitigation_team = $request->responsible;
         $item->assessment_id = $request->id;
         $item->type = $request->type;
@@ -44,8 +69,22 @@ class MitigationController extends Controller
         $item->save();
         if ($request->wantsJson())
         {
-            return response()->json(['created' => $item->id]);
+            return response()->json(['created' => $item]);
 
+        }
+        return redirect($this->route);
+    }
+
+    public function destroy(Request $request, $id)
+    {
+        if($id)
+        {
+            if ($request->wantsJson())
+            {
+                Mitigation::destroy($id);
+                return response()->json(['deleted' => $id]);
+
+            }
         }
         return redirect($this->route);
     }

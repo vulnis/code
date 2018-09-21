@@ -497,7 +497,7 @@ $lang = array(
     'DisableRegistrationNotice'=>'Registratiemelding niet meer tonen',
     'UserPolicy'=>'Gebruikersbeleid',
     'UseCaseSensitiveValidationOfUsername'=>'Hoofdlettergevoelig validatie van gebruikersnaam gebruiken',
-    'MitigationPlanning'=>'Oplevering',
+    'MitigationPlanning'=>'Gepland',
     'AssetDetails'=>'Details',
     'RiskList'=>'Risico\'s',
     'Are you sure you want to close the risk? All changes will be lost!'=>'Weet u zeker dat u wilt sluiten het risico? Alle wijzigingen zullen verloren gaan!',
@@ -1047,6 +1047,7 @@ $lang = array(
     ],
     'Asset' => 'Asset|Assets',
     'Assessment' => 'Assessment|Assessments',
+    'Reassessment' => 'Herzien',
     'Stage' => 'Operationele fase|Operationele fases',
     'Cause' => 'Oorzaak|Oorzaken',
     'Order' => 'Volgnummer',
@@ -1066,6 +1067,10 @@ $lang = array(
     'MitigationType' => 'Type maatregel',
     'MitigationReporting' => 'Rapporteren aan',
     'Responsible' => 'Verantwoordelijke',
+    'Never' => 'Nooit',
+    'InWeek' => 'Na :value week|Na :value weken',
+    'InMonth' => 'Na :value maand|Na :value maanden',
+    'InYear' => 'Na :value jaar|Na :value jaren',
     '' => '',
 );
 
