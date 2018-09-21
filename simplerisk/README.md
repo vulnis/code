@@ -1,10 +1,10 @@
 # SimpleRisk
 
-# About SimpleRisk
+## About SimpleRisk
 
 Welcome to SimpleRisk, a simple and free tool to perform risk management activities. Based entirely on open source technologies and sporting a Mozilla Public License 2.0, a SimpleRisk instance can be stood up in minutes and instantly provides the security professional with the ability to submit risks, plan mitigations, facilitate management reviews, prioritize for project planning, and track regular reviews. It is highly configurable and includes dynamic reporting and the ability to tweak risk formulas on the fly. It is under active development with new features being added all the time. SimpleRisk is truly Enterprise Risk Management simplified.
 
-# Why SimpleRisk
+## Why SimpleRisk
 
 As security professionals, almost every action we take comes down to making a risk-based decision. Web application vulnerabilities, malware infections, physical vulnerabilities, and much more all boils down to some combination of the likelihood of an event happening and the impact of that event. Risk management is a relatively simple concept to grasp, but the place where many practitioners fall down is in the tool set. The lucky security professionals work for companies who can afford expensive GRC tools to aide in managing risk. The unlucky majority out there usually end up spending countless hours managing risk via spreadsheets.  It's cumbersome, time consuming, and just plain sucks. After starting a Risk Management program from scratch at a $1B/yr company, Josh Sokol ran into these same barriers and where budget wouldn't let him go down the GRC route, he finally decided to do something about it.
 
@@ -20,15 +20,12 @@ Note that this is a restricted basic user account and it does not have the abili
 
 ## Get SimpleRisk
 
-If you're ready to get started, head on over to our download page to get the latest version:
+If you're ready to get started, head on over to our [download](https://www.simplerisk.com/download) page to get the latest version. Then check out the SimpleRisk Installation [Guide](https://www.simplerisk.com/documentation) to get started
 
-https://www.simplerisk.com/download
-
-Then check out the SimpleRisk Installation Guide to get started:
-
-https://www.simplerisk.com/documentation
 
 ## Laravel version
+
+We are working hard on modernizing SimpleRisk. An early beta in Laravel is available. Want to help out? We can use your help!
 
 ### Requirements
 1. PHP >7.1
