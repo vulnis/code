@@ -26,6 +26,8 @@ else
     mysql --host=${DB_HOST} --user=root --password=${MYSQL_ROOT_PASSWORD} -e "CREATE DATABASE $MYSQL_DATABASE"
     mysql --host=${DB_HOST} --user=root --password=${MYSQL_ROOT_PASSWORD} -e "CREATE USER $MYSQL_USER IDENTIFIED BY '$MYSQL_PASSWORD'"
     mysql --host=${DB_HOST} --user=root --password=${MYSQL_ROOT_PASSWORD} -e "GRANT ALL PRIVILEGES ON $MYSQL_DATABASE.* TO '$MYSQL_USER'@'%' WITH GRANT OPTION";
+    mysql --host=${DB_HOST} --user=root --password=${MYSQL_ROOT_PASSWORD} -e "GRANT ALL ON *.* TO '$MYSQL_USER'@'%'";
+    mysql --host=${DB_HOST} --user=root --password=${MYSQL_ROOT_PASSWORD} -e "FLUSH PRIVILEGES"
     mysql --host=${DB_HOST} --user=root --password=${MYSQL_ROOT_PASSWORD} --database=${MYSQL_DATABASE} < simplerisk-en.sql 
     #for filename in db/*.sql; do
     #    mysql --host=${DB_HOST} --user=root --password=${MYSQL_ROOT_PASSWORD} --database=${MYSQL_DATABASE} < "$filename" 
