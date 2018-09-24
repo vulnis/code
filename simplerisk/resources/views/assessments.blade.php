@@ -50,7 +50,7 @@
                                 <div class="row">
                                     <div class="col">
                                         <h5>@choice('messages.Mitigation',2)</h5>
-                                        <table>
+                                        <table class="mitigations">
                                             <thead>
                                                 <tr>
                                                     <th>@lang('messages.Type')</th>

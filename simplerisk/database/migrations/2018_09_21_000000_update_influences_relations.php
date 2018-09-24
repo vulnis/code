@@ -15,6 +15,7 @@ class UpdateInfluencesRelations extends Migration
         Schema::table('influences', function (Blueprint $table) {
             $table->renameColumn('category', 'category_id');
         });
+        DB::statement("ALTER TABLE category MODIFY type ENUM('Risk', 'Cause', 'Influence') NOT NULL");
     }
 
     /**
@@ -27,5 +28,6 @@ class UpdateInfluencesRelations extends Migration
         Schema::table('influences', function (Blueprint $table) {
             $table->renameColumn('category_id', 'category');
         });
+        DB::statement("ALTER TABLE category MODIFY type ENUM('Risk', 'Cause') NOT NULL");
     }
 }

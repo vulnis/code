@@ -55,8 +55,24 @@ $(document).ready(function () {
         if (routedata.routeId) {
             formdata += "&id=" + encodeURIComponent(routedata.routeId);
         }
+        console.log(routedata.routePath);
         axios.post(routedata.routePath, formdata)
             .then(function (response) {
+                var model = routedata.routePath.replace(/\//g, "");
+                if(model == "mitigations"){
+                    var mitigation = response.data.created;
+                    //Add the response to the correct table
+                    var tbody = $('.' + model).find('tbody');
+                    if(tbody){
+                        var icon = mitigation.type === 'CA' ? "fas fa-highlighter fa-fw" : "fas fa-shield-alt fa-fw";
+                        tbody
+                            .append('<tr>')
+                                .append([
+                                    '<td><i class="' + icon + '"></i></td>',
+                                    '<td>' + mitigation.current_solution + '</td>'
+                                ]);
+                    }
+                }
                 // todo: Process success
                 form.trigger("reset");
                 form.closest('.modal').modal('hide');

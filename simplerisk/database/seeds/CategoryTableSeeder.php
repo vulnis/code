@@ -53,5 +53,12 @@ class CategoryTableSeeder extends Seeder
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
+        DB::table('category')->insert([
+            'value' => 21,
+            'name' => 'UAV',
+            'type' => 'Asset',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ]);
     }
 }

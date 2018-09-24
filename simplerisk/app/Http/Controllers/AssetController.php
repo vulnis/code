@@ -20,7 +20,7 @@ class AssetController extends Controller
     {
         return view($this->route,[
             'asset' => null,
-            'assets' => Asset::all()
+            'assets' => Asset::all(),
         ]);
     }
 
