@@ -35,8 +35,8 @@ class CategoryController extends Controller
             'types' => [
                 new NameValue(trans_choice('messages.Risk',1), 'Risk'),
                 new NameValue(trans_choice('messages.Cause',1), 'Cause'),
-                new NameValue(trans_choice('messages.Risk',1), 'Influence'),
-                new NameValue(trans_choice('messages.Risk',1), 'Asset'),
+                new NameValue(trans_choice('messages.Asset',1), 'Asset'),
+                new NameValue(trans_choice('messages.Stage',1), 'Stage'),
             ]
         ]);
     }

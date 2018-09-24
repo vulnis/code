@@ -47,15 +47,16 @@ class FrameworkController extends Controller
         // Validate the request...
 
         $this->validate($request, [
+            'description' => 'required',
             'name' => 'required',
         ]);
         $item = new Framework;
         $parent = Framework::find($request->parent);
-        $item->parent()->associate($parent);
+        $item->super()->associate($parent);
         $item->name = $request->name;
-        $item->description = $request->description;
-        $item->status = $request->status;
-        $item->order = $request->order;
+        $item->description = $request->description ? $request->description : '';
+        $item->status = $request->status ? $request->status : 0;
+        $item->order = $request->order ? $request->order : 0;
         $item->last_audit_date = $request->last_audit_date;
         $item->next_audit_date = $request->next_audit_date;
         $item->desired_frequency = $request->desired_frequency;

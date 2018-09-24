@@ -12,6 +12,10 @@ class Cause extends Model
         return $this->belongsTo(Category::class, 'category_id','value');
     }
 
+    public function component() {
+        return $this->belongsTo(Component::class);
+    }
+
     public function consequences()
     {
         return $this->belongsToMany(Consequence::class);

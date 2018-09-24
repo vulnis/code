@@ -18,7 +18,9 @@ class CreateSraTable extends Migration
             $table->unsignedInteger('cause_id');
             $table->unsignedInteger('probability_id');
             $table->unsignedInteger('severity_id');
-            $table->unsignedInteger('level_id');
+            $table->unsignedInteger('integrity')->nullable(); // On a scale of 0 to 10
+            $table->unsignedInteger('confidentiality')->nullable(); // On a scale of 0 to 10
+            $table->unsignedInteger('availability')->nullable(); // On a scale of 0 to 10
             $table->timestamps();
         });
     }

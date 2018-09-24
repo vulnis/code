@@ -13,7 +13,7 @@ class UpdateSource extends Migration
     public function up()
     {
         Schema::table('source', function (Blueprint $table) {
-            $table->enum('type',['Risk','Hazard'])->default('Risk');
+            $table->enum('type',['Risk','Hazard','Cause'])->default('Risk');
             $table->timestamps();
         });
     }

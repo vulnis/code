@@ -13,6 +13,7 @@ use App\Consequence;
 use App\Cause;
 use App\Source;
 use App\Assessment;
+use App\Component;
 class CauseController extends Controller
 {
     protected $route = 'causes';
@@ -33,6 +34,7 @@ class CauseController extends Controller
             'causes' => Cause::all(),
             'cause' => null,
             'categories' => Category::where('type', 'Cause')->get(),
+            'components' => Component::all(),
             'consequences' => $consequences = Consequence::all()
         ]);
     }

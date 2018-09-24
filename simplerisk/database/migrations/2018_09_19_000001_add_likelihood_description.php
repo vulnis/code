@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class UpdateHazardSource extends Migration
+class AddLikelihoodDescription extends Migration
 {
     /**
      * Run the migrations.
@@ -12,8 +12,8 @@ class UpdateHazardSource extends Migration
      */
     public function up()
     {
-        Schema::table('hazards', function (Blueprint $table) {
-            $table->unsignedInteger('source');
+        Schema::table('likelihood', function (Blueprint $table) {
+            $table->text('description')->nullable();
         });
     }
 
@@ -24,8 +24,8 @@ class UpdateHazardSource extends Migration
      */
     public function down()
     {
-        Schema::table('hazards', function (Blueprint $table) {
-            $table->dropColumn('source');
+        Schema::table('likelihood', function (Blueprint $table) {
+            $table->dropColumn('description');
         });
     }
 }

@@ -1075,6 +1075,7 @@ $lang = array(
     'InWeek' => 'In :value week|in :value weeks',
     'InMonth' => 'In :value month|Na :value months',
     'InYear' => 'Na :value year|Na :value years',
+    'Component' => 'Component|Components',
     '' => '',
 );
 

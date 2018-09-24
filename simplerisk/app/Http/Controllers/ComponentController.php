@@ -5,13 +5,13 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Asset;
+use App\Component;
 use App\Category;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
-class AssetController extends Controller
+class ComponentController extends Controller
 {
-    protected $route = 'assets';
+    protected $route = 'components';
     public function __construct()
     {
         $this->middleware('auth');
@@ -20,9 +20,10 @@ class AssetController extends Controller
     public function index()
     {
         return view($this->route,[
-            'asset' => null,
-            'assets' => Asset::all(),
+            'component' => null,
+            'components' => Component::all(),
             'categories' => Category::where('type', 'Asset')->get(),
+            'parents' => Component::with('children')->whereNull('parent_id')->orderBy('name', 'asc')->get(),
         ]);
     }
 
@@ -30,7 +31,7 @@ class AssetController extends Controller
     {
         if ($request->wantsJson())
         {
-            $item = Asset::find($id);
+            $item = Component::find($id);
             if($item)
             {
                 return response()->json($item);
@@ -43,14 +44,11 @@ class AssetController extends Controller
         $this->validate($request, [
             'name' => 'required|max:200',
         ]);
-        $item = new Asset;
+        $item = new Component;
         $item->name = $request->name;
-        $item->details = $request->description;
-        $item->location = $request->location ? $request->location : 0;
-        $item->team = $request->team ? $request->team : 0;
+        $item->description = $request->description;
         $category = Category::find($request->category);
         $item->category()->associate($category);
-        $item->created = Carbon::now();
         $item->save();
         return redirect($this->route);
     }
@@ -61,7 +59,7 @@ class AssetController extends Controller
         {
             if ($request->wantsJson())
             {
-                Asset::destroy($id);
+                Component::destroy($id);
                 return response()->json(['deleted' => $id]);
             }
         }

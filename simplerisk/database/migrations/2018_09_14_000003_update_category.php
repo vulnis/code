@@ -13,7 +13,7 @@ class UpdateCategory extends Migration
     public function up()
     {
         Schema::table('category', function (Blueprint $table) {
-            $table->enum('type',['Risk','Hazard'])->default('Risk');
+            $table->enum('type',['Risk','Assessment','Cause','Asset','Stage','Component'])->default('Risk');
             $table->timestamps();
         });
     }

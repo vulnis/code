@@ -1,10 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class RemoveColLevelId extends Migration
+class UpdateFrameworks extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +12,8 @@ class RemoveColLevelId extends Migration
      */
     public function up()
     {
-        Schema::table('sra', function (Blueprint $table) {
-            $table->dropColumn('level_id');
+        Schema::table('frameworks', function (Blueprint $table) {
+            $table->unsignedInteger('parent')->nullable()->change();
         });
     }
 
@@ -25,8 +24,8 @@ class RemoveColLevelId extends Migration
      */
     public function down()
     {
-        Schema::table('sra', function (Blueprint $table) {
-            $table->unsignedInteger('level_id');
+        Schema::table('frameworks', function (Blueprint $table) {
+            $table->unsignedInteger('parent')->change();
         });
     }
 }

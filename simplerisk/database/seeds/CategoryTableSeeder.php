@@ -55,7 +55,7 @@ class CategoryTableSeeder extends Seeder
         ]);
         DB::table('category')->insert([
             'value' => 21,
-            'name' => 'UAV',
+            'name' => 'Unmanned aerial vehicle',
             'type' => 'Asset',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),

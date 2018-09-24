@@ -1,10 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class RiskStages extends Migration
+class UpdateRisk extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +12,10 @@ class RiskStages extends Migration
      */
     public function up()
     {
-        Schema::table('risks', function(Blueprint $table) {
+        Schema::table('risks', function (Blueprint $table) {
             $table->unsignedInteger('stage_id')->nullable();
+            $table->dateTime('last_update')->nullable()->change();
+			$table->dateTime('review_date')->nullable()->change();
         });
     }
 
@@ -27,6 +28,9 @@ class RiskStages extends Migration
     {
         Schema::table('risks', function (Blueprint $table) {
             $table->dropColumn('stage_id');
+            $table->dateTime('last_update')->change();
+			$table->dateTime('review_date')->change();
+
         });
     }
 }

@@ -27,6 +27,8 @@ class DatabaseSeeder extends Seeder
             LevelTableSeeder::class,
             AssessmentTableSeeder::class,
             MitigationTableSeeder::class,
+            AssetTableSeeder::class,
+            ComponentTableSeeder::class,
         ]);
     }
 }

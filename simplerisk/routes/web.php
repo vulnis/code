@@ -28,4 +28,5 @@ Route::resource('/causes'       , 'CauseController'        , ['only' => [ 'index
 Route::resource('/consequences' , 'ConsequenceController'  , ['only' => [ 'index', 'show', 'store', 'destroy' ]]);
 Route::resource('/sources'      , 'SourceController'       , ['only' => [ 'index', 'show', 'store', 'destroy' ]]);
 Route::resource('/responsibles' , 'ResponsibleController'  , ['only' => [ 'index', 'show', 'store', 'destroy' ]]);
+Route::resource('/components'   , 'ComponentController'    , ['only' => [ 'index', 'show', 'store', 'destroy' ]]);
 Route::resource('/mitigations'  , 'MitigationController'   , ['only' => [                  'store', 'destroy' ]]);

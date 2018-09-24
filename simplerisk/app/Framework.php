@@ -10,13 +10,13 @@ class Framework extends Model
     protected $primaryKey = 'value';
     public $timestamps = false;
 
-    public function parent()
+    public function super()
     {
-        return $this->belongsTo(Framework::class, 'parent', 'value');
+        return $this->belongsTo(static::class, 'parent', 'value');
     }
 
     public function children()
     {
-        return $this->hasMany(Framework::class);
+        return $this->hasMany(static::class, 'parent')->orderBy('name', 'asc');
     }
 }

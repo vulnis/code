@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class RiskNullableTimestamps extends Migration
+class AddImpactDescription extends Migration
 {
     /**
      * Run the migrations.
@@ -12,8 +12,9 @@ class RiskNullableTimestamps extends Migration
      */
     public function up()
     {
-        DB::statement("ALTER TABLE risks MODIFY review_date TIMESTAMP NULL, MODIFY last_update TIMESTAMP NULL");
-        
+        Schema::table('impact', function (Blueprint $table) {
+            $table->text('description')->nullable();
+        });
     }
 
     /**
@@ -23,5 +24,8 @@ class RiskNullableTimestamps extends Migration
      */
     public function down()
     {
+        Schema::table('impact', function (Blueprint $table) {
+            $table->dropColumn('description');
+        });
     }
 }

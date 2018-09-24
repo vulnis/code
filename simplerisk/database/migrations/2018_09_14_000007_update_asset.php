@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class UpdateImpactDescription extends Migration
+class UpdateAsset extends Migration
 {
     /**
      * Run the migrations.
@@ -12,8 +12,9 @@ class UpdateImpactDescription extends Migration
      */
     public function up()
     {
-        Schema::table('impact', function (Blueprint $table) {
-            $table->text('description');
+        Schema::table('assets', function (Blueprint $table) {
+            $table->unsignedInteger('category_id');
+            $table->text('description')->nullable();
         });
     }
 
@@ -24,7 +25,8 @@ class UpdateImpactDescription extends Migration
      */
     public function down()
     {
-        Schema::table('impact', function (Blueprint $table) {
+        Schema::table('assets', function (Blueprint $table) {
+            $table->dropColumn('category_id');
             $table->dropColumn('description');
         });
     }

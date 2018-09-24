@@ -22,13 +22,15 @@ class CauseTableSeeder extends Seeder
             'id' => 15,
             'description' => 'Battery was not charged',
             'category_id' => 10,
+            'component_id' => 6,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
         DB::table('causes')->insert([
             'id' => 16,
-            'description' => 'Defect',
+            'description' => 'Camera defect',
             'category_id' => 12,
+            'component_id' => 7,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
@@ -43,6 +45,7 @@ class CauseTableSeeder extends Seeder
             'id' => 18,
             'description' => 'GPS stabilizer defect',
             'category_id' => 12,
+            'component_id' => 7,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
