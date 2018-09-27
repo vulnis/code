@@ -4,12 +4,12 @@
         <ul class="list-unstyled components">
             <li {!! (Request::is('*risks*') ? 'class="active"' : 'class=""') !!}>
                 <a href="{{ url('risks') }}" role="button">
-                    <i class="fas fa-fire fa-fw"></i>
+                    <i class="fab fa-hotjar fa-fw"></i>
                     <span>@choice('messages.Risk',1)</span>
                 </a>
             </li>
             <li {!! (Request::is('*assessments*') ? 'class="active"' : 'class=""') !!}>
-                <a href="{{ url('assessments') }}" role="button"><i class="fas fa-search fa-fw"></i>
+                <a href="{{ url('assessments') }}" role="button"><i class="fas fa-notes-medical fa-fw"></i> 
                     <span>@choice('messages.Assessment',1)</span></a>
             </li>
             <li {!! (Request::is('*categories*') ? 'class="active"' : 'class=""') !!}>

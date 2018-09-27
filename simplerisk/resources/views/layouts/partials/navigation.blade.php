@@ -6,7 +6,7 @@
         <span class="navbar-toggler-icon"></span>
     </button> @endif
         <!-- Branding Image -->
-        <a class="navbar-brand pl-3" href="{{ url('/') }}">
+        <a class="navbar-brand pl-3" href="{{ url('/home') }}">
         <img src='/images/logo@2x.png' alt='SimpleRisk Logo' />
     </a>
         <!-- Collapsed Hamburger -->
